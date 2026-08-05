@@ -1,10 +1,30 @@
+
 # Cyber Pujangga
 
-A bilingual (English / Bahasa Melayu) literature site. Three sections:
-**Essays**, **Daily Journal**, **Poems**. Static, no tracking, no
-database. Built with Astro 5 and deployed to Cloudflare Pages.
+A bilingual (English / Bahasa Melayu) literature site — **Essays**, **Daily Journal**, and **Poems** — built as a fully static Astro 5 site with zero tracking and no database, deployed to Cloudflare Pages.
 
-Live (after first deploy): `https://cyber_pujangga.pages.dev`
+**Live:** [`cyber_pujangga.pages.dev`](https://cyber_pujangga.pages.dev)
+
+---
+
+## About this project
+
+Cyber Pujangga started as a place for bilingual literary writing, but it also doubles as a **case study in AI-agent-driven development**. The entire scaffold — project structure, i18n routing, content collections, layouts, and the deploy pipeline — was built through natural-language prompts to a local coding agent, with the human role kept to short, high-level direction rather than hands-on implementation.
+
+If you're exploring this repo as a reference for agent-driven workflows, the interesting parts are:
+- The **content model** (`src/content/`) — how per-language Markdown collections are structured so an agent can scaffold new pieces consistently via `new-piece.sh`.
+- The **deploy pipeline** (`deploy.sh` + `cf-pages-cleanup.py`) — a single script that builds, deploys, and prunes old Cloudflare Pages deployments automatically.
+- The **i18n approach** — per-file language folders instead of translation-pairing, keeping routing and content simple enough for an agent to reason about.
+
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Astro 5 |
+| Content | Markdown collections (`content.config.ts`) |
+| Styling | Plain CSS (`src/styles/global.css`) |
+| Hosting | Cloudflare Pages (via Wrangler) |
+| Tooling | Biome (lint/format) |
 
 ## Project layout
 
@@ -13,7 +33,7 @@ cyber-pujangga/
 ├── deploy.sh                  # build → wrangler deploy → cleanup old deploys
 ├── new-piece.sh               # scaffold new essay / journal / poem
 ├── cf-pages-cleanup.py        # shared with tech-journal/ (no changes)
-└── cyber-pujangga-site/        # the Astro project
+└── cyber-pujangga-site/       # the Astro project
     ├── astro.config.ts
     ├── content.config.ts
     ├── public/
@@ -63,29 +83,31 @@ npm run dev          # http://localhost:4321
 
 ```bash
 export CLOUDFLARE_API_TOKEN=cfut_xxxxx   # same token as tech-journal
-cd /home/arif_debian/projects/cyber-pujangga
+cd ~/projects/cyber-pujangga
 ./deploy.sh
 ```
 
 The deploy script:
-1. `npm install` (first run only)
-2. `npm run build` → produces `cyber-pujangga-site/dist/`
-3. `wrangler pages deploy ./dist --project-name=cyber_pujangga`
+1. Runs `npm install` (first run only)
+2. Builds the site (`npm run build` → `cyber-pujangga-site/dist/`)
+3. Deploys via `wrangler pages deploy ./dist --project-name=cyber_pujangga`
 4. Deletes all previous deployments, keeping only the latest
 
-The Cloudflare account is the same as `malay-tech-journal`
-(account ID `1c5731ce0fd505c95adb0069d6aa4dd2`).
+> Uses the same Cloudflare account as `malay-tech-journal` (account ID `1c5731ce0fd505c95adb0069d6aa4dd2`).
 
 ## Bilingual model
 
-- **Per-file language**: each piece lives in `en/` or `ms/` folder; no
-  translation pairing. Authors translate manually when they want both
-  versions.
-- **URLs**: `/en/essays/slug/` and `/ms/essays/slug/`.
-- **Language toggle** in the header switches to the same page in the
-  other language (falls back to landing if no equivalent).
-- **Default locale**: `en` (with prefix). Root URL `/` redirects to `/en`.
+- **Per-file language** — each piece lives in an `en/` or `ms/` folder; no translation pairing. Authors translate manually when they want both versions.
+- **URLs** — `/en/essays/slug/` and `/ms/essays/slug/`.
+- **Language toggle** in the header switches to the same page in the other language (falls back to the section landing page if no equivalent exists).
+- **Default locale** — `en`. Root URL `/` redirects to `/en`.
 
 ## RSS
 
 Per-language feeds at `/en/rss.xml` and `/ms/rss.xml`.
+
+## License
+
+Personal project — content and code are not licensed for reuse unless stated otherwise.
+
+
