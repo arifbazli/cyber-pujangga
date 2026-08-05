@@ -9,22 +9,15 @@ import ThemeProvider from "@/components/ThemeProvider.astro";
 import type { Locale } from "@/i18n";
 
 interface Props {
-	title: string;
-	description?: string;
-	lang: Locale;
-	currentPath?: string;
-	ogImage?: string;
-	articleDate?: string;
+  title: string;
+  description?: string;
+  lang: Locale;
+  currentPath?: string;
+  ogImage?: string;
+  articleDate?: string;
 }
 
-const {
-	title,
-	description,
-	lang,
-	currentPath = "",
-	ogImage,
-	articleDate,
-} = Astro.props;
+const { title, description, lang, currentPath = "", ogImage, articleDate } = Astro.props;
 ---
 
 <!doctype html>

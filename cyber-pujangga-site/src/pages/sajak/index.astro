@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import { type Locale, localePath, t } from "../../i18n";
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import { t, localePath, type Locale } from "../../i18n";
 import { filterByLocale, slugOf } from "../../lib/content";
 
 const locale: Locale = "ms";
@@ -9,16 +9,16 @@ const strings = t(locale);
 const items = filterByLocale(await getCollection("poems", ({ data }) => !data.draft), locale);
 
 function dateShort(d: Date): string {
-	return d.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
+  return d.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
 }
 
 const rows = items.map((e) => ({
-	href: localePath(locale, "sajak") + "/" + slugOf(e),
-	sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-	dateLabel: dateShort(e.data.pubDate),
-	title: e.data.title,
-	section: "poems" as const,
-	lang: locale,
+  href: localePath(locale, "sajak") + "/" + slugOf(e),
+  sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+  dateLabel: dateShort(e.data.pubDate),
+  title: e.data.title,
+  section: "poems" as const,
+  lang: locale,
 }));
 ---
 

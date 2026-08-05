@@ -1,19 +1,19 @@
 ---
+import type { Locale } from "../i18n";
 /**
  * EntryRow — single compact row in the mockup's entry-list.
  * Click target wraps the whole row, but share button is positioned absolute
  * to allow independent interaction.
  */
 import ShareButton from "./ShareButton.astro";
-import { type Locale } from "../i18n";
 
 interface Props {
-	href: string;
-	sectionLabel: string;
-	dateLabel: string;
-	title: string;
-	section: "essays" | "journal" | "poems";
-	lang: Locale;
+  href: string;
+  sectionLabel: string;
+  dateLabel: string;
+  title: string;
+  section: "essays" | "journal" | "poems";
+  lang: Locale;
 }
 
 const { href, sectionLabel, dateLabel, title, section, lang } = Astro.props;

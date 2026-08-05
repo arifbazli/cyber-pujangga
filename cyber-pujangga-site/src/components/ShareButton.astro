@@ -8,13 +8,13 @@
  *    the native share sheet.
  *  - Otherwise, copies the URL to the clipboard and shows "Disalin!" / "Copied!".
  */
-import { type Locale } from "@/i18n";
+import type { Locale } from "@/i18n";
 
 interface Props {
-	lang: Locale;
-	url: string;
-	title: string;
-	compact?: boolean;
+  lang: Locale;
+  url: string;
+  title: string;
+  compact?: boolean;
 }
 
 const { lang, url, title, compact = false } = Astro.props;

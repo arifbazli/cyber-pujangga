@@ -1,0 +1,697 @@
+./tailwind.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     3  3 │   
+     4  4 │   export default {
+     5    │ - → content:·[
+     6    │ - → → "./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}",
+     7    │ - → → "!./src/pages/og-image/[slug].png.ts",
+     8    │ - → ],
+     9    │ - → darkMode:·["class",·'[data-theme="dark"]'],
+    10    │ - → plugins:·[],
+    11    │ - → theme:·{
+    12    │ - → → extend:·{
+    13    │ - → → → colors:·{
+    14    │ - → → → → accent:·"hsl(var(--theme-accent)·/·<alpha-value>)",
+    15    │ - → → → → "accent-2":·"hsl(var(--theme-accent-2)·/·<alpha-value>)",
+    16    │ - → → → → bgColor:·"hsl(var(--theme-bg)·/·<alpha-value>)",
+    17    │ - → → → → link:·"hsl(var(--theme-link)·/·<alpha-value>)",
+    18    │ - → → → → quote:·"hsl(var(--theme-quote)·/·<alpha-value>)",
+    19    │ - → → → → textColor:·"hsl(var(--theme-text)·/·<alpha-value>)",
+    20    │ - → → → → textMuted:·"hsl(var(--theme-text-muted)·/·<alpha-value>)",
+    21    │ - → → → },
+    22    │ - → → → fontFamily:·{
+    23    │ - → → → → sans:·["Inter",·...defaultTheme.fontFamily.sans],
+    24    │ - → → → → serif:·[...defaultTheme.fontFamily.serif],
+    25    │ - → → → },
+    26    │ - → → → transitionProperty:·{
+    27    │ - → → → → height:·"height",
+    28    │ - → → → },
+    29    │ - → → },
+    30    │ - → },
+        5 │ + ··content:·[
+        6 │ + ····"./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}",
+        7 │ + ····"!./src/pages/og-image/[slug].png.ts",
+        8 │ + ··],
+        9 │ + ··darkMode:·["class",·'[data-theme="dark"]'],
+       10 │ + ··plugins:·[],
+       11 │ + ··theme:·{
+       12 │ + ····extend:·{
+       13 │ + ······colors:·{
+       14 │ + ········accent:·"hsl(var(--theme-accent)·/·<alpha-value>)",
+       15 │ + ········"accent-2":·"hsl(var(--theme-accent-2)·/·<alpha-value>)",
+       16 │ + ········bgColor:·"hsl(var(--theme-bg)·/·<alpha-value>)",
+       17 │ + ········link:·"hsl(var(--theme-link)·/·<alpha-value>)",
+       18 │ + ········quote:·"hsl(var(--theme-quote)·/·<alpha-value>)",
+       19 │ + ········textColor:·"hsl(var(--theme-text)·/·<alpha-value>)",
+       20 │ + ········textMuted:·"hsl(var(--theme-text-muted)·/·<alpha-value>)",
+       21 │ + ······},
+       22 │ + ······fontFamily:·{
+       23 │ + ········sans:·["Inter",·...defaultTheme.fontFamily.sans],
+       24 │ + ········serif:·[...defaultTheme.fontFamily.serif],
+       25 │ + ······},
+       26 │ + ······transitionProperty:·{
+       27 │ + ········height:·"height",
+       28 │ + ······},
+       29 │ + ····},
+       30 │ + ··},
+    31 31 │   } satisfies Config;
+    32 32 │   
+  
+
+./astro.config.ts organizeImports ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Import statements could be sorted:
+  
+     4  4 │   
+     5  5 │   import fs from "node:fs";
+     6    │ - import·mdx·from·"@astrojs/mdx";
+        6 │ + import·{·unified·}·from·"@astrojs/markdown-remark";
+        7 │ + import·mdx·from·"@astrojs/mdx";
+     7  8 │   import sitemap from "@astrojs/sitemap";
+     8  9 │   import expressiveCode from "astro-expressive-code";
+     9 10 │   import icon from "astro-icon";
+    10    │ - import·robotsTxt·from·"astro-robots-txt";
+    11    │ - import·{·unified·}·from·"@astrojs/markdown-remark";
+       11 │ + import·robotsTxt·from·"astro-robots-txt";
+    12 12 │   import { defineConfig } from "astro/config";
+    13 13 │   import { expressiveCodeOptions } from "./src/site.config";
+  
+
+./src/types.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     1  1 │   export interface ProfileConfig {
+     2    │ - → /**·Author·display·name;·used·in·bylines,·schema,·OG·images.·*/
+     3    │ - → name:·string;
+     4    │ - → /**·Contact·email·shown·in·About-page·socials.·Omit·to·hide.·*/
+     5    │ - → email?:·string;
+     6    │ - → /**·Profile·URL·on·GitHub.·Leave·empty·to·hide.·*/
+     7    │ - → github?:·string;
+     8    │ - → /**·Profile·URL·on·LinkedIn.·Leave·empty·to·hide.·*/
+     9    │ - → linkedin?:·string;
+    10    │ - → /**·Twitter·/·X·profile·URL.·Leave·empty·to·hide.·*/
+    11    │ - → twitter?:·string;
+    12    │ - → /**·Mastodon·profile·URL.·Leave·empty·to·hide.·*/
+    13    │ - → mastodon?:·string;
+    14    │ - → /**·Schema.org·Person.jobTitle.·*/
+    15    │ - → jobTitle?:·string;
+    16    │ - → /**·Schema.org·Person.worksFor.name·(current·employer).·*/
+    17    │ - → employer?:·string;
+    18    │ - → /**·Schema.org·Person.worksFor.url.·*/
+    19    │ - → employerUrl?:·string;
+    20    │ - → /**·Schema.org·Person.alumniOf.name.·*/
+    21    │ - → alumni?:·string;
+    22    │ - → /**·Absolute·avatar/photo·URL·used·in·schema·markup.·*/
+    23    │ - → avatar?:·string;
+        2 │ + ··/**·Author·display·name;·used·in·bylines,·schema,·OG·images.·*/
+        3 │ + ··name:·string;
+        4 │ + ··/**·Contact·email·shown·in·About-page·socials.·Omit·to·hide.·*/
+        5 │ + ··email?:·string;
+        6 │ + ··/**·Profile·URL·on·GitHub.·Leave·empty·to·hide.·*/
+        7 │ + ··github?:·string;
+        8 │ + ··/**·Profile·URL·on·LinkedIn.·Leave·empty·to·hide.·*/
+        9 │ + ··linkedin?:·string;
+       10 │ + ··/**·Twitter·/·X·profile·URL.·Leave·empty·to·hide.·*/
+       11 │ + ··twitter?:·string;
+       12 │ + ··/**·Mastodon·profile·URL.·Leave·empty·to·hide.·*/
+       13 │ + ··mastodon?:·string;
+       14 │ + ··/**·Schema.org·Person.jobTitle.·*/
+       15 │ + ··jobTitle?:·string;
+       16 │ + ··/**·Schema.org·Person.worksFor.name·(current·employer).·*/
+       17 │ + ··employer?:·string;
+       18 │ + ··/**·Schema.org·Person.worksFor.url.·*/
+       19 │ + ··employerUrl?:·string;
+       20 │ + ··/**·Schema.org·Person.alumniOf.name.·*/
+       21 │ + ··alumni?:·string;
+       22 │ + ··/**·Absolute·avatar/photo·URL·used·in·schema·markup.·*/
+       23 │ + ··avatar?:·string;
+    24 24 │   }
+    25 25 │   
+    26 26 │   export interface SiteConfig {
+    27    │ - → /**·Site-wide·display·name;·fallback·for·profile.name.·*/
+    28    │ - → author:·string;
+    29    │ - → date:·{
+    30    │ - → → locale:·string·|·string[]·|·undefined;
+    31    │ - → → options:·Intl.DateTimeFormatOptions;
+    32    │ - → };
+    33    │ - → /**·Primary·(Malay)·site·description.·*/
+    34    │ - → description:·string;
+    35    │ - → /**·Optional·English·site·description·for·/en·pages.·*/
+    36    │ - → descriptionEn?:·string;
+    37    │ - → lang:·string;
+    38    │ - → ogLocale:·string;
+    39    │ - → sortPostsByUpdatedDate:·boolean;
+    40    │ - → title:·string;
+    41    │ - → /**·Personal·info·for·About·page,·schema,·byline.·*/
+    42    │ - → profile?:·ProfileConfig;
+    43    │ - → /**·Set·true·to·hide·the·"Built·with·Astro·Sienna"·footer·credit.·*/
+    44    │ - → hideThemeCredit?:·boolean;
+       27 │ + ··/**·Site-wide·display·name;·fallback·for·profile.name.·*/
+       28 │ + ··author:·string;
+       29 │ + ··date:·{
+       30 │ + ····locale:·string·|·string[]·|·undefined;
+       31 │ + ····options:·Intl.DateTimeFormatOptions;
+       32 │ + ··};
+       33 │ + ··/**·Primary·(Malay)·site·description.·*/
+       34 │ + ··description:·string;
+       35 │ + ··/**·Optional·English·site·description·for·/en·pages.·*/
+       36 │ + ··descriptionEn?:·string;
+       37 │ + ··lang:·string;
+       38 │ + ··ogLocale:·string;
+       39 │ + ··sortPostsByUpdatedDate:·boolean;
+       40 │ + ··title:·string;
+       41 │ + ··/**·Personal·info·for·About·page,·schema,·byline.·*/
+       42 │ + ··profile?:·ProfileConfig;
+       43 │ + ··/**·Set·true·to·hide·the·"Built·with·Astro·Sienna"·footer·credit.·*/
+       44 │ + ··hideThemeCredit?:·boolean;
+    45 45 │   }
+    46 46 │   
+    47 47 │   export interface SiteMeta {
+    48    │ - → articleDate?:·string·|·undefined;
+    49    │ - → description?:·string;
+    50    │ - → ogImage?:·string·|·undefined;
+    51    │ - → title:·string;
+    52    │ - → /**·BCP-47·locale·tag·for·the·current·page·(e.g.·"ms-MY"·or·"en-US").·*/
+    53    │ - → lang?:·string;
+       48 │ + ··articleDate?:·string·|·undefined;
+       49 │ + ··description?:·string;
+       50 │ + ··ogImage?:·string·|·undefined;
+       51 │ + ··title:·string;
+       52 │ + ··/**·BCP-47·locale·tag·for·the·current·page·(e.g.·"ms-MY"·or·"en-US").·*/
+       53 │ + ··lang?:·string;
+    54 54 │   }
+    55 55 │   
+    ····· │ 
+    60 60 │    */
+    61 61 │   export type MenuLink = {
+    62    │ - → path:·string;
+    63    │ - → title:·string;
+       62 │ + ··path:·string;
+       63 │ + ··title:·string;
+    64 64 │   };
+    65 65 │   
+  
+
+./scripts/build-redirects.mjs:74:12 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    73 │ // Trailing-slash alias for EN home
+  > 74 │ lines.push(`/en    /en/    301`);
+       │            ^^^^^^^^^^^^^^^^^^^^
+    75 │ 
+    76 │ // Legacy /about URL aliases — `/about` was the pre-bilingual URL.
+  
+  i Unsafe fix: Replace with string literal
+  
+    72 72 │   
+    73 73 │   // Trailing-slash alias for EN home
+    74    │ - lines.push(`/en····/en/····301`);
+       74 │ + lines.push("/en····/en/····301");
+    75 75 │   
+    76 76 │   // Legacy /about URL aliases — `/about` was the pre-bilingual URL.
+  
+
+./scripts/build-redirects.mjs:80:12 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    78 │ // variants of the bare EN URL to the canonical `/en/about/` so anyone
+    79 │ // sharing the old link lands on the right page.
+  > 80 │ lines.push(`/about    /en/about    301`);
+       │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    81 │ lines.push(`/about/   /en/about/   301`);
+    82 │ 
+  
+  i Unsafe fix: Replace with string literal
+  
+    78 78 │   // variants of the bare EN URL to the canonical `/en/about/` so anyone
+    79 79 │   // sharing the old link lands on the right page.
+    80    │ - lines.push(`/about····/en/about····301`);
+       80 │ + lines.push("/about····/en/about····301");
+    81 81 │   lines.push(`/about/   /en/about/   301`);
+    82 82 │   
+  
+
+./scripts/build-redirects.mjs:81:12 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    79 │ // sharing the old link lands on the right page.
+    80 │ lines.push(`/about    /en/about    301`);
+  > 81 │ lines.push(`/about/   /en/about/   301`);
+       │            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    82 │ 
+    83 │ const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+  
+  i Unsafe fix: Replace with string literal
+  
+    79 79 │   // sharing the old link lands on the right page.
+    80 80 │   lines.push(`/about    /en/about    301`);
+    81    │ - lines.push(`/about/···/en/about/···301`);
+       81 │ + lines.push("/about/···/en/about/···301");
+    82 82 │   
+    83 83 │   const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+  
+
+./scripts/build-redirects.mjs:83:13 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Template literals are preferred over string concatenation.
+  
+    81 │ lines.push(`/about/   /en/about/   301`);
+    82 │ 
+  > 83 │ const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  > 84 │   `# Cross-locale URL aliases so that mixed (category-prefix × slug-locale)\n` +
+  > 85 │   `# URLs gracefully redirect to the canonical page.\n\n` +
+  > 86 │   lines.join("\n") + "\n";
+       │   ^^^^^^^^^^^^^^^^^^^^^^^
+    87 │ 
+    88 │ const target = resolve(siteRoot, "public/_redirects");
+  
+  i Unsafe fix: Use a template literal.
+  
+    81 81 │   lines.push(`/about/   /en/about/   301`);
+    82 82 │   
+    83    │ - const·out·=·`#·Auto-generated·by·scripts/build-redirects.mjs·—·do·not·edit·by·hand.\n`·+
+    84    │ - ··`#·Cross-locale·URL·aliases·so·that·mixed·(category-prefix·×·slug-locale)\n`·+
+    85    │ - ··`#·URLs·gracefully·redirect·to·the·canonical·page.\n\n`·+
+    86    │ - ··lines.join("\n")·+·"\n";
+       83 │ + const·out·=·`#·Auto-generated·by·scripts/build-redirects.mjs·—·do·not·edit·by·hand.\n#·Cross-locale·URL·aliases·so·that·mixed·(category-prefix·×·slug-locale)\n#·URLs·gracefully·redirect·to·the·canonical·page.\n\n${lines.join("\n")}\n`;
+    87 84 │   
+    88 85 │   const target = resolve(siteRoot, "public/_redirects");
+  
+
+./scripts/build-redirects.mjs:83:13 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    81 │ lines.push(`/about/   /en/about/   301`);
+    82 │ 
+  > 83 │ const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    84 │   `# Cross-locale URL aliases so that mixed (category-prefix × slug-locale)\n` +
+    85 │   `# URLs gracefully redirect to the canonical page.\n\n` +
+  
+  i Unsafe fix: Replace with string literal
+  
+    81 81 │   lines.push(`/about/   /en/about/   301`);
+    82 82 │   
+    83    │ - const·out·=·`#·Auto-generated·by·scripts/build-redirects.mjs·—·do·not·edit·by·hand.\n`·+
+       83 │ + const·out·=·"#·Auto-generated·by·scripts/build-redirects.mjs·—·do·not·edit·by·hand.\n"·+
+    84 84 │     `# Cross-locale URL aliases so that mixed (category-prefix × slug-locale)\n` +
+    85 85 │     `# URLs gracefully redirect to the canonical page.\n\n` +
+  
+
+./scripts/build-redirects.mjs:84:3 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    83 │ const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+  > 84 │   `# Cross-locale URL aliases so that mixed (category-prefix × slug-locale)\n` +
+       │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    85 │   `# URLs gracefully redirect to the canonical page.\n\n` +
+    86 │   lines.join("\n") + "\n";
+  
+  i Unsafe fix: Replace with string literal
+  
+    82 82 │   
+    83 83 │   const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+    84    │ - ··`#·Cross-locale·URL·aliases·so·that·mixed·(category-prefix·×·slug-locale)\n`·+
+       84 │ + ··"#·Cross-locale·URL·aliases·so·that·mixed·(category-prefix·×·slug-locale)\n"·+
+    85 85 │     `# URLs gracefully redirect to the canonical page.\n\n` +
+    86 86 │     lines.join("\n") + "\n";
+  
+
+./scripts/build-redirects.mjs:85:3 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    83 │ const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+    84 │   `# Cross-locale URL aliases so that mixed (category-prefix × slug-locale)\n` +
+  > 85 │   `# URLs gracefully redirect to the canonical page.\n\n` +
+       │   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    86 │   lines.join("\n") + "\n";
+    87 │ 
+  
+  i Unsafe fix: Replace with string literal
+  
+    83 83 │   const out = `# Auto-generated by scripts/build-redirects.mjs — do not edit by hand.\n` +
+    84 84 │     `# Cross-locale URL aliases so that mixed (category-prefix × slug-locale)\n` +
+    85    │ - ··`#·URLs·gracefully·redirect·to·the·canonical·page.\n\n`·+
+       85 │ + ··"#·URLs·gracefully·redirect·to·the·canonical·page.\n\n"·+
+    86 86 │     lines.join("\n") + "\n";
+    87 87 │   
+  
+
+./scripts/build-redirects.mjs organizeImports ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Import statements could be sorted:
+  
+     1  1 │   #!/usr/bin/env node
+        2 │ + import·{·readdirSync·}·from·"node:fs";
+     2  3 │   /**
+     3  4 │    * Build script: generates `public/_redirects` with cross-locale slugs.
+    ····· │ 
+    13 14 │    * Also adds `/en/about` ↔ `/tentang` aliases and category-only cross-mixes.
+    14 15 │    */
+    15    │ - import·{·readFile,·writeFile·}·from·"node:fs/promises";
+    16    │ - import·{·fileURLToPath·}·from·"node:url";
+       16 │ + import·{·readFile,·writeFile·}·from·"node:fs/promises";
+    17 17 │   import { dirname, resolve } from "node:path";
+    18    │ - import·{·readdirSync·}·from·"node:fs";
+       18 │ + import·{·fileURLToPath·}·from·"node:url";
+    19 19 │   
+    20 20 │   const here = dirname(fileURLToPath(import.meta.url));
+  
+
+./src/components/BaseHead.astro organizeImports ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Import statements could be sorted:
+  
+     3  3 │   // Adapted from astro-sienna. Stripped of analytics, webmentions, giscus.
+     4  4 │   import "@/styles/global.css";
+     5    │ - import·{·siteConfig·}·from·"@/site.config";
+     6    │ - import·type·{·Locale·}·from·"@/i18n";
+        5 │ + import·type·{·Locale·}·from·"@/i18n";
+        6 │ + import·{·siteConfig·}·from·"@/site.config";
+     7  7 │   // Preload the variable newsreader subset; rest loads via @font-face in global.css.
+     8  8 │   import newsreaderLatin from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
+  
+
+./src/components/BaseHead.astro format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     9  9 │   
+    10 10 │   interface Props {
+    11    │ - → title:·string;
+    12    │ - → description?:·string;
+    13    │ - → lang:·Locale;
+    14    │ - → ogImage?:·string;
+    15    │ - → articleDate?:·string;
+       11 │ + ··title:·string;
+       12 │ + ··description?:·string;
+       13 │ + ··lang:·Locale;
+       14 │ + ··ogImage?:·string;
+       15 │ + ··articleDate?:·string;
+    16 16 │   }
+    17 17 │   
+    ····· │ 
+    20 20 │   const titleSeparator = "·";
+    21 21 │   // Avoid duplicating the site name when the title IS the site name (landing pages).
+    22    │ - const·siteTitle·=·title·===·siteConfig.title·?·siteConfig.title·:·`${title}·${titleSeparator}·${siteConfig.title}`;
+       22 │ + const·siteTitle·=
+       23 │ + ··title·===·siteConfig.title·?·siteConfig.title·:·`${title}·${titleSeparator}·${siteConfig.title}`;
+    23 24 │   const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+    24 25 │   const socialImageURL = ogImage
+    25    │ - → ?·new·URL(ogImage,·Astro.site).href
+    26    │ - → :·new·URL("/social-card.png",·Astro.site).href;
+       26 │ + ··?·new·URL(ogImage,·Astro.site).href
+       27 │ + ··:·new·URL("/social-card.png",·Astro.site).href;
+    27 28 │   
+    28 29 │   const ogLocale = lang === "ms" ? "ms_MY" : "en_US";
+  
+
+./scripts/build-redirects.mjs format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    23  23 │   function listMd(dir) {
+    24  24 │     try {
+    25     │ - ····return·readdirSync(resolve(siteRoot,·"src/content",·dir)).filter((f)·=>·f.endsWith(".md")).map((f)·=>·f.replace(/\.md$/,·""));
+        25 │ + ····return·readdirSync(resolve(siteRoot,·"src/content",·dir))
+        26 │ + ······.filter((f)·=>·f.endsWith(".md"))
+        27 │ + ······.map((f)·=>·f.replace(/\.md$/,·""));
+    26  28 │     } catch {
+    27  29 │       return [];
+    ······ │ 
+    62  64 │   
+    63  65 │   // Pair essay slugs by index (assumes parallel content)
+    64     │ - const·essayPairs·=·essayMs.map((msSlug,·i)·=>·({·msSlug,·enSlug:·essayEn[i]·??·msSlug·})).filter((p)·=>·p.enSlug);
+        66 │ + const·essayPairs·=·essayMs
+        67 │ + ··.map((msSlug,·i)·=>·({·msSlug,·enSlug:·essayEn[i]·??·msSlug·}))
+        68 │ + ··.filter((p)·=>·p.enSlug);
+    65  69 │   for (const { msSlug, enSlug } of essayPairs) crossMix(msSlug, enSlug, "esei", "essays");
+    66  70 │   
+    67     │ - const·journalPairs·=·journalMs.map((msSlug,·i)·=>·({·msSlug,·enSlug:·journalEn[i]·??·msSlug·})).filter((p)·=>·p.enSlug);
+        71 │ + const·journalPairs·=·journalMs
+        72 │ + ··.map((msSlug,·i)·=>·({·msSlug,·enSlug:·journalEn[i]·??·msSlug·}))
+        73 │ + ··.filter((p)·=>·p.enSlug);
+    68  74 │   for (const { msSlug, enSlug } of journalPairs) crossMix(msSlug, enSlug, "jurnal", "journal");
+    69  75 │   
+    70     │ - const·poemPairs·=·poemMs.map((msSlug,·i)·=>·({·msSlug,·enSlug:·poemEn[i]·??·msSlug·})).filter((p)·=>·p.enSlug);
+        76 │ + const·poemPairs·=·poemMs
+        77 │ + ··.map((msSlug,·i)·=>·({·msSlug,·enSlug:·poemEn[i]·??·msSlug·}))
+        78 │ + ··.filter((p)·=>·p.enSlug);
+    71  79 │   for (const { msSlug, enSlug } of poemPairs) crossMix(msSlug, enSlug, "sajak", "poems");
+    72  80 │   
+    ······ │ 
+    81  89 │   lines.push(`/about/   /en/about/   301`);
+    82  90 │   
+    83     │ - const·out·=·`#·Auto-generated·by·scripts/build-redirects.mjs·—·do·not·edit·by·hand.\n`·+
+        91 │ + const·out·=
+        92 │ + ··`#·Auto-generated·by·scripts/build-redirects.mjs·—·do·not·edit·by·hand.\n`·+
+    84  93 │     `# Cross-locale URL aliases so that mixed (category-prefix × slug-locale)\n` +
+    85  94 │     `# URLs gracefully redirect to the canonical page.\n\n` +
+    86     │ - ··lines.join("\n")·+·"\n";
+        95 │ + ··lines.join("\n")·+
+        96 │ + ··"\n";
+    87  97 │   
+    88  98 │   const target = resolve(siteRoot, "public/_redirects");
+    89  99 │   await writeFile(target, out);
+    90     │ - console.log(`Wrote·${target}·(${lines.length}·redirect·rules)`);
+       100 │ + console.log(`Wrote·${target}·(${lines.length}·redirect·rules)`);
+       101 │ + 
+  
+
+./src/components/EntryRow.astro:8:8 lint/style/useImportType  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × All these imports are only used as types.
+  
+     6 │  */
+     7 │ import ShareButton from "./ShareButton.astro";
+   > 8 │ import { type Locale } from "../i18n";
+       │        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     9 │ 
+    10 │ interface Props {
+  
+  i Importing the types with import type ensures that they are removed by the compilers and avoids loading unnecessary modules.
+  
+  i Safe fix: Use import type.
+  
+     6  6 │    */
+     7  7 │   import ShareButton from "./ShareButton.astro";
+     8    │ - import·{·type·Locale·}·from·"../i18n";
+        8 │ + import·type·{·Locale·}·from·"../i18n";
+     9  9 │   
+    10 10 │   interface Props {
+  
+
+./src/components/EntryRow.astro organizeImports ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Import statements could be sorted:
+  
+     1  1 │   ---
+        2 │ + import·{·type·Locale·}·from·"../i18n";
+     2  3 │   /**
+     3  4 │    * EntryRow — single compact row in the mockup's entry-list.
+    ····· │ 
+     5  6 │    * to allow independent interaction.
+     6  7 │    */
+     7    │ - import·ShareButton·from·"./ShareButton.astro";
+     8    │ - import·{·type·Locale·}·from·"../i18n";
+        8 │ + import·ShareButton·from·"./ShareButton.astro";
+     9  9 │   
+    10 10 │   interface Props {
+  
+
+./src/components/EntryRow.astro format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     9  9 │   
+    10 10 │   interface Props {
+    11    │ - → href:·string;
+    12    │ - → sectionLabel:·string;
+    13    │ - → dateLabel:·string;
+    14    │ - → title:·string;
+    15    │ - → section:·"essays"·|·"journal"·|·"poems";
+    16    │ - → lang:·Locale;
+       11 │ + ··href:·string;
+       12 │ + ··sectionLabel:·string;
+       13 │ + ··dateLabel:·string;
+       14 │ + ··title:·string;
+       15 │ + ··section:·"essays"·|·"journal"·|·"poems";
+       16 │ + ··lang:·Locale;
+    17 17 │   }
+    18 18 │   
+  
+
+./src/components/Footer.astro organizeImports ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Import statements could be sorted:
+  
+     3  3 │    * Footer — 100% mockup-faithful: social row pill row + copyright line.
+     4  4 │    */
+     5    │ - import·{·t,·localePath,·type·Locale·}·from·"../i18n";
+        5 │ + import·{·type·Locale,·localePath,·t·}·from·"../i18n";
+     6  6 │   
+     7  7 │   interface Props {
+  
+
+./src/components/Footer.astro format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+     6  6 │   
+     7  7 │   interface Props {
+     8    │ - → lang:·Locale;
+        8 │ + ··lang:·Locale;
+     9  9 │   }
+    10 10 │   
+  
+
+./astro.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+    21 21 │   
+    22 22 │   export default defineConfig({
+    23    │ - → site:·"https://cyber-pujangga.pages.dev",
+    24    │ - → base:·"/",
+    25    │ - → output:·"static",
+    26    │ - → compressHTML:·true,
+    27    │ - → trailingSlash:·"never",
+    28    │ - → build:·{
+    29    │ - → → inlineStylesheets:·"always",
+    30    │ - → },
+    31    │ - → integrations:·[
+    32    │ - → → expressiveCode(expressiveCodeOptions),
+    33    │ - → → icon(),
+    34    │ - → → sitemap({
+    35    │ - → → → changefreq:·"weekly",
+    36    │ - → → → priority:·0.7,
+    37    │ - → → → lastmod:·new·Date(),
+    38    │ - → → }),
+    39    │ - → → mdx(),
+    40    │ - → → robotsTxt(),
+    41    │ - → ],
+    42    │ - → //·Astro·7·defaults·to·Sätteri;·opt·back·into·remark/rehype.
+    43    │ - → markdown:·{
+    44    │ - → → processor:·unified({
+    45    │ - → → → rehypePlugins:·[
+    46    │ - → → → → rehypeUnwrapImages,
+    47    │ - → → → → [
+    48    │ - → → → → → rehypeExternalLinks,
+    49    │ - → → → → → {
+    50    │ - → → → → → → rel:·["nofollow",·"noreferrer"],
+    51    │ - → → → → → → target:·"_blank",
+    52    │ - → → → → → },
+    53    │ - → → → → ],
+    54    │ - → → → ],
+    55    │ - → → → remarkPlugins:·[remarkReadingTime,·remarkDirective,·remarkAdmonitions],
+    56    │ - → → → remarkRehype:·{
+    57    │ - → → → → footnoteLabelProperties:·{
+    58    │ - → → → → → className:·[""],
+    59    │ - → → → → },
+    60    │ - → → → },
+    61    │ - → → }),
+    62    │ - → },
+    63    │ - → prefetch:·true,
+    64    │ - → vite:·{
+    65    │ - → → plugins:·[rawFonts()],
+    66    │ - → },
+       23 │ + ··site:·"https://cyber-pujangga.pages.dev",
+       24 │ + ··base:·"/",
+       25 │ + ··output:·"static",
+       26 │ + ··compressHTML:·true,
+       27 │ + ··trailingSlash:·"never",
+       28 │ + ··build:·{
+       29 │ + ····inlineStylesheets:·"always",
+       30 │ + ··},
+       31 │ + ··integrations:·[
+       32 │ + ····expressiveCode(expressiveCodeOptions),
+       33 │ + ····icon(),
+       34 │ + ····sitemap({
+       35 │ + ······changefreq:·"weekly",
+       36 │ + ······priority:·0.7,
+       37 │ + ······lastmod:·new·Date(),
+       38 │ + ····}),
+       39 │ + ····mdx(),
+       40 │ + ····robotsTxt(),
+       41 │ + ··],
+       42 │ + ··//·Astro·7·defaults·to·Sätteri;·opt·back·into·remark/rehype.
+       43 │ + ··markdown:·{
+       44 │ + ····processor:·unified({
+       45 │ + ······rehypePlugins:·[
+       46 │ + ········rehypeUnwrapImages,
+       47 │ + ········[
+       48 │ + ··········rehypeExternalLinks,
+       49 │ + ··········{
+       50 │ + ············rel:·["nofollow",·"noreferrer"],
+       51 │ + ············target:·"_blank",
+       52 │ + ··········},
+       53 │ + ········],
+       54 │ + ······],
+       55 │ + ······remarkPlugins:·[remarkReadingTime,·remarkDirective,·remarkAdmonitions],
+       56 │ + ······remarkRehype:·{
+       57 │ + ········footnoteLabelProperties:·{
+       58 │ + ··········className:·[""],
+       59 │ + ········},
+       60 │ + ······},
+       61 │ + ····}),
+       62 │ + ··},
+       63 │ + ··prefetch:·true,
+       64 │ + ··vite:·{
+       65 │ + ····plugins:·[rawFonts()],
+       66 │ + ··},
+    67 67 │   });
+    68 68 │   
+    69 69 │   function rawFonts() {
+    70    │ - → return·{
+    71    │ - → → name:·"vite-plugin-raw-fonts",
+    72    │ - → → transform(_code:·string,·id:·string)·{
+    73    │ - → → → if·(id.endsWith(".ttf")·||·id.endsWith(".woff")·||·id.endsWith(".woff2"))·{
+    74    │ - → → → → const·buffer·=·fs.readFileSync(id);
+    75    │ - → → → → return·{
+    76    │ - → → → → → code:·`export·default·${JSON.stringify(buffer)}`,
+    77    │ - → → → → → map:·null,
+    78    │ - → → → → };
+    79    │ - → → → }
+    80    │ - → → → return·null;
+    81    │ - → → },
+    82    │ - → };
+    83    │ - }
+       70 │ + ··return·{
+       71 │ + ····name:·"vite-plugin-raw-fonts",
+       72 │ + ····transform(_code:·string,·id:·string)·{
+       73 │ + ······if·(id.endsWith(".ttf")·||·id.endsWith(".woff")·||·id.endsWith(".woff2"))·{
+       74 │ + ········const·buffer·=·fs.readFileSync(id);
+       75 │ + ········return·{
+       76 │ + ··········code:·`export·default·${JSON.stringify(buffer)}`,
+       77 │ + ··········map:·null,
+       78 │ + ········};
+       79 │ + ······}
+       80 │ + ······return·null;
+       81 │ + ····},
+       82 │ + ··};
+       83 │ + }
+       84 │ + 
+  
+
+Skipped 32 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --fix --unsafe
+
+The number of diagnostics exceeds the number allowed by Biome.
+Diagnostics not shown: 88.
+Checked 51 files in 34ms. No fixes applied.
+Found 108 errors.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

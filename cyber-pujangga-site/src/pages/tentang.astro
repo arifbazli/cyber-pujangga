@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import { type Locale, localePath, t } from "../i18n";
 import AboutLayout from "../layouts/AboutLayout.astro";
-import { t, localePath, type Locale } from "../i18n";
 import { localeOf, slugOf } from "../lib/content";
 
 const locale: Locale = "ms";
@@ -14,8 +14,8 @@ const aboutContent = about ? await render(about) : null;
 const title = `Tulisan peribadi, <span class="plain">dibuka perlahan</span>, merentasi dua bahasa.`;
 
 const ctas = {
-	primary: { href: localePath(locale, "esei"), label: "Baca esei pertama" },
-	secondary: { href: localePath(locale), label: "Kembali ke Laman" },
+  primary: { href: localePath(locale, "esei"), label: "Baca esei pertama" },
+  secondary: { href: localePath(locale), label: "Kembali ke Laman" },
 };
 ---
 

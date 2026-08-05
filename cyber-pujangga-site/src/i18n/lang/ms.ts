@@ -1,14 +1,13 @@
 // Bahasa Melayu UI strings
 // Convention: keep the SAME key structure as en.ts so lookups stay simple.
 
-import type { Strings } from "./en"
+import type { Strings } from "./en";
 
 export const ms: Strings = {
   site: {
     title: "Cyber Pujangga",
     tagline: "Esei, jurnal harian, dan sajak — dalam dua bahasa",
-    description:
-      "Tulisan peribadi merentasi dua bahasa: esei, nota harian, dan sajak.",
+    description: "Tulisan peribadi merentasi dua bahasa: esei, nota harian, dan sajak.",
   },
 
   nav: {
@@ -69,4 +68,4 @@ export const ms: Strings = {
     notFound: "Halaman tidak dijumpai.",
     home: "Kembali ke Laman",
   },
-} as const
+} as const;

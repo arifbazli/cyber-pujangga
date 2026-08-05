@@ -1,17 +1,17 @@
 ---
+import { type Locale, t } from "../i18n";
 /**
  * AboutLayout — matches LandingLayout's hero pattern exactly.
  * Hero = kinetic title (with optional <span class="plain">) + two CTAs only.
  * No avatar row, no byline, no lede. Mirrors the home page design 100%.
  */
 import BaseLayout from "./BaseLayout.astro";
-import { t, type Locale } from "../i18n";
 
 interface Props {
-	locale: Locale;
-	currentPath: string;
-	title: string;
-	ctas: { primary: { href: string; label: string }; secondary: { href: string; label: string } };
+  locale: Locale;
+  currentPath: string;
+  title: string;
+  ctas: { primary: { href: string; label: string }; secondary: { href: string; label: string } };
 }
 
 const { locale, currentPath, title, ctas } = Astro.props;

@@ -5,11 +5,11 @@
  * Mobile menu is a full-screen overlay with a backdrop, large tap
  * targets, focus-trap, escape-to-close, and body-scroll lock.
  */
-import { t, localePath, alternateLocalePath, menuLinksMs, menuLinksEn, type Locale } from "../i18n";
+import { type Locale, alternateLocalePath, localePath, menuLinksEn, menuLinksMs, t } from "../i18n";
 
 interface Props {
-	lang: Locale;
-	currentPath: string;
+  lang: Locale;
+  currentPath: string;
 }
 
 const { lang, currentPath } = Astro.props;
@@ -22,8 +22,8 @@ const otherLocalePath = alternateLocalePath(lang, currentPath);
 
 // Check if a link matches currentPath (or matches its locale-prefixed variant).
 const isActive = (href: string): boolean => {
-	if (href === "/") return currentPath === "/" || currentPath === "/en" || currentPath === "/en/";
-	return currentPath === href || currentPath === `${href}/`;
+  if (href === "/") return currentPath === "/" || currentPath === "/en" || currentPath === "/en/";
+  return currentPath === href || currentPath === `${href}/`;
 };
 ---
 
