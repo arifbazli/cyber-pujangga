@@ -1,4 +1,7 @@
 ---
+import EntryRow from "../components/EntryRow.astro";
+import ShareButton from "../components/ShareButton.astro";
+import { type Locale, localePath, t } from "../i18n";
 /**
  * LandingLayout — shared hero homepage used by both MS (`/`) and EN (`/en`).
  * Renders:
@@ -11,21 +14,18 @@
  * The locale is passed in; all strings come from `t(locale)`.
  */
 import BaseLayout from "./BaseLayout.astro";
-import EntryRow from "../components/EntryRow.astro";
-import ShareButton from "../components/ShareButton.astro";
-import { t, localePath, type Locale } from "../i18n";
 
 export interface EntryMeta {
-	date: Date;
-	section: "essays" | "journal" | "poems";
-	title: string;
-	slug: string;
-	form?: string;
+  date: Date;
+  section: "essays" | "journal" | "poems";
+  title: string;
+  slug: string;
+  form?: string;
 }
 
 interface Props {
-	locale: Locale;
-	allEntries: EntryMeta[];
+  locale: Locale;
+  allEntries: EntryMeta[];
 }
 
 const { locale, allEntries } = Astro.props as Props;
@@ -36,32 +36,36 @@ const remaining = allEntries.slice(1);
 
 const segMap = { essays: "esei", journal: "jurnal", poems: "sajak" } as const;
 const sectionLabelMap = {
-	ms: { essays: "Esei", journal: "Jurnal", poems: "Sajak" } as const,
-	en: { essays: "Essay", journal: "Journal", poems: "Poem" } as const,
+  ms: { essays: "Esei", journal: "Jurnal", poems: "Sajak" } as const,
+  en: { essays: "Essay", journal: "Journal", poems: "Poem" } as const,
 }[locale];
 
 function entryHref(e: EntryMeta): string {
-	return localePath(locale, segMap[e.section] as any) + "/" + e.slug;
+  return localePath(locale, segMap[e.section] as any) + "/" + e.slug;
 }
 
 function dateShort(d: Date): string {
-	const localeTag = locale === "ms" ? "ms-MY" : "en-US";
-	return d.toLocaleDateString(localeTag, { day: "2-digit", month: "short", year: "numeric" });
+  const localeTag = locale === "ms" ? "ms-MY" : "en-US";
+  return d.toLocaleDateString(localeTag, { day: "2-digit", month: "short", year: "numeric" });
 }
 
 function lastUpdatedLabel(): string {
-	if (!featured) return "";
-	const localeTag = locale === "ms" ? "ms-MY" : "en-US";
-	const d = featured.date.toLocaleDateString(localeTag, { day: "numeric", month: "long", year: "numeric" });
-	return strings.landingStrip.lastUpdated.replace("{date}", d);
+  if (!featured) return "";
+  const localeTag = locale === "ms" ? "ms-MY" : "en-US";
+  const d = featured.date.toLocaleDateString(localeTag, {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  return strings.landingStrip.lastUpdated.replace("{date}", d);
 }
 
 // Pick featured CTA label based on section
 function featuredReadLabel(): string {
-	if (!featured) return "";
-	if (featured.section === "essays") return strings.featured.readFullEssay;
-	if (featured.section === "journal") return strings.featured.readFullJournal;
-	return strings.featured.readFullPoem;
+  if (!featured) return "";
+  if (featured.section === "essays") return strings.featured.readFullEssay;
+  if (featured.section === "journal") return strings.featured.readFullJournal;
+  return strings.featured.readFullPoem;
 }
 ---
 

@@ -1,14 +1,14 @@
 ---
 import { getCollection, render } from "astro:content";
+import { type Locale, localePath, t } from "../../i18n";
 import PieceLayout from "../../layouts/PieceLayout.astro";
-import { t, localePath, type Locale } from "../../i18n";
 import { localeOf, readingTime, slugOf } from "../../lib/content";
 
 export async function getStaticPaths() {
-	const entries = await getCollection("poems", ({ data }) => !data.draft);
-	return entries
-		.filter((e) => localeOf(e) === "en")
-		.map((entry) => ({ params: { slug: slugOf(entry) }, props: { entry } }));
+  const entries = await getCollection("poems", ({ data }) => !data.draft);
+  return entries
+    .filter((e) => localeOf(e) === "en")
+    .map((entry) => ({ params: { slug: slugOf(entry) }, props: { entry } }));
 }
 
 const locale: Locale = "en";

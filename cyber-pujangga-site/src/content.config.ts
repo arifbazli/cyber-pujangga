@@ -3,8 +3,8 @@
 // Each piece is written in ONE language per file; the language is determined
 // by the folder it lives in (en/ or ms/) — see the `loader` pattern below.
 
-import { defineCollection, z } from "astro:content"
-import { glob } from "astro/loaders"
+import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 // ----- Essays -----
 // Longer reflective / argumentative pieces.
@@ -19,7 +19,7 @@ const essays = defineCollection({
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),
-})
+});
 
 // ----- Journal (daily short entries) -----
 // Short, dated entries. `date` is the journal entry date (not publish date).
@@ -28,13 +28,13 @@ const journal = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    date: z.coerce.date(),         // when the entry was written
-    pubDate: z.coerce.date(),      // when published on the site
-    mood: z.string().optional(),   // free-form: "thoughtful", "tired", etc.
+    date: z.coerce.date(), // when the entry was written
+    pubDate: z.coerce.date(), // when published on the site
+    mood: z.string().optional(), // free-form: "thoughtful", "tired", etc.
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
   }),
-})
+});
 
 // ----- Poems -----
 // Verse pieces with extra structure for forms/dedications.
@@ -56,7 +56,7 @@ const poems = defineCollection({
     strictLayout: z.boolean().default(false),
     draft: z.boolean().default(false),
   }),
-})
+});
 
 // ----- Static pages (about, etc.) -----
 // Per-language files named: about.en.md, about.ms.md
@@ -67,6 +67,6 @@ const pages = defineCollection({
     description: z.string().optional(),
     updatedDate: z.coerce.date().optional(),
   }),
-})
+});
 
-export const collections = { essays, journal, poems, pages }
+export const collections = { essays, journal, poems, pages };

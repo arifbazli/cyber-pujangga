@@ -1,4 +1,6 @@
 ---
+import EntryRow from "@/components/EntryRow.astro";
+import type { Locale } from "@/i18n";
 /**
  * SectionLayout — clean, minimal landing for a category page.
  * No hero block (heros are homepage-only). Shows a simple page title
@@ -6,30 +8,29 @@
  * blurbs — let the entries speak for themselves.
  */
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import EntryRow from "@/components/EntryRow.astro";
-import { type Locale } from "@/i18n";
 
 interface Item {
-	href: string;
-	sectionLabel: string;
-	dateLabel: string;
-	title: string;
-	section: "essays" | "journal" | "poems";
-	lang: Locale;
+  href: string;
+  sectionLabel: string;
+  dateLabel: string;
+  title: string;
+  section: "essays" | "journal" | "poems";
+  lang: Locale;
 }
 
 interface Props {
-	title: string;
-	description?: string;
-	lang: Locale;
-	currentPath: string;
-	backLabel: string;
-	backHref: string;
-	emptyLabel: string;
-	items: Item[];
+  title: string;
+  description?: string;
+  lang: Locale;
+  currentPath: string;
+  backLabel: string;
+  backHref: string;
+  emptyLabel: string;
+  items: Item[];
 }
 
-const { title, description, lang, currentPath, backLabel, backHref, emptyLabel, items } = Astro.props;
+const { title, description, lang, currentPath, backLabel, backHref, emptyLabel, items } =
+  Astro.props;
 ---
 
 <BaseLayout title={title} description={description} lang={lang} currentPath={currentPath}>

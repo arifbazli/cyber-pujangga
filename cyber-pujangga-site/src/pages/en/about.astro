@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import { type Locale, localePath, t } from "../../i18n";
 import AboutLayout from "../../layouts/AboutLayout.astro";
-import { t, localePath, type Locale } from "../../i18n";
 import { localeOf, slugOf } from "../../lib/content";
 
 const locale: Locale = "en";
@@ -14,8 +14,8 @@ const aboutContent = about ? await render(about) : null;
 const title = `Personal writing, <span class="plain">shared quietly</span>, across two languages.`;
 
 const ctas = {
-	primary: { href: localePath(locale, "essays"), label: "Read the first essay" },
-	secondary: { href: localePath(locale), label: "Return to Home" },
+  primary: { href: localePath(locale, "essays"), label: "Read the first essay" },
+  secondary: { href: localePath(locale), label: "Return to Home" },
 };
 ---
 

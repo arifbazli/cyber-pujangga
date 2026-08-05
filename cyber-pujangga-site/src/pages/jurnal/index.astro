@@ -1,24 +1,28 @@
 ---
 import { getCollection } from "astro:content";
+import { type Locale, localePath, t } from "../../i18n";
 import SectionLayout from "../../layouts/SectionLayout.astro";
-import { t, localePath, type Locale } from "../../i18n";
 import { filterByLocale, slugOf } from "../../lib/content";
 
 const locale: Locale = "ms";
 const strings = t(locale);
-const items = filterByLocale(await getCollection("journal", ({ data }) => !data.draft), locale, "date");
+const items = filterByLocale(
+  await getCollection("journal", ({ data }) => !data.draft),
+  locale,
+  "date",
+);
 
 function dateShort(d: Date): string {
-	return d.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
+  return d.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
 }
 
 const rows = items.map((e) => ({
-	href: localePath(locale, "jurnal") + "/" + slugOf(e),
-	sectionLabel: strings.section.journal,
-	dateLabel: dateShort(e.data.date ?? e.data.pubDate),
-	title: e.data.title,
-	section: "journal" as const,
-	lang: locale,
+  href: localePath(locale, "jurnal") + "/" + slugOf(e),
+  sectionLabel: strings.section.journal,
+  dateLabel: dateShort(e.data.date ?? e.data.pubDate),
+  title: e.data.title,
+  section: "journal" as const,
+  lang: locale,
 }));
 ---
 

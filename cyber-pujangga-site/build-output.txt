@@ -1,0 +1,63 @@
+
+> cyber-pujangga@0.1.0 build
+> node scripts/build-redirects.mjs && astro build
+
+Wrote /home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site/public/_redirects (23 redirect rules)
+[2m04:06:24[22m [34m[content][39m Syncing content
+[2m04:06:24[22m [34m[content][39m Synced content
+[2m04:06:24[22m [34m[types][39m Generated [2m467ms[22m
+[2m04:06:24[22m [34m[build][39m output: [34m"static"[39m
+[2m04:06:24[22m [34m[build][39m mode: [34m"static"[39m
+[2m04:06:24[22m [34m[build][39m directory: [34m/home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site/dist/[39m
+[2m04:06:24[22m [34m[build][39m Collecting build info...
+[2m04:06:24[22m [34m[build][39m [32m✓ Completed in 588ms.[39m
+[2m04:06:24[22m [34m[build][39m Building static entrypoints...
+[2m04:06:24[22m [34m[vite][39m [32m✓ built in 375ms[39m
+[2m04:06:24[22m [34m[vite][39m [32m✓ built in 23ms[39m
+[2m04:06:24[22m [34m[build][39m Rearranging server assets...
+
+[42m[30m generating static routes [39m[49m
+[2m04:06:24[22m   [34m├─[39m [2m/404.html[22m [2m(+16ms)[22m 
+[2m04:06:24[22m   [34m├─[39m [2m/en/about/index.html[22m [2m(+4ms)[22m 
+[2m04:06:24[22m   [34m├─[39m [2m/en/rss.xml[22m [2m(+45ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/en/index.html[22m [2m(+8ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/esei/index.html[22m [2m(+6ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/esei/buku-yang-menjual-kasut/index.html[22m [2m(+4ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/esei/mengenai-kesunyian-membaca/index.html[22m [2m(+17ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/esei/sajak-perlahan-generasi-membaca/index.html[22m [2m(+2ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/essays/index.html[22m [2m(+4ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/essays/on-the-quietness-of-reading/index.html[22m [2m(+2ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/essays/slow-poems-waiting-for-the-generation-that-reads-aloud/index.html[22m [2m(+2ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/essays/the-bookshop-that-sells-sneakers/index.html[22m [2m(+1ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/journal/index.html[22m [2m(+2ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/journal/2026-07-13-slow-morning/index.html[22m [2m(+2ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/jurnal/index.html[22m [2m(+2ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/jurnal/2026-07-13-pagi-perlahan/index.html[22m [2m(+4ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/essays/en/on-the-quietness-of-reading.png[22m [31m(+670ms)[39m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/essays/en/slow-poems-waiting-for-the-generation-that-reads-aloud.png[22m [2m(+35ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/essays/en/the-bookshop-that-sells-sneakers.png[22m [2m(+38ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/essays/ms/buku-yang-menjual-kasut.png[22m [2m(+28ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/essays/ms/mengenai-kesunyian-membaca.png[22m [2m(+28ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/essays/ms/sajak-perlahan-generasi-membaca.png[22m [2m(+31ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/journal/en/2026-07-13-slow-morning.png[22m [2m(+28ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/journal/ms/2026-07-13-pagi-perlahan.png[22m [2m(+27ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/poems/en/the-lamp-at-three.png[22m [2m(+27ms)[22m 
+[2m04:06:25[22m   [34m├─[39m [2m/og-image/poems/ms/lampu-pukul-tiga.png[22m [2m(+27ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/poem-card/en/the-lamp-at-three.png[22m [2m(+48ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/poem-card/ms/lampu-pukul-tiga.png[22m [2m(+42ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/poems/index.html[22m [2m(+3ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/poems/the-lamp-at-three/index.html[22m [2m(+1ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/robots.txt[22m [2m(+1ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/rss.xml[22m [2m(+3ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/sajak/index.html[22m [2m(+2ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/sajak/lampu-pukul-tiga/index.html[22m [2m(+2ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/tentang/index.html[22m [2m(+2ms)[22m 
+[2m04:06:26[22m   [34m├─[39m [2m/index.html[22m [2m(+3ms)[22m 
+[2m04:06:26[22m [32m✓ Completed in 1.31s.
+[39m
+[2m04:06:26[22m [34m[build][39m [32m✓ Completed in 1.74s.[39m
+[2m04:06:26[22m [34m[@astrojs/sitemap][39m `sitemap-index.xml` created at `dist`
+[32mastro-robots-txt:[0m `robots.txt` is created.
+
+[2m04:06:26[22m [34m[build][39m 21 page(s) built in [1m2.37s[22m
+[2m04:06:26[22m [34m[build][39m [1mComplete![22m

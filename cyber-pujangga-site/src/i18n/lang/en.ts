@@ -6,8 +6,7 @@ export const en = {
   site: {
     title: "Cyber Pujangga",
     tagline: "Essays, daily journal, and poetry — in two languages",
-    description:
-      "Personal writing across two languages: essays, daily notes, and poems.",
+    description: "Personal writing across two languages: essays, daily notes, and poems.",
   },
 
   // Navigation
@@ -74,6 +73,6 @@ export const en = {
     notFound: "Page not found.",
     home: "Return home",
   },
-} as const
+} as const;
 
-export type Strings = typeof en
+export type Strings = typeof en;

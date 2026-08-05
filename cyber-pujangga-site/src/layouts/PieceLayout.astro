@@ -1,39 +1,39 @@
 ---
+import ShareButton from "@/components/ShareButton.astro";
+import { type Locale, t } from "@/i18n";
 // PieceLayout — wrapper for essay, journal, and poem detail pages.
 // Header is intentionally minimal: eyebrow back-link and title only.
 // Excerpts, byline, dates, read-time and tags have been removed so the
 // piece's own voice carries the page.
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import ShareButton from "@/components/ShareButton.astro";
-import { t, type Locale } from "@/i18n";
 
 interface Props {
-	title: string;
-	description?: string;
-	lang: Locale;
-	pubDate: Date;
-	updatedDate?: Date;
-	author: string;
-	readingMinutes: number;
-	backHref: string;
-	backLabel: string;
-	sectionLabel: string;
-	currentPath?: string;
-	tags?: string[];
-	ogImage?: string;
+  title: string;
+  description?: string;
+  lang: Locale;
+  pubDate: Date;
+  updatedDate?: Date;
+  author: string;
+  readingMinutes: number;
+  backHref: string;
+  backLabel: string;
+  sectionLabel: string;
+  currentPath?: string;
+  tags?: string[];
+  ogImage?: string;
 }
 
 const {
-	title,
-	description,
-	lang,
-	pubDate,
-	updatedDate,
-	backHref,
-	backLabel,
-	currentPath = "",
-	tags: _tags = [],
-	ogImage,
+  title,
+  description,
+  lang,
+  pubDate,
+  updatedDate,
+  backHref,
+  backLabel,
+  currentPath = "",
+  tags: _tags = [],
+  ogImage,
 } = Astro.props;
 
 const strings = t(lang);
