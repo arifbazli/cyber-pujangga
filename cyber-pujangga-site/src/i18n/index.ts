@@ -77,7 +77,7 @@ async function buildSlugTranslationMap() {
       const first = e.id.split("/")[0];
       const loc = first === "ms" || first === "en" ? first : null;
       if (!loc) continue;
-      const d = (e.data.pubDate ?? e.data.date) as Date | undefined;
+      const d = e.data.pubDate;
       if (!d) continue;
       const formKey =
         collection === "poems" && (e.data as { form?: string }).form

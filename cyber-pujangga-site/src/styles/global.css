@@ -70,10 +70,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  /* Prevent iOS rubber-band zoom from mis-scaling layout */
-  text-size: 100%;
 }
-
 /* Prevent auto-zoom on input focus (iOS Safari) — not used here but safe */
 input,
 textarea,

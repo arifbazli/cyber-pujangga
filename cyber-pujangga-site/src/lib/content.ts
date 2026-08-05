@@ -80,12 +80,12 @@ export function filterByLocale<
  * `/essays/on-the-quietness-of-reading` (and vice versa).
  */
 export async function buildSlugTranslationMap(): Promise<{
-  msToEn: Map<string, { collection: string; slug: string }>;
-  enToMs: Map<string, { collection: string; slug: string }>;
+  msToEn: Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>;
+  enToMs: Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>;
 }> {
   type Key = string; // `${collection}:${slug}`
-  const msToEn = new Map<string, { collection: string; slug: string }>();
-  const enToMs = new Map<string, { collection: string; slug: string }>();
+  const msToEn = new Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>();
+  const enToMs = new Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>();
 
   const collections: Array<"essays" | "journal" | "poems"> = ["essays", "journal", "poems"];
   for (const collection of collections) {
@@ -96,7 +96,7 @@ export async function buildSlugTranslationMap(): Promise<{
     for (const e of all) {
       const loc = localeOf(e);
       if (loc !== "ms" && loc !== "en") continue;
-      const d = e.data.pubDate ?? e.data.date;
+      const d = e.data.pubDate;
       if (!d) continue;
       const formKey =
         collection === "poems" && (e.data as { form?: string }).form

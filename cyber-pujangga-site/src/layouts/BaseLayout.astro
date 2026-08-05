@@ -47,7 +47,7 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 				const body = document.body;
 				const btn = document.getElementById("themeBtn");
 
-				function applyTheme(theme) {
+				function applyTheme(theme: "light" | "dark") {
 					html.setAttribute("data-theme", theme);
 					body.setAttribute("data-theme", theme);
 					if (btn) btn.textContent = theme === "dark" ? "☾" : "☀";
@@ -72,7 +72,7 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 							: "light";
 				}
 				if (initial !== "dark" && initial !== "light") initial = "dark";
-				applyTheme(initial);
+				applyTheme(initial as "dark" | "light");
 
 				if (!btn) return;
 
@@ -89,22 +89,22 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 		<script>
 			// ── Mobile menu (full-screen overlay) ───────────────────────────
 			(function bindMobileMenu() {
-				const btn = document.getElementById("menuBtn");
+				const btn = document.getElementById("menuBtn") as HTMLElement;
 				const closeBtn = document.getElementById("menuClose");
-				const menu = document.getElementById("mobileMenu");
-				const backdrop = document.getElementById("menuBackdrop");
+				const menu = document.getElementById("mobileMenu") as HTMLElement;
+				const backdrop = document.getElementById("menuBackdrop") as HTMLElement;
 				if (!btn || !menu || !backdrop) return;
 
-				let prevFocus = null;
+				let prevFocus: HTMLElement | null = null;
 
 				const focusables = () =>
 					Array.from(
-						menu.querySelectorAll(
+						menu.querySelectorAll<HTMLElement>(
 							'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
 						),
 					).filter((el) => !el.hasAttribute("aria-hidden"));
 
-				const onKeydown = (e) => {
+				const onKeydown = (e: KeyboardEvent) => {
 					if (e.key === "Escape") {
 						e.preventDefault();
 						closeMenu();
@@ -125,7 +125,7 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 				};
 
 				function openMenu() {
-					prevFocus = document.activeElement;
+					prevFocus = document.activeElement as HTMLElement | null;
 					menu.classList.add("open");
 					backdrop.classList.add("open");
 					document.body.classList.add("menu-open");
@@ -160,7 +160,7 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 				backdrop.addEventListener("click", closeMenu);
 
 				// Close on any link click (so navigating closes the menu)
-				menu.querySelectorAll("a").forEach((a) => {
+				menu.querySelectorAll<HTMLElement>("a").forEach((a) => {
 					a.addEventListener("click", closeMenu);
 				});
 			})();

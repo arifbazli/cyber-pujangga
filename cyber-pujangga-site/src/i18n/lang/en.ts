@@ -73,6 +73,6 @@ export const en = {
     notFound: "Page not found.",
     home: "Return home",
   },
-} as const;
+}
 
 export type Strings = typeof en;

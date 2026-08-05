@@ -41,7 +41,7 @@ const sectionLabelMap = {
 }[locale];
 
 function entryHref(e: EntryMeta): string {
-  return localePath(locale, segMap[e.section] as any) + "/" + e.slug;
+  return `${localePath(locale, segMap[e.section])}/${e.slug}`;
 }
 
 function dateShort(d: Date): string {

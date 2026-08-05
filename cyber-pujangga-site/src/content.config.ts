@@ -29,6 +29,7 @@ const journal = defineCollection({
     title: z.string(),
     description: z.string().optional(),
     date: z.coerce.date(), // when the entry was written
+    author: z.string().default("Cyber Pujangga"),
     pubDate: z.coerce.date(), // when published on the site
     mood: z.string().optional(), // free-form: "thoughtful", "tired", etc.
     tags: z.array(z.string()).default([]),

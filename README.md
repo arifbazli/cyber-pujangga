@@ -3,7 +3,7 @@
 
 A bilingual (English / Bahasa Melayu) literature site — **Essays**, **Daily Journal**, and **Poems** — built as a fully static Astro 5 site with zero tracking and no database, deployed to Cloudflare Pages.
 
-**Live:** [`cyber_pujangga.pages.dev`](https://cyber_pujangga.pages.dev)
+**Live:** [`cyber-pujangga.pages.dev`](https://cyber-pujangga.pages.dev)
 
 ---
 
@@ -90,7 +90,7 @@ cd ~/projects/cyber-pujangga
 The deploy script:
 1. Runs `npm install` (first run only)
 2. Builds the site (`npm run build` → `cyber-pujangga-site/dist/`)
-3. Deploys via `wrangler pages deploy ./dist --project-name=cyber_pujangga`
+3. Deploys via `wrangler pages deploy ./dist --project-name=cyber-pujangga`
 4. Deletes all previous deployments, keeping only the latest
 
 > Uses the same Cloudflare account as `malay-tech-journal` (account ID `1c5731ce0fd505c95adb0069d6aa4dd2`).
