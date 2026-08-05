@@ -1,0 +1,93 @@
+---
+/**
+ * ShareButton — copies URL (or uses Web Share API) with "Kongsi"/"Share" label.
+ * Used in EntryRow (listing) and PieceLayout (post detail).
+ *
+ * On click:
+ *  - If `navigator.share` is available (mobile + some desktop browsers), opens
+ *    the native share sheet.
+ *  - Otherwise, copies the URL to the clipboard and shows "Disalin!" / "Copied!".
+ */
+import { type Locale } from "@/i18n";
+
+interface Props {
+	lang: Locale;
+	url: string;
+	title: string;
+	compact?: boolean;
+}
+
+const { lang, url, title, compact = false } = Astro.props;
+
+const label = lang === "ms" ? "Kongsi" : "Share";
+const copiedLabel = lang === "ms" ? "Disalin!" : "Copied!";
+const ariaLabel = lang === "ms" ? `Kongsi ${title}` : `Share ${title}`;
+---
+
+<button
+	class="share-btn"
+	type="button"
+	data-share-url={url}
+	data-share-title={title}
+	data-copied-label={copiedLabel}
+	aria-label={ariaLabel}
+	title={ariaLabel}
+>
+	<svg class="share-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+		<circle cx="18" cy="5" r="3"/>
+		<circle cx="6" cy="12" r="3"/>
+		<circle cx="18" cy="19" r="3"/>
+		<line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+		<line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+	</svg>
+	{!compact && <span class="share-label">{label}</span>}
+	{compact && <span class="share-label-compact">{label}</span>}
+</button>
+
+<style>
+	.share-btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 6px 10px;
+		background: transparent;
+		color: var(--ink-dim);
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		cursor: pointer;
+		transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+		min-height: 32px;
+	}
+
+	.share-btn:hover,
+	.share-btn:focus-visible {
+		color: var(--ink);
+		background: var(--accent-soft-strong);
+		border-color: var(--line-strong);
+		outline: none;
+	}
+
+	.share-btn:focus-visible {
+		box-shadow: 0 0 0 2px var(--accent-soft);
+	}
+
+	.share-btn.is-copied {
+		color: var(--ink);
+		background: var(--accent-soft);
+		border-color: var(--line-strong);
+	}
+
+	.share-icon {
+		flex: 0 0 auto;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.share-btn {
+			transition: none;
+		}
+	}
+</style>

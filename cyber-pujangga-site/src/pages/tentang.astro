@@ -1,0 +1,38 @@
+---
+import { getCollection, render } from "astro:content";
+import AboutLayout from "../layouts/AboutLayout.astro";
+import { t, localePath, type Locale } from "../i18n";
+import { localeOf, slugOf } from "../lib/content";
+
+const locale: Locale = "ms";
+const strings = t(locale);
+
+const allPages = await getCollection("pages");
+const about = allPages.find((p) => localeOf(p) === "ms" && slugOf(p) === "about");
+const aboutContent = about ? await render(about) : null;
+
+const title = `Tulisan peribadi, <span class="plain">dibuka perlahan</span>, merentasi dua bahasa.`;
+
+const ctas = {
+	primary: { href: localePath(locale, "esei"), label: "Baca esei pertama" },
+	secondary: { href: localePath(locale), label: "Kembali ke Laman" },
+};
+---
+
+<AboutLayout locale={locale} currentPath="tentang" title={title} ctas={ctas}>
+	<header class="section-header">
+		<p class="section-eyebrow"><a href={localePath(locale)}>← {strings.nav.back}</a></p>
+		<h1 class="section-title">{strings.nav.about}</h1>
+	</header>
+
+	{aboutContent
+		? <aboutContent.Content />
+		: <p>{strings.site.description}</p>}
+
+	<nav class="about-links" aria-label="Pautan berkaitan">
+		<a href={localePath(locale, "esei")}>{strings.nav.essays}</a>
+		<a href={localePath(locale, "jurnal")}>{strings.nav.journal}</a>
+		<a href={localePath(locale, "sajak")}>{strings.nav.poems}</a>
+		<a href="/rss.xml">RSS</a>
+	</nav>
+</AboutLayout>

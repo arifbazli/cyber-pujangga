@@ -1,0 +1,120 @@
+---
+/**
+ * LandingLayout — shared hero homepage used by both MS (`/`) and EN (`/en`).
+ * Renders:
+ *  - Hero with avatar row, kinetic H1, lede, CTA buttons
+ *  - Optional "today strip" with last-updated label
+ *  - Featured entry card (with share button)
+ *  - Compact EntryRow listing of remaining entries
+ *  - "See all" link
+ *
+ * The locale is passed in; all strings come from `t(locale)`.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import EntryRow from "../components/EntryRow.astro";
+import ShareButton from "../components/ShareButton.astro";
+import { t, localePath, type Locale } from "../i18n";
+
+export interface EntryMeta {
+	date: Date;
+	section: "essays" | "journal" | "poems";
+	title: string;
+	slug: string;
+	form?: string;
+}
+
+interface Props {
+	locale: Locale;
+	allEntries: EntryMeta[];
+}
+
+const { locale, allEntries } = Astro.props as Props;
+const strings = t(locale);
+
+const featured = allEntries[0];
+const remaining = allEntries.slice(1);
+
+const segMap = { essays: "esei", journal: "jurnal", poems: "sajak" } as const;
+const sectionLabelMap = {
+	ms: { essays: "Esei", journal: "Jurnal", poems: "Sajak" } as const,
+	en: { essays: "Essay", journal: "Journal", poems: "Poem" } as const,
+}[locale];
+
+function entryHref(e: EntryMeta): string {
+	return localePath(locale, segMap[e.section] as any) + "/" + e.slug;
+}
+
+function dateShort(d: Date): string {
+	const localeTag = locale === "ms" ? "ms-MY" : "en-US";
+	return d.toLocaleDateString(localeTag, { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function lastUpdatedLabel(): string {
+	if (!featured) return "";
+	const localeTag = locale === "ms" ? "ms-MY" : "en-US";
+	const d = featured.date.toLocaleDateString(localeTag, { day: "numeric", month: "long", year: "numeric" });
+	return strings.landingStrip.lastUpdated.replace("{date}", d);
+}
+
+// Pick featured CTA label based on section
+function featuredReadLabel(): string {
+	if (!featured) return "";
+	if (featured.section === "essays") return strings.featured.readFullEssay;
+	if (featured.section === "journal") return strings.featured.readFullJournal;
+	return strings.featured.readFullPoem;
+}
+---
+
+<BaseLayout title={strings.site.title} description={strings.site.description} lang={locale} currentPath={locale === "en" ? "en" : ""}>
+
+	<section class="hero">
+		<h1 class="kinetic-title" set:html={strings.hero.title.replace("{plain}", `<span class="plain">${strings.hero.plain}</span>`)} />
+		<div class="hero-actions">
+			<a href={featured ? entryHref(featured) : "#main"} class="btn primary">{strings.hero.ctaPrimary}</a>
+			<a href="#entries" class="btn ghost">{strings.hero.ctaSecondary}</a>
+		</div>
+	</section>
+
+	{featured && (
+		<div class="today-strip"><span class="pulse"></span> {lastUpdatedLabel()}</div>
+	)}
+
+	<main id="main">
+
+		{featured && (
+			<div class="featured">
+				<span class="featured-label">{strings.featured.label}</span>
+				<a href={entryHref(featured)}><h2>{featured.title}</h2></a>
+				<div class="featured-meta">
+					<span>{sectionLabelMap[featured.section]}</span>
+					<span>·</span>
+					<span>{dateShort(featured.date)}</span>
+				</div>
+				<div class="featured-actions">
+					<a href={entryHref(featured)} class="featured-read">{featuredReadLabel()}</a>
+					<ShareButton
+						lang={locale}
+						url={entryHref(featured)}
+						title={featured.title}
+					/>
+				</div>
+			</div>
+		)}
+
+		<div id="entries">
+			{remaining.map((entry) => (
+				<EntryRow
+					href={entryHref(entry)}
+					sectionLabel={sectionLabelMap[entry.section]}
+					dateLabel={dateShort(entry.date)}
+					title={entry.title}
+					section={entry.section}
+					lang={locale}
+				/>
+			))}
+		</div>
+
+		<a href="#entries" class="see-all">{strings.seeAll}</a>
+
+	</main>
+</BaseLayout>

@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import { t, localePath, type Locale } from "../../i18n";
+import { filterByLocale, slugOf } from "../../lib/content";
+
+const locale: Locale = "ms";
+const strings = t(locale);
+const items = filterByLocale(await getCollection("essays", ({ data }) => !data.draft), locale);
+
+function dateShort(d: Date): string {
+	return d.toLocaleDateString("ms-MY", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+const rows = items.map((e) => ({
+	href: localePath(locale, "esei") + "/" + slugOf(e),
+	sectionLabel: strings.section.essays,
+	dateLabel: dateShort(e.data.pubDate),
+	title: e.data.title,
+	section: "essays" as const,
+	lang: locale,
+}));
+---
+
+<SectionLayout
+	title={strings.section.essays}
+	lang={locale}
+	currentPath="esei"
+	backLabel={strings.nav.back}
+	backHref={localePath(locale)}
+	emptyLabel="Belum ada esei."
+	items={rows}
+/>

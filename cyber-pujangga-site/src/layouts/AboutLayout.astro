@@ -1,0 +1,35 @@
+---
+/**
+ * AboutLayout — matches LandingLayout's hero pattern exactly.
+ * Hero = kinetic title (with optional <span class="plain">) + two CTAs only.
+ * No avatar row, no byline, no lede. Mirrors the home page design 100%.
+ */
+import BaseLayout from "./BaseLayout.astro";
+import { t, type Locale } from "../i18n";
+
+interface Props {
+	locale: Locale;
+	currentPath: string;
+	title: string;
+	ctas: { primary: { href: string; label: string }; secondary: { href: string; label: string } };
+}
+
+const { locale, currentPath, title, ctas } = Astro.props;
+const strings = t(locale);
+---
+
+<BaseLayout title={strings.nav.about} description={strings.site.description} lang={locale} currentPath={currentPath}>
+	<section class="hero">
+		<h1 class="kinetic-title" set:html={title} />
+		<div class="hero-actions">
+			<a href={ctas.primary.href} class="btn primary">{ctas.primary.label}</a>
+			<a href={ctas.secondary.href} class="btn ghost">{ctas.secondary.label}</a>
+		</div>
+	</section>
+
+	<main id="main">
+		<article class="post-article about-prose">
+			<slot />
+		</article>
+	</main>
+</BaseLayout>

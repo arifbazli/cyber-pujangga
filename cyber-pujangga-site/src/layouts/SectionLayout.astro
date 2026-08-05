@@ -1,0 +1,61 @@
+---
+/**
+ * SectionLayout — clean, minimal landing for a category page.
+ * No hero block (heros are homepage-only). Shows a simple page title
+ * and the entry list. No excerpts, descriptions, or per-section
+ * blurbs — let the entries speak for themselves.
+ */
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import EntryRow from "@/components/EntryRow.astro";
+import { type Locale } from "@/i18n";
+
+interface Item {
+	href: string;
+	sectionLabel: string;
+	dateLabel: string;
+	title: string;
+	section: "essays" | "journal" | "poems";
+	lang: Locale;
+}
+
+interface Props {
+	title: string;
+	description?: string;
+	lang: Locale;
+	currentPath: string;
+	backLabel: string;
+	backHref: string;
+	emptyLabel: string;
+	items: Item[];
+}
+
+const { title, description, lang, currentPath, backLabel, backHref, emptyLabel, items } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} lang={lang} currentPath={currentPath}>
+	<main id="main">
+		<header class="section-header">
+			<p class="section-eyebrow">
+				<a href={backHref}>← {backLabel}</a>
+			</p>
+			<h1 class="section-title kinetic-title">{title}</h1>
+		</header>
+
+		{items.length === 0 && <p class="section-empty"><em>{emptyLabel}</em></p>}
+
+		<div class="entry-list">
+			{items.map((item) => (
+				<EntryRow
+					href={item.href}
+					sectionLabel={item.sectionLabel}
+					dateLabel={item.dateLabel}
+					title={item.title}
+					section={item.section}
+					lang={item.lang}
+				/>
+			))}
+		</div>
+
+		<a href={backHref} class="see-all">← {backLabel}</a>
+	</main>
+</BaseLayout>

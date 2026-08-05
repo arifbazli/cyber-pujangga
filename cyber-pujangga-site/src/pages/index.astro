@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import LandingLayout, { type EntryMeta } from "../layouts/LandingLayout.astro";
+import { filterByLocale, slugOf } from "../lib/content";
+
+const locale = "ms" as const;
+
+const [essays, journal, poems] = await Promise.all([
+	getCollection("essays", ({ data }) => !data.draft),
+	getCollection("journal", ({ data }) => !data.draft),
+	getCollection("poems", ({ data }) => !data.draft),
+]);
+
+const essaysLocale = filterByLocale(essays, locale);
+const journalLocale = filterByLocale(journal, locale, "date");
+const poemsLocale = filterByLocale(poems, locale);
+
+const allEntries: EntryMeta[] = [
+	...essaysLocale.map((e) => ({
+		date: e.data.pubDate,
+		section: "essays" as const,
+		title: e.data.title,
+		slug: slugOf(e),
+	})),
+	...journalLocale.map((e) => ({
+		date: e.data.date ?? e.data.pubDate,
+		section: "journal" as const,
+		title: e.data.title,
+		slug: slugOf(e),
+	})),
+	...poemsLocale.map((e) => ({
+		date: e.data.pubDate,
+		section: "poems" as const,
+		title: e.data.title,
+		slug: slugOf(e),
+		form: e.data.form,
+	})),
+].sort((a, b) => b.date.getTime() - a.date.getTime());
+---
+
+<LandingLayout locale={locale} allEntries={allEntries} />

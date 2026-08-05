@@ -1,0 +1,25 @@
+---
+/**
+ * ThemeProvider — inline FOUC-free theme init + click handlers.
+ * Mockup v3: `data-theme` lives on <body>; we mirror it on <html> as well
+ * so the very-first paint already has the right CSS variables applied.
+ */
+---
+
+<script is:inline>
+	// FOUC-free theme bootstrap — runs synchronously before <body> paints.
+	// Default to dark when no stored preference (mockup v3 default).
+	(function () {
+		try {
+			var stored = localStorage.getItem("theme");
+			var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+			// If user explicitly toggled before, honour that. Otherwise use
+			// system preference, falling back to dark (mockup v3 default).
+			var theme = stored || (prefersDark ? "dark" : "light");
+			document.documentElement.setAttribute("data-theme", theme);
+		} catch (_) {
+			// localStorage may be unavailable (private mode, sandboxed iframe).
+			document.documentElement.setAttribute("data-theme", "dark");
+		}
+	})();
+</script>

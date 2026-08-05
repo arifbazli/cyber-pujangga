@@ -1,0 +1,62 @@
+---
+/**
+ * Header — site chrome matching the 2026 v3 mockup.
+ * Sticky, full-width (not wrapped in `.wrap`).
+ * Mobile menu is a full-screen overlay with a backdrop, large tap
+ * targets, focus-trap, escape-to-close, and body-scroll lock.
+ */
+import { t, localePath, alternateLocalePath, menuLinksMs, menuLinksEn, type Locale } from "../i18n";
+
+interface Props {
+	lang: Locale;
+	currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+const strings = t(lang);
+
+const links = lang === "ms" ? menuLinksMs : menuLinksEn;
+const otherLocaleLabel = lang === "ms" ? "EN" : "MS";
+const otherLocaleLabelLong = lang === "ms" ? "English" : "Bahasa Melayu";
+const otherLocalePath = alternateLocalePath(lang, currentPath);
+
+// Check if a link matches currentPath (or matches its locale-prefixed variant).
+const isActive = (href: string): boolean => {
+	if (href === "/") return currentPath === "/" || currentPath === "/en" || currentPath === "/en/";
+	return currentPath === href || currentPath === `${href}/`;
+};
+---
+
+<header id="siteHeader">
+	<a class="logo" href={localePath(lang)}>Cyber Pujangga</a>
+	<nav class="primary" id="primaryNav" aria-label={lang === "ms" ? "Menu utama" : "Primary"}>
+		{links.map((link) => (
+			<a href={link.href} class={isActive(link.href) ? "active" : ""}>{link.label}</a>
+		))}
+	</nav>
+	<div class="nav-right">
+		<a href={otherLocalePath} class="lang-toggle lang-toggle--desktop" aria-label={`${strings.theme.switchLangAria} (${otherLocaleLabelLong})`}>{otherLocaleLabel}</a>
+		<button class="theme-toggle" id="themeBtn" type="button" aria-label={strings.theme.toggleAria}>☾</button>
+		<button class="menu-btn" id="menuBtn" type="button" aria-label={strings.theme.menuAria} aria-expanded="false" aria-controls="primaryNav">☰</button>
+	</div>
+</header>
+
+{/* Full-screen mobile menu — rendered outside <header> so it can use
+    position:fixed and sit above all content. Toggled by #menuBtn / #menuClose. */}
+<div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+<aside class="mobile-menu" id="mobileMenu" aria-hidden="true" role="dialog" aria-modal="true" aria-label={lang === "ms" ? "Menu mudah alih" : "Mobile menu"}>
+	<button class="menu-close" id="menuClose" type="button" aria-label={strings.theme.menuCloseAria}>✕</button>
+
+	<nav class="mobile-nav-list" aria-label={lang === "ms" ? "Menu utama" : "Primary"}>
+		{links.map((link) => (
+			<a href={link.href} class={isActive(link.href) ? "active" : ""}>{link.label}</a>
+		))}
+	</nav>
+
+	<div class="mobile-menu-foot">
+		<a href={otherLocalePath} class="lang-pill" aria-label={`${strings.theme.switchLangAria} (${otherLocaleLabelLong})`}>
+			<span class="lang-pill-label">{lang === "ms" ? "Bahasa" : "Language"}</span>
+			<span class="lang-pill-value">{otherLocaleLabel}</span>
+		</a>
+	</div>
+</aside>

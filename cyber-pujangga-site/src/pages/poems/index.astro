@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import SectionLayout from "../../layouts/SectionLayout.astro";
+import { t, localePath, type Locale } from "../../i18n";
+import { filterByLocale, slugOf } from "../../lib/content";
+
+const locale: Locale = "en";
+const strings = t(locale);
+const items = filterByLocale(await getCollection("poems", ({ data }) => !data.draft), locale);
+
+function dateShort(d: Date): string {
+	return d.toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+const rows = items.map((e) => ({
+	href: localePath(locale, "poems") + "/" + slugOf(e),
+	sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+	dateLabel: dateShort(e.data.pubDate),
+	title: e.data.title,
+	section: "poems" as const,
+	lang: locale,
+}));
+---
+
+<SectionLayout
+	title={strings.section.poems}
+	lang={locale}
+	currentPath="poems"
+	backLabel={strings.nav.back}
+	backHref={localePath(locale)}
+	emptyLabel="No poems yet."
+	items={rows}
+/>

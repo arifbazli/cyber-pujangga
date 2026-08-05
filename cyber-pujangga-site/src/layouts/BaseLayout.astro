@@ -1,0 +1,256 @@
+---
+// BaseLayout — site chrome: <head>, skip link, header, <slot/>, footer.
+// Faithful to the 2026 v3 mockup (no .wrap wrapper, no .site-header class).
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import SkipLink from "@/components/SkipLink.astro";
+import ThemeProvider from "@/components/ThemeProvider.astro";
+import type { Locale } from "@/i18n";
+
+interface Props {
+	title: string;
+	description?: string;
+	lang: Locale;
+	currentPath?: string;
+	ogImage?: string;
+	articleDate?: string;
+}
+
+const {
+	title,
+	description,
+	lang,
+	currentPath = "",
+	ogImage,
+	articleDate,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang === "ms" ? "ms" : "en"}>
+	<head>
+		<ThemeProvider />
+		<BaseHead
+			title={title}
+			description={description}
+			lang={lang}
+			ogImage={ogImage}
+			articleDate={articleDate}
+		/>
+	</head>
+	<body>
+		<SkipLink lang={lang} />
+		<Header lang={lang} currentPath={currentPath} />
+		<slot />
+		<Footer lang={lang} />
+
+		<script>
+			// ── Theme toggle ────────────────────────────────────────────
+			// Mockup v3: `data-theme` lives on <body> AND <html>.
+			// Default = dark (per mockup). Persists to localStorage["theme"].
+			(function initTheme() {
+				const html = document.documentElement;
+				const body = document.body;
+				const btn = document.getElementById("themeBtn");
+
+				function applyTheme(theme) {
+					html.setAttribute("data-theme", theme);
+					body.setAttribute("data-theme", theme);
+					if (btn) btn.textContent = theme === "dark" ? "☾" : "☀";
+					try {
+						localStorage.setItem("theme", theme);
+					} catch (_) {}
+				}
+
+				// Read initial state from FOUC bootstrap on <html>,
+				// or localStorage, or system preference. Final fallback: dark.
+				let initial = html.getAttribute("data-theme");
+				if (!initial) {
+					try {
+						initial = localStorage.getItem("theme");
+					} catch (_) {}
+				}
+				if (!initial) {
+					initial =
+						window.matchMedia &&
+						window.matchMedia("(prefers-color-scheme: dark)").matches
+							? "dark"
+							: "light";
+				}
+				if (initial !== "dark" && initial !== "light") initial = "dark";
+				applyTheme(initial);
+
+				if (!btn) return;
+
+				btn.addEventListener("click", () => {
+					const current =
+						body.getAttribute("data-theme") ||
+						html.getAttribute("data-theme") ||
+						"dark";
+					applyTheme(current === "dark" ? "light" : "dark");
+				});
+			})();
+		</script>
+
+		<script>
+			// ── Mobile menu (full-screen overlay) ───────────────────────────
+			(function bindMobileMenu() {
+				const btn = document.getElementById("menuBtn");
+				const closeBtn = document.getElementById("menuClose");
+				const menu = document.getElementById("mobileMenu");
+				const backdrop = document.getElementById("menuBackdrop");
+				if (!btn || !menu || !backdrop) return;
+
+				let prevFocus = null;
+
+				const focusables = () =>
+					Array.from(
+						menu.querySelectorAll(
+							'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+						),
+					).filter((el) => !el.hasAttribute("aria-hidden"));
+
+				const onKeydown = (e) => {
+					if (e.key === "Escape") {
+						e.preventDefault();
+						closeMenu();
+						return;
+					}
+					if (e.key !== "Tab") return;
+					const items = focusables();
+					if (items.length === 0) return;
+					const first = items[0];
+					const last = items[items.length - 1];
+					if (e.shiftKey && document.activeElement === first) {
+						e.preventDefault();
+						last.focus();
+					} else if (!e.shiftKey && document.activeElement === last) {
+						e.preventDefault();
+						first.focus();
+					}
+				};
+
+				function openMenu() {
+					prevFocus = document.activeElement;
+					menu.classList.add("open");
+					backdrop.classList.add("open");
+					document.body.classList.add("menu-open");
+					menu.setAttribute("aria-hidden", "false");
+					backdrop.setAttribute("aria-hidden", "false");
+					btn.setAttribute("aria-expanded", "true");
+					btn.textContent = "✕";
+					document.addEventListener("keydown", onKeydown, true);
+					const items = focusables();
+					if (items.length) items[0].focus({ preventScroll: true });
+				}
+
+				function closeMenu() {
+					menu.classList.remove("open");
+					backdrop.classList.remove("open");
+					document.body.classList.remove("menu-open");
+					menu.setAttribute("aria-hidden", "true");
+					backdrop.setAttribute("aria-hidden", "true");
+					btn.setAttribute("aria-expanded", "false");
+					btn.textContent = "☰";
+					document.removeEventListener("keydown", onKeydown, true);
+					if (prevFocus && typeof prevFocus.focus === "function") {
+						prevFocus.focus({ preventScroll: true });
+					}
+				}
+
+				btn.addEventListener("click", () => {
+					if (menu.classList.contains("open")) closeMenu();
+					else openMenu();
+				});
+				if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+				backdrop.addEventListener("click", closeMenu);
+
+				// Close on any link click (so navigating closes the menu)
+				menu.querySelectorAll("a").forEach((a) => {
+					a.addEventListener("click", closeMenu);
+				});
+			})();
+
+			// ── Sticky glass header on scroll ───────────────────────────
+			const header = document.getElementById("siteHeader");
+			if (header) {
+				const onScroll = () => {
+					header.classList.toggle("scrolled", window.scrollY > 20);
+				};
+				onScroll();
+				window.addEventListener("scroll", onScroll, { passive: true });
+			}
+
+			// ── Scroll-reveal via IntersectionObserver (one-shot) ───────
+			// The mockup uses `[data-reveal]` → `.is-visible`. We also keep
+			// the project's `.reveal` → `.reveal-on` alias for backwards-compat.
+			const rows = document.querySelectorAll("[data-reveal], .reveal");
+			if ("IntersectionObserver" in window) {
+				const io = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (entry.isIntersecting) {
+								entry.target.classList.add("is-visible");
+								entry.target.classList.add("reveal-on");
+								io.unobserve(entry.target);
+							}
+						}
+					},
+					{ threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+				);
+				rows.forEach((r) => io.observe(r));
+			} else {
+				rows.forEach((r) => {
+					r.classList.add("is-visible");
+					r.classList.add("reveal-on");
+				});
+			}
+
+			// ── Share buttons (Web Share API → clipboard fallback) ──────
+			// Listens for clicks on any `.share-btn` (or legacy `.tiktok-share`).
+			function bindShareButtons() {
+				const buttons = document.querySelectorAll(".share-btn, .tiktok-share");
+				buttons.forEach((btn) => {
+					if ((btn as HTMLElement).dataset.shareBound === "1") return;
+					(btn as HTMLElement).dataset.shareBound = "1";
+					btn.addEventListener("click", async (e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						const url = (btn as HTMLElement).dataset.shareUrl || window.location.href;
+						const title = (btn as HTMLElement).dataset.shareTitle || document.title;
+						const copiedLabel = (btn as HTMLElement).dataset.copiedLabel || "Copied!";
+						const originalLabel =
+							(btn.querySelector(".share-label") as HTMLElement)?.textContent ||
+							(btn.querySelector(".tt-label") as HTMLElement)?.textContent ||
+							"";
+						try {
+							if (navigator.share) {
+								await navigator.share({ url, title });
+								return;
+							}
+						} catch (err) {
+							// User cancelled or share failed — fall through to copy.
+						}
+						try {
+							await navigator.clipboard.writeText(url);
+							btn.classList.add("is-copied");
+							const labelEl = btn.querySelector(".share-label, .tt-label");
+							if (labelEl) labelEl.textContent = copiedLabel;
+							setTimeout(() => {
+								btn.classList.remove("is-copied");
+								if (labelEl) labelEl.textContent = originalLabel;
+							}, 1800);
+						} catch (_) {
+							// Final fallback: show a prompt with the URL.
+							window.prompt("Copy this link:", url);
+						}
+					});
+				});
+			}
+			bindShareButtons();
+			// Re-bind after Astro page transitions (if used in future).
+			document.addEventListener("astro:page-load", bindShareButtons);
+		</script>
+	</body>
+</html>
