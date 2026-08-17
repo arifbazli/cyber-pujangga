@@ -1,0 +1,24 @@
+---
+title: "What the Travelogue Serves"
+description: "Taiwan Travelogue just won the International Booker Prize. I keep thinking about why its chapters are named after dishes instead of dates."
+pubDate: 2026-08-17T09:00:00Z
+author: "Cyber Pujangga"
+tags:
+  - translation
+  - colonialism
+  - taiwan
+---
+
+Every chapter of Taiwan Travelogue is named after a dish. Not a month, not a town on the itinerary, not a mood. A dish. I keep circling that decision, because on the surface it looks like the smallest possible way to organize a novel about a colonial-era journey, and yet I suspect it is doing more work than any map or calendar could have.
+
+The novel that made this decision has just won the 2026 International Booker Prize — the first time the award has gone to a Taiwanese author, and the first time it has gone to a work originally written in Mandarin under the prize's current format. Yang Shuang-zi wrote it; Lin King translated it into the English that eventually reached the judges. The win did not arrive out of nowhere. In the Graywolf Press edition most English readers will have first held it in, the book had already taken the 2024 National Book Award for Translated Literature.
+
+What is the novel about, underneath the prizes? A Japanese writer named Aoyama Chizuko travels through Japanese-ruled Taiwan in 1938 and files a serialized travelogue as she goes. That alone would be a modest historical curiosity. But Yang's novel does not simply retell Chizuko's journey — it presents itself as having rediscovered Chizuko's own account decades later and carried it, for the first time, into Chinese, in the twenty-first century, in Yang's own hand. The book an English reader holds, then, is a translation of a translation of a document the novel itself invents the discovery of. I don't know if I am meant to trust that frame or simply admire it as a frame. Maybe both, and maybe the novel wants it both ways.
+
+Inside that frame, the real subject is smaller and warmer than the history surrounding it: Chizuko's developing relationship with O Chizuru, the Taiwanese woman assigned to translate for her. Two names close enough in transliteration that I reread the descriptions twice before trusting I had the two women properly separated. It is here that the dishes stop being a curiosity and start behaving like an argument. If a chapter has to be given a name, and the choice falls on a plate of food rather than a place or a date, then the meal is being proposed as the truer unit of the journey — the point where a colonial gaze and an occupied woman's ordinary appetite are briefly forced to look at the same object. Empire moves through travel permits and official assignments and the schedule Chizuko is sent to fulfill. Whatever passes between her and O Chizuru moves through what gets ordered, cooked, and eaten in between those obligations.
+
+Is that a softened way of writing about colonization, or the only honest one? A travelogue that named its chapters after decrees or dates would already be telling you which version of that year it believed — that history moves through documents, and everything else is footnote. Naming a chapter after a dish insists on something closer to the opposite: that Chizuko's real map of 1938 is the one drawn by what she and O Chizuru shared at a table, running underneath the official itinerary without ever quite matching it. The International Booker's jury chair described the book as succeeding both as a romance and as an incisive post-colonial novel, and I think the dish-chapters are exactly the hinge between those two descriptions — the place where the novel refuses to let a reader have the love story without the history, or the history without the appetite that keeps insisting on being fed regardless of who governs the harbor that year.
+
+I keep returning to the fact that Yang chose autofiction over straight history for this — that she gave herself, a contemporary Taiwanese novelist, the task of "translating" a Japanese woman's account of a Taiwan that no longer exists in the form Chizuko once walked through. Every act of rediscovery in this book is also, quietly, an act of invention, and I don't think Yang is hiding that from anyone. She seems to be asking the reader to hold both at once, the way a good meal asks nothing of you except that you taste it, and lets the history of how the ingredients arrived at that table wait outside the frame, if that is what you would rather do with your attention.
+
+I have not read the novel itself yet, only its outline and its awards, which is its own kind of distance to admit to. But tonight I find myself thinking about O Chizuru, setting some dish in front of a woman she is paid to translate for, and watching her taste something she has no other word for yet. The only record of that small gesture that will reach me, a century later and several languages removed, is the name it eventually gave a chapter.
