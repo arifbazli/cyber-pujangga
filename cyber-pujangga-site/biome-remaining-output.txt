@@ -172,55 +172,6 @@
     158 158 │     // If we ended up with no path, return the locale home
   
 
-./src/styles/global.css:74:3 lint/correctness/noUnknownProperty ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Unknown property is not allowed.
-  
-    72 │   text-size-adjust: 100%;
-    73 │   /* Prevent iOS rubber-band zoom from mis-scaling layout */
-  > 74 │   text-size: 100%;
-       │   ^^^^^^^^^
-    75 │ }
-    76 │ 
-  
-  i See CSS Specifications and browser specific properties for more details.
-  
-  i To resolve this issue, replace the unknown property with a valid CSS property.
-  
-
-./src/layouts/LandingLayout.astro:44:10 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Template literals are preferred over string concatenation.
-  
-    43 │ function entryHref(e: EntryMeta): string {
-  > 44 │   return localePath(locale, segMap[e.section] as any) + "/" + e.slug;
-       │          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    45 │ }
-    46 │ 
-  
-  i Unsafe fix: Use a template literal.
-  
-    42 42 │   
-    43 43 │   function entryHref(e: EntryMeta): string {
-    44    │ - ··return·localePath(locale,·segMap[e.section]·as·any)·+·"/"·+·e.slug;
-       44 │ + ··return·`${localePath(locale,·segMap[e.section]·as·any)}/${e.slug}`;
-    45 45 │   }
-    46 46 │   
-  
-
-./src/layouts/LandingLayout.astro:44:50 lint/suspicious/noExplicitAny ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Unexpected any. Specify a different type.
-  
-    43 │ function entryHref(e: EntryMeta): string {
-  > 44 │   return localePath(locale, segMap[e.section] as any) + "/" + e.slug;
-       │                                                  ^^^
-    45 │ }
-    46 │ 
-  
-  i any disables many type checking rules. Its use should be avoided.
-  
-
 ./src/pages/en/rss.xml.ts:52:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━
 
   × Do not use template literals if interpolation and special-character handling are not needed.
@@ -322,66 +273,69 @@
     22 22 │     dateLabel: dateShort(e.data.date ?? e.data.pubDate),
   
 
-./src/site.config.ts:30:33 lint/suspicious/noExplicitAny ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+./src/pages/poems/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  × Unexpected any. Specify a different type.
+  × Template literals are preferred over string concatenation.
   
-    28 │     borderRadius: "4px",
-    29 │     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  > 30 │     codeBackground: ({ theme }: any) => (theme.type === "light" ? "#f0e9d6" : "#1a1715"),
-       │                                 ^^^
-    31 │     codeFontFamily:
-    32 │       'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
+    15 │ const rows = items.map((e) => ({
+  > 16 │   href: localePath(locale, "poems") + "/" + slugOf(e),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 │   dateLabel: dateShort(e.data.pubDate),
   
-  i any disables many type checking rules. Its use should be avoided.
+  i Unsafe fix: Use a template literal.
   
-
-./src/site.config.ts:38:46 lint/suspicious/noExplicitAny ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Unexpected any. Specify a different type.
-  
-    36 │     frames: {
-    37 │       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  > 38 │       editorActiveTabBackground: ({ theme }: any) =>
-       │                                              ^^^
-    39 │         theme.type === "light" ? "#f0e9d6" : "#1a1715",
-    40 │       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  
-  i any disables many type checking rules. Its use should be avoided.
+    14 14 │   
+    15 15 │   const rows = items.map((e) => ({
+    16    │ - ··href:·localePath(locale,·"poems")·+·"/"·+·slugOf(e),
+       16 │ + ··href:·`${localePath(locale,·"poems")}/${slugOf(e)}`,
+    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 18 │     dateLabel: dateShort(e.data.pubDate),
   
 
-./src/site.config.ts:41:43 lint/suspicious/noExplicitAny ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+./src/pages/rss.xml.ts:52:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  × Unexpected any. Specify a different type.
+  × Do not use template literals if interpolation and special-character handling are not needed.
   
-    39 │         theme.type === "light" ? "#f0e9d6" : "#1a1715",
-    40 │       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  > 41 │       editorTabBarBackground: ({ theme }: any) => (theme.type === "light" ? "#ebe3cd" : "#15120e"),
-       │                                           ^^^
-    42 │       frameBoxShadowCssValue: "none",
-    43 │       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    50 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
+    51 │     items,
+  > 52 │     customData: `<language>ms-my</language>`,
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    53 │   });
+    54 │ }
   
-  i any disables many type checking rules. Its use should be avoided.
+  i Unsafe fix: Replace with string literal
   
-
-./src/site.config.ts:44:39 lint/suspicious/noExplicitAny ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Unexpected any. Specify a different type.
-  
-    42 │       frameBoxShadowCssValue: "none",
-    43 │       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  > 44 │       terminalBackground: ({ theme }: any) => (theme.type === "light" ? "#f0e9d6" : "#1a1715"),
-       │                                       ^^^
-    45 │       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    46 │       terminalTitlebarBackground: ({ theme }: any) =>
-  
-  i any disables many type checking rules. Its use should be avoided.
+    50 50 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
+    51 51 │       items,
+    52    │ - ····customData:·`<language>ms-my</language>`,
+       52 │ + ····customData:·"<language>ms-my</language>",
+    53 53 │     });
+    54 54 │   }
   
 
-The number of diagnostics exceeds the number allowed by Biome.
-Diagnostics not shown: 7.
-Checked 51 files in 34ms. No fixes applied.
-Found 27 errors.
+./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Template literals are preferred over string concatenation.
+  
+    15 │ const rows = items.map((e) => ({
+  > 16 │   href: localePath(locale, "sajak") + "/" + slugOf(e),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 │   dateLabel: dateShort(e.data.pubDate),
+  
+  i Unsafe fix: Use a template literal.
+  
+    14 14 │   
+    15 15 │   const rows = items.map((e) => ({
+    16    │ - ··href:·localePath(locale,·"sajak")·+·"/"·+·slugOf(e),
+       16 │ + ··href:·`${localePath(locale,·"sajak")}/${slugOf(e)}`,
+    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 18 │     dateLabel: dateShort(e.data.pubDate),
+  
+
+Checked 51 files in 33ms. No fixes applied.
+Found 16 errors.
 check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Some errors were emitted while running checks.

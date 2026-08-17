@@ -27,7 +27,8 @@ export const siteConfig: SiteConfig = {
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
   styleOverrides: {
     borderRadius: "4px",
-    codeBackground: ({ theme }: { theme: ExpressiveCodeTheme }) => (theme.type === "light" ? "#f0e9d6" : "#1a1715"),
+    codeBackground: ({ theme }: { theme: ExpressiveCodeTheme }) =>
+      theme.type === "light" ? "#f0e9d6" : "#1a1715",
     codeFontFamily:
       'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
     codeFontSize: "0.875rem",
@@ -46,14 +47,16 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
     },
     uiLineHeight: "inherit",
   },
-  themeCssSelector(theme: ExpressiveCodeTheme, { styleVariants }: { styleVariants: StyleVariant[] }) {
+  themeCssSelector(
+    theme: ExpressiveCodeTheme,
+    { styleVariants }: { styleVariants: StyleVariant[] },
+  ) {
     if (styleVariants.length >= 2) {
       const baseTheme = styleVariants[0]?.theme;
       const altTheme = styleVariants.find(
         (v: StyleVariant) => v.theme.type !== baseTheme?.type,
       )?.theme;
-      if (theme === baseTheme || theme === altTheme)
-        return `[data-theme='${theme.type}']`;
+      if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
     }
     return `[data-theme="${theme.name}"]`;
   },
