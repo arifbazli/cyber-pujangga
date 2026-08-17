@@ -1,6 +1,8 @@
 /* Cyber Pujangga — global styles
    Design tokens + components, modeled 100% on the 2026 v3 mockup.
    Newsreader + JetBrains Mono, parchment bg, glassmorphic surfaces.
+   Changes under src/styles/ auto-deploy to production on merge to
+   master — see .github/workflows/deploy-on-ui-change.yml.
    ------------------------------------------------------------------ */
 
 @import "@fontsource-variable/newsreader/wght.css";
