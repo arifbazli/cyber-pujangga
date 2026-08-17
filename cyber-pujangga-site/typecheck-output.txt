@@ -2,98 +2,102 @@
 > cyber-pujangga@0.1.0 check
 > astro check
 
-[2m04:06:16[22m [34m[content][39m Syncing content
-[2m04:06:16[22m [34m[content][39m Synced content
-[2m04:06:16[22m [34m[types][39m Generated [2m655ms[22m
-[2m04:06:16[22m [34m[check][39m Getting diagnostics for Astro files in /home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site...
-[96mscripts/build-redirects.mjs[0m:[93m15[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'readFile' is declared but its value is never read.
+[2m03:50:07[22m [34m[content][39m Syncing content
+[2m03:50:07[22m [34m[content][39m Synced content
+[2m03:50:07[22m [34m[types][39m Generated [2m664ms[22m
+[2m03:50:07[22m [34m[check][39m Getting diagnostics for Astro files in /home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site...
+[96mscripts/build-redirects.mjs[0m:[93m16[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'readFile' is declared but its value is never read.
 
-[7m15[0m import { readFile, writeFile } from "node:fs/promises";
+[7m16[0m import { readFile, writeFile } from "node:fs/promises";
 [7m  [0m [93m         ~~~~~~~~[0m
 
+[96msrc/content.config.ts[0m:[93m69[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m69[0m     updatedDate: z.coerce.date().optional(),
+[7m  [0m [93m                 ~[0m
 [96msrc/content.config.ts[0m:[93m68[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m68[0m     updatedDate: z.coerce.date().optional(),
+[7m68[0m     description: z.string().optional(),
 [7m  [0m [93m                 ~[0m
-[96msrc/content.config.ts[0m:[93m67[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m67[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m67[0m     description: z.string().optional(),
-[7m  [0m [93m                 ~[0m
-[96msrc/content.config.ts[0m:[93m66[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
-
-[7m66[0m     title: z.string(),
+[7m67[0m     title: z.string(),
 [7m  [0m [93m           ~[0m
-[96msrc/content.config.ts[0m:[93m65[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m66[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m65[0m   schema: z.object({
+[7m66[0m   schema: z.object({
 [7m  [0m [93m          ~[0m
-[96msrc/content.config.ts[0m:[93m57[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m58[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m57[0m     draft: z.boolean().default(false),
+[7m58[0m     draft: z.boolean().default(false),
 [7m  [0m [93m           ~[0m
-[96msrc/content.config.ts[0m:[93m56[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m57[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m56[0m     strictLayout: z.boolean().default(false),
+[7m57[0m     strictLayout: z.boolean().default(false),
 [7m  [0m [93m                  ~[0m
-[96msrc/content.config.ts[0m:[93m52[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m53[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m52[0m     tags: z.array(z.string()).default([]),
+[7m53[0m     tags: z.array(z.string()).default([]),
 [7m  [0m [93m                  ~[0m
-[96msrc/content.config.ts[0m:[93m52[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m53[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m52[0m     tags: z.array(z.string()).default([]),
+[7m53[0m     tags: z.array(z.string()).default([]),
 [7m  [0m [93m          ~[0m
-[96msrc/content.config.ts[0m:[93m51[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m52[0m:[93m17[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m51[0m     dedication: z.string().optional(),
+[7m52[0m     dedication: z.string().optional(),
 [7m  [0m [93m                ~[0m
-[96msrc/content.config.ts[0m:[93m48[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m49[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m48[0m     form: z
+[7m49[0m     form: z
 [7m  [0m [93m          ~[0m
-[96msrc/content.config.ts[0m:[93m47[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m48[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m47[0m     author: z.string().default("Cyber Pujangga"),
+[7m48[0m     author: z.string().default("Cyber Pujangga"),
 [7m  [0m [93m            ~[0m
-[96msrc/content.config.ts[0m:[93m46[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m47[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m46[0m     pubDate: z.coerce.date(),
+[7m47[0m     pubDate: z.coerce.date(),
 [7m  [0m [93m             ~[0m
-[96msrc/content.config.ts[0m:[93m45[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m46[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m45[0m     description: z.string().optional(),
+[7m46[0m     description: z.string().optional(),
 [7m  [0m [93m                 ~[0m
-[96msrc/content.config.ts[0m:[93m44[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m45[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m44[0m     title: z.string(),
+[7m45[0m     title: z.string(),
 [7m  [0m [93m           ~[0m
-[96msrc/content.config.ts[0m:[93m43[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m44[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m43[0m   schema: z.object({
+[7m44[0m   schema: z.object({
 [7m  [0m [93m          ~[0m
-[96msrc/content.config.ts[0m:[93m35[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m36[0m:[93m12[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m35[0m     draft: z.boolean().default(false),
+[7m36[0m     draft: z.boolean().default(false),
 [7m  [0m [93m           ~[0m
-[96msrc/content.config.ts[0m:[93m34[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m35[0m:[93m19[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m34[0m     tags: z.array(z.string()).default([]),
+[7m35[0m     tags: z.array(z.string()).default([]),
 [7m  [0m [93m                  ~[0m
+[96msrc/content.config.ts[0m:[93m35[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m35[0m     tags: z.array(z.string()).default([]),
+[7m  [0m [93m          ~[0m
 [96msrc/content.config.ts[0m:[93m34[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m34[0m     tags: z.array(z.string()).default([]),
+[7m34[0m     mood: z.string().optional(), // free-form: "thoughtful", "tired", etc.
 [7m  [0m [93m          ~[0m
-[96msrc/content.config.ts[0m:[93m33[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+[96msrc/content.config.ts[0m:[93m33[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m33[0m     mood: z.string().optional(),   // free-form: "thoughtful", "tired", etc.
-[7m  [0m [93m          ~[0m
-[96msrc/content.config.ts[0m:[93m32[0m:[93m14[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
-
-[7m32[0m     pubDate: z.coerce.date(),      // when published on the site
+[7m33[0m     pubDate: z.coerce.date(), // when published on the site
 [7m  [0m [93m             ~[0m
+[96msrc/content.config.ts[0m:[93m32[0m:[93m13[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m32[0m     author: z.string().default("Cyber Pujangga"),
+[7m  [0m [93m            ~[0m
 [96msrc/content.config.ts[0m:[93m31[0m:[93m11[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m31[0m     date: z.coerce.date(),         // when the entry was written
+[7m31[0m     date: z.coerce.date(), // when the entry was written
 [7m  [0m [93m          ~[0m
 [96msrc/content.config.ts[0m:[93m30[0m:[93m18[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
@@ -145,251 +149,21 @@
 [7m  [0m [93m          ~[0m
 [96msrc/content.config.ts[0m:[93m6[0m:[93m28[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
 
-[7m6[0m import { defineCollection, z } from "astro:content"
+[7m6[0m import { defineCollection, z } from "astro:content";
 [7m [0m [93m                           ~[0m
-
-[96msrc/i18n/index.ts[0m:[93m71[0m:[93m43[0m - [91merror[0m[90m ts(2339): [0mProperty 'date' does not exist on type '{ title: string; pubDate: Date; author: string; tags: string[]; draft: boolean; description?: string | undefined; updatedDate?: Date | undefined; } | { title: string; date: Date; ... 4 more ...; mood?: string | undefined; } | { ...; }'.
-  Property 'date' does not exist on type '{ title: string; pubDate: Date; author: string; tags: string[]; draft: boolean; description?: string | undefined; updatedDate?: Date | undefined; }'.
-
-[7m71[0m       const d = (e.data.pubDate ?? e.data.date) as Date | undefined
-[7m  [0m [91m                                          ~~~~[0m
-
-[96msrc/i18n/lang/ms.ts[0m:[93m70[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Kembali ke Laman"' is not assignable to type '"Return home"'.
-
-[7m70[0m     home: "Kembali ke Laman",
-[7m  [0m [91m    ~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m69[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Halaman tidak dijumpai."' is not assignable to type '"Page not found."'.
-
-[7m69[0m     notFound: "Halaman tidak dijumpai.",
-[7m  [0m [91m    ~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m65[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Perihal"' is not assignable to type '"About"'.
-
-[7m65[0m     about: "Perihal",
-[7m  [0m [91m    ~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m60[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Tukar ke Bahasa Inggeris"' is not assignable to type '"Switch to Malay"'.
-
-[7m60[0m     switchLangAria: "Tukar ke Bahasa Inggeris",
-[7m  [0m [91m    ~~~~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m59[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Langkau ke kandungan"' is not assignable to type '"Skip to content"'.
-
-[7m59[0m     skipLabel: "Langkau ke kandungan",
-[7m  [0m [91m    ~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m58[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Tutup menu"' is not assignable to type '"Close menu"'.
-
-[7m58[0m     menuCloseAria: "Tutup menu",
-[7m  [0m [91m    ~~~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m57[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Buka menu"' is not assignable to type '"Open menu"'.
-
-[7m57[0m     menuAria: "Buka menu",
-[7m  [0m [91m    ~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m56[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Tukar mod terang/gelap"' is not assignable to type '"Toggle light/dark mode"'.
-
-[7m56[0m     toggleAria: "Tukar mod terang/gelap",
-[7m  [0m [91m    ~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m52[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Kembali ke"' is not assignable to type '"Back to"'.
-
-[7m52[0m     backTo: "Kembali ke",
-[7m  [0m [91m    ~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m49[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType '"Semua catatan dalam Arkib →"' is not assignable to type '"All entries in the Archive →"'.
-
-[7m49[0m   seeAll: "Semua catatan dalam Arkib →",
-[7m  [0m [91m  ~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m46[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"baca sajak penuh →"' is not assignable to type '"Read the full poem →"'.
-
-[7m46[0m     readFullPoem: "baca sajak penuh →",
-[7m  [0m [91m    ~~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m45[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"baca jurnal penuh →"' is not assignable to type '"Read the full journal →"'.
-
-[7m45[0m     readFullJournal: "baca jurnal penuh →",
-[7m  [0m [91m    ~~~~~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m44[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"baca esei penuh →"' is not assignable to type '"Read the full essay →"'.
-
-[7m44[0m     readFullEssay: "baca esei penuh →",
-[7m  [0m [91m    ~~~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m43[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Catatan terkini"' is not assignable to type '"Latest entry"'.
-
-[7m43[0m     label: "Catatan terkini",
-[7m  [0m [91m    ~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m39[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Kemas kini terakhir · {date}"' is not assignable to type '"Last updated · {date}"'.
-
-[7m39[0m     lastUpdated: "Kemas kini terakhir · {date}",
-[7m  [0m [91m    ~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m35[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Lihat arkib"' is not assignable to type '"Browse the archive"'.
-
-[7m35[0m     ctaSecondary: "Lihat arkib",
-[7m  [0m [91m    ~~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m34[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Baca tulisan terkini"' is not assignable to type '"Read the latest"'.
-
-[7m34[0m     ctaPrimary: "Baca tulisan terkini",
-[7m  [0m [91m    ~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m33[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"dibuka perlahan"' is not assignable to type '"shared quietly"'.
-
-[7m33[0m     plain: "dibuka perlahan",
-[7m  [0m [91m    ~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m32[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Tulisan peribadi, {plain}, satu suara merentasi dua bahasa."' is not assignable to type '"Personal writing, {plain}, one voice across two languages."'.
-
-[7m32[0m     title: "Tulisan peribadi, {plain}, satu suara merentasi dua bahasa.",
-[7m  [0m [91m    ~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m27[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Sajak"' is not assignable to type '"Poems"'.
-
-[7m27[0m     poems: "Sajak",
-[7m  [0m [91m    ~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m26[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Jurnal"' is not assignable to type '"Journal"'.
-
-[7m26[0m     journal: "Jurnal",
-[7m  [0m [91m    ~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m25[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Esei"' is not assignable to type '"Essays"'.
-
-[7m25[0m     essays: "Esei",
-[7m  [0m [91m    ~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m21[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Bahasa"' is not assignable to type '"Language"'.
-
-[7m21[0m     language: "Bahasa",
-[7m  [0m [91m    ~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m20[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Perihal"' is not assignable to type '"About"'.
-
-[7m20[0m     about: "Perihal",
-[7m  [0m [91m    ~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m19[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Sajak"' is not assignable to type '"Poems"'.
-
-[7m19[0m     poems: "Sajak",
-[7m  [0m [91m    ~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m18[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Jurnal"' is not assignable to type '"Journal"'.
-
-[7m18[0m     journal: "Jurnal",
-[7m  [0m [91m    ~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m17[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Esei"' is not assignable to type '"Essays"'.
-
-[7m17[0m     essays: "Esei",
-[7m  [0m [91m    ~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m16[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Kembali ke Laman"' is not assignable to type '"Back to Home"'.
-
-[7m16[0m     back: "Kembali ke Laman",
-[7m  [0m [91m    ~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m15[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Laman"' is not assignable to type '"Home"'.
-
-[7m15[0m     home: "Laman",
-[7m  [0m [91m    ~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m10[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Tulisan peribadi merentasi dua bahasa: esei, nota harian, dan sajak."' is not assignable to type '"Personal writing across two languages: essays, daily notes, and poems."'.
-
-[7m10[0m     description:
-[7m  [0m [91m    ~~~~~~~~~~~[0m
-[96msrc/i18n/lang/ms.ts[0m:[93m9[0m:[93m5[0m - [91merror[0m[90m ts(2322): [0mType '"Esei, jurnal harian, dan sajak — dalam dua bahasa"' is not assignable to type '"Essays, daily journal, and poetry — in two languages"'.
-
-[7m9[0m     tagline: "Esei, jurnal harian, dan sajak — dalam dua bahasa",
-[7m [0m [91m    ~~~~~~~[0m
-
-[96msrc/layouts/BaseLayout.astro[0m:[93m157[0m:[93m10[0m - [91merror[0m[90m ts(7005): [0mVariable 'prevFocus' implicitly has an 'any' type.
-
-[7m157[0m      if (prevFocus && typeof prevFocus.focus === "function") {
-[7m   [0m [91m         ~~~~~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m155[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'btn' is possibly 'null'.
-
-[7m155[0m      btn.textContent = "☰";
-[7m   [0m [91m     ~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m154[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'btn' is possibly 'null'.
-
-[7m154[0m      btn.setAttribute("aria-expanded", "false");
-[7m   [0m [91m     ~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m153[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'backdrop' is possibly 'null'.
-
-[7m153[0m      backdrop.setAttribute("aria-hidden", "true");
-[7m   [0m [91m     ~~~~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m152[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'menu' is possibly 'null'.
-
-[7m152[0m      menu.setAttribute("aria-hidden", "true");
-[7m   [0m [91m     ~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m150[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'backdrop' is possibly 'null'.
-
-[7m150[0m      backdrop.classList.remove("open");
-[7m   [0m [91m     ~~~~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m149[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'menu' is possibly 'null'.
-
-[7m149[0m      menu.classList.remove("open");
-[7m   [0m [91m     ~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m145[0m:[93m33[0m - [91merror[0m[90m ts(2339): [0mProperty 'focus' does not exist on type 'Element'.
-
-[7m145[0m      if (items.length) items[0].focus({ preventScroll: true });
-[7m   [0m [91m                                ~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m142[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'btn' is possibly 'null'.
-
-[7m142[0m      btn.textContent = "✕";
-[7m   [0m [91m     ~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m141[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'btn' is possibly 'null'.
-
-[7m141[0m      btn.setAttribute("aria-expanded", "true");
-[7m   [0m [91m     ~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m140[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'backdrop' is possibly 'null'.
-
-[7m140[0m      backdrop.setAttribute("aria-hidden", "false");
-[7m   [0m [91m     ~~~~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m139[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'menu' is possibly 'null'.
-
-[7m139[0m      menu.setAttribute("aria-hidden", "false");
-[7m   [0m [91m     ~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m137[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'backdrop' is possibly 'null'.
-
-[7m137[0m      backdrop.classList.add("open");
-[7m   [0m [91m     ~~~~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m136[0m:[93m6[0m - [91merror[0m[90m ts(18047): [0m'menu' is possibly 'null'.
-
-[7m136[0m      menu.classList.add("open");
-[7m   [0m [91m     ~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m130[0m:[93m13[0m - [91merror[0m[90m ts(2339): [0mProperty 'focus' does not exist on type 'Element'.
-
-[7m130[0m       first.focus();
-[7m   [0m [91m            ~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m127[0m:[93m12[0m - [91merror[0m[90m ts(2339): [0mProperty 'focus' does not exist on type 'Element'.
-
-[7m127[0m       last.focus();
-[7m   [0m [91m           ~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m114[0m:[93m24[0m - [91merror[0m[90m ts(7006): [0mParameter 'e' implicitly has an 'any' type.
-
-[7m114[0m     const onKeydown = (e) => {
-[7m   [0m [91m                       ~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m105[0m:[93m9[0m - [91merror[0m[90m ts(7034): [0mVariable 'prevFocus' implicitly has type 'any' in some locations where its type cannot be determined.
-
-[7m105[0m     let prevFocus = null;
-[7m   [0m [91m        ~~~~~~~~~[0m
-[96msrc/layouts/BaseLayout.astro[0m:[93m57[0m:[93m25[0m - [91merror[0m[90m ts(7006): [0mParameter 'theme' implicitly has an 'any' type.
-
-[7m57[0m     function applyTheme(theme) {
-[7m  [0m [91m                        ~~~~~[0m
 
 [96msrc/layouts/PieceLayout.astro[0m:[93m39[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'strings' is declared but its value is never read.
 
 [7m39[0m const strings = t(lang);
 [7m  [0m [93m      ~~~~~~~[0m
 
-[96msrc/lib/content.ts[0m:[93m133[0m:[93m3[0m - [91merror[0m[90m ts(2322): [0mType '{ collection: string; slug: string; } | null' is not assignable to type '{ collection: "essays" | "journal" | "poems"; slug: string; } | null'.
-  Type '{ collection: string; slug: string; }' is not assignable to type '{ collection: "essays" | "journal" | "poems"; slug: string; }'.
-    Types of property 'collection' are incompatible.
-      Type 'string' is not assignable to type '"essays" | "journal" | "poems"'.
+[96msrc/lib/content.ts[0m:[93m86[0m:[93m8[0m - [93mwarning[0m[90m ts(6196): [0m'Key' is declared but never used.
 
-[7m133[0m   return m.get(`${collection}:${slug}`) ?? null;
-[7m   [0m [91m  ~~~~~~[0m
-[96msrc/lib/content.ts[0m:[93m101[0m:[93m42[0m - [91merror[0m[90m ts(2339): [0mProperty 'date' does not exist on type '{ title: string; pubDate: Date; author: string; tags: string[]; draft: boolean; description?: string | undefined; updatedDate?: Date | undefined; } | { title: string; date: Date; ... 4 more ...; mood?: string | undefined; } | { ...; }'.
-  Property 'date' does not exist on type '{ title: string; pubDate: Date; author: string; tags: string[]; draft: boolean; description?: string | undefined; updatedDate?: Date | undefined; }'.
-
-[7m101[0m       const d = e.data.pubDate ?? e.data.date;
-[7m   [0m [91m                                         ~~~~[0m
-[96msrc/lib/content.ts[0m:[93m88[0m:[93m8[0m - [93mwarning[0m[90m ts(6196): [0m'Key' is declared but never used.
-
-[7m88[0m   type Key = string; // `${collection}:${slug}`
+[7m86[0m   type Key = string; // `${collection}:${slug}`
 [7m  [0m [93m       ~~~[0m
 
-[96msrc/pages/journal/[...slug].astro[0m:[93m25[0m:[93m22[0m - [91merror[0m[90m ts(2339): [0mProperty 'author' does not exist on type '{ title: string; date: Date; pubDate: Date; tags: string[]; draft: boolean; description?: string | undefined; mood?: string | undefined; }'.
-
-[7m25[0m   author={entry.data.author ?? "Cyber Pujangga"}
-[7m  [0m [91m                     ~~~~~~[0m
-
-[96msrc/pages/jurnal/[...slug].astro[0m:[93m25[0m:[93m22[0m - [91merror[0m[90m ts(2339): [0mProperty 'author' does not exist on type '{ title: string; date: Date; pubDate: Date; tags: string[]; draft: boolean; description?: string | undefined; mood?: string | undefined; }'.
-
-[7m25[0m   author={entry.data.author ?? "Cyber Pujangga"}
-[7m  [0m [91m                     ~~~~~~[0m
-
 Result (48 files): 
-- 55 errors
+- 0 errors
 - 0 warnings
-- 37 hints
+- 38 hints
 
