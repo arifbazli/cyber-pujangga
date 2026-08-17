@@ -38,7 +38,21 @@ Built for coding agents to work in directly:
 - `PLAN.md` — what's active
 - `STYLE.md` — writing voice
 - `.claude/skills/` — `new-piece`, `deploy-site`, `bilingual-check`
-- `.claude/workflows/weekly-content-crew.js` — research → draft → verify → publish agent crew (opens a PR, never auto-merges)
+- `.claude/workflows/weekly-content-crew.js` — orchestrator + lead/worker agent crew (opens a PR, never auto-merges):
+
+```mermaid
+flowchart LR
+  subgraph Research
+    direction TB
+    RW1[worker: current-events] --> RL[lead: research]
+    RW2[worker: literature] --> RL
+  end
+  subgraph Draft
+    direction TB
+    DW1[worker: en] --> DW2[worker: bm] --> DL[lead: draft]
+  end
+  O(Orchestrator) --> Research --> Draft --> Verify --> Publish[Publish -> PR]
+```
 
 ## License
 Personal project — content and code not licensed for reuse unless stated otherwise.
