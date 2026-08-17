@@ -1,12 +1,14 @@
 # Plan
 
 ## Active
-- [ ] Restructure repo scaffolding for agentic-engineering workflow: AGENTS.md, CLAUDE.md, CONTEXT.md, PLAN.md, `.claude/skills/*`
+_(nothing tracked right now)_
 
 ## Backlog
-- [ ]
+_(add next initiatives here)_
 
 ## Done
-- [x] Modernize README with project case-study framing
-- [x] Add scheduled lint/type/build health-check workflow
-- [x] Fix pages.dev URL / project-name typo in docs
+- [x] Agentic scaffolding: AGENTS.md, CLAUDE.md, CONTEXT.md, PLAN.md, STYLE.md, `.claude/skills/*`
+- [x] Removed unused Tailwind/Inter dependencies
+- [x] Auto-deploy on UI-path merges (`deploy-on-ui-change.yml`)
+- [x] `weekly-content-crew` orchestrator + lead/worker agent crew
+- [x] Modernized README; scheduled lint/type/build health check
