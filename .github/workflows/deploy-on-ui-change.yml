@@ -1,0 +1,39 @@
+name: Deploy on UI Change
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "cyber-pujangga-site/src/components/**"
+      - "cyber-pujangga-site/src/layouts/**"
+      - "cyber-pujangga-site/src/styles/**"
+      - "cyber-pujangga-site/public/**"
+      - "cyber-pujangga-site/astro.config.ts"
+      - "cyber-pujangga-site/src/site.config.ts"
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: cyber-pujangga-site/package-lock.json
+
+      # deploy.sh expects `wrangler` on PATH; it's not a project dependency
+      # (developers install it globally locally), so CI installs it here.
+      - name: Install wrangler
+        run: npm install -g wrangler@4.121.0
+
+      - name: Build, deploy, and prune old deployments
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: bash ./deploy.sh

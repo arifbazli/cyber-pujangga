@@ -9,6 +9,7 @@ Cyber Pujangga is a bilingual (EN/MS) literature site — essays, journal, poems
 - `cyber-pujangga-site/` — the Astro app (all source code)
 - `new-piece.sh`, `deploy.sh`, `cf-pages-cleanup.py` — repo-root scripts, run from `cyber-pujangga/`, not from inside the Astro app
 - `.github/workflows/scheduled-code-check.yml` — weekly type/lint/build check, auto-PRs safe Biome fixes, opens an issue for the rest
+- `.github/workflows/deploy-on-ui-change.yml` — auto-deploys to production (`cyber-pujangga.pages.dev`) on every push to `master` that touches `src/components/`, `src/layouts/`, `src/styles/`, `public/`, `astro.config.ts`, or `src/site.config.ts`. **Merging a UI-touching PR now deploys automatically** — no manual `./deploy.sh` step needed for those paths. Content-only changes (`src/content/**`) still require a manual deploy.
 
 ## Setup
     cd cyber-pujangga-site && npm install
@@ -37,5 +38,5 @@ From repo root:
 
 ## Don't
 - Don't commit `CLOUDFLARE_API_TOKEN` or any secret.
-- Don't run `./deploy.sh` unless explicitly asked — it deploys to production and deletes prior Cloudflare Pages deployments.
+- Don't run `./deploy.sh` manually unless explicitly asked — it deploys to production and deletes prior Cloudflare Pages deployments. (UI-path PRs deploy automatically on merge, see Layout above — don't also deploy manually for those.)
 - Don't edit `cf-pages-cleanup.py` without checking the `tech-journal` sibling project's copy — it's meant to stay in sync.
