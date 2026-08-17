@@ -3,7 +3,7 @@
 Instructions for any coding agent (Claude Code, Codex, Cursor, etc.) working in this repo.
 
 ## What this repo is
-Cyber Pujangga is a bilingual (EN/MS) literature site — essays, journal, poems — built as a static Astro 5 site, deployed to Cloudflare Pages. See CONTEXT.md for background, PLAN.md for what's in flight.
+Cyber Pujangga is a bilingual (EN/MS) literature site — essays, journal, poems — built as a static Astro 5 site, deployed to Cloudflare Pages. See CONTEXT.md for background, PLAN.md for what's in flight, STYLE.md for the writing voice(s) to use when drafting content.
 
 ## Layout
 - `cyber-pujangga-site/` — the Astro app (all source code)

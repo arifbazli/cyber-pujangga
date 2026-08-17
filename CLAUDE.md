@@ -8,4 +8,4 @@ Skills for this repo live in `.claude/skills/` — prefer them over re-deriving 
 - `deploy-site` — build, deploy, and prune Cloudflare Pages deployments
 - `bilingual-check` — audit EN/MS content pairs for drift
 
-Treat CONTEXT.md and PLAN.md as living docs: update PLAN.md when a tracked initiative starts/completes; update CONTEXT.md only when an architectural decision actually changes.
+Treat CONTEXT.md, PLAN.md, and STYLE.md as living docs: update PLAN.md when a tracked initiative starts/completes; update CONTEXT.md only when an architectural decision actually changes; update STYLE.md when the site's writing voice is deliberately revised.

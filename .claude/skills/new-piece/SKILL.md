@@ -10,3 +10,4 @@ Run `./new-piece.sh <essay|journal|poem> <slug> [--lang en|ms] [--date ISO8601]`
 - Omit `--date` unless backdating — script stamps real UTC time by default.
 - After scaffolding, fill in `title`, `description`, and body — don't leave placeholder text.
 - Never hand-write frontmatter yourself — required fields differ per section (essay/poem need `author`; journal needs `mood`; poem needs `form`).
+- Before writing the body, check `STYLE.md` for which voice register fits: journal is always quiet-personal; essays about a specific work/prize/translation/critical debate may use the literary-critical register, otherwise quiet-personal.
