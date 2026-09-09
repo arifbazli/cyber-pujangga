@@ -151,46 +151,46 @@
      96  96 │     "\n";
   
 
-./src/i18n/index.ts:156:29 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+./src/i18n/index.ts:161:29 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Template literals are preferred over string concatenation.
   
-    154 │   // Assemble final path
-    155 │   let result = targetSection;
-  > 156 │   if (targetSlug) result += "/" + targetSlug;
+    159 │   // Assemble final path
+    160 │   let result = targetSection;
+  > 161 │   if (targetSlug) result += "/" + targetSlug;
         │                             ^^^^^^^^^^^^^^^^
-    157 │ 
-    158 │   // If we ended up with no path, return the locale home
+    162 │ 
+    163 │   // The EN About route is uniquely nested under /en/ (menuLinksEn has
   
   i Unsafe fix: Use a template literal.
   
-    154 154 │     // Assemble final path
-    155 155 │     let result = targetSection;
-    156     │ - ··if·(targetSlug)·result·+=·"/"·+·targetSlug;
-        156 │ + ··if·(targetSlug)·result·+=·`/${targetSlug}`;
-    157 157 │   
-    158 158 │     // If we ended up with no path, return the locale home
+    159 159 │     // Assemble final path
+    160 160 │     let result = targetSection;
+    161     │ - ··if·(targetSlug)·result·+=·"/"·+·targetSlug;
+        161 │ + ··if·(targetSlug)·result·+=·`/${targetSlug}`;
+    162 162 │   
+    163 163 │     // The EN About route is uniquely nested under /en/ (menuLinksEn has
   
 
-./src/pages/en/rss.xml.ts:52:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━
+./src/pages/en/rss.xml.ts:40:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━
 
   × Do not use template literals if interpolation and special-character handling are not needed.
   
-    50 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 │     items,
-  > 52 │     customData: `<language>en-us</language>`,
+    38 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 │     items,
+  > 40 │     customData: `<language>en-us</language>`,
        │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    53 │   });
-    54 │ }
+    41 │   });
+    42 │ }
   
   i Unsafe fix: Replace with string literal
   
-    50 50 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 51 │       items,
-    52    │ - ····customData:·`<language>en-us</language>`,
-       52 │ + ····customData:·"<language>en-us</language>",
-    53 53 │     });
-    54 54 │   }
+    38 38 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 39 │       items,
+    40    │ - ····customData:·`<language>en-us</language>`,
+       40 │ + ····customData:·"<language>en-us</language>",
+    41 41 │     });
+    42 42 │   }
   
 
 ./src/pages/esei/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -293,25 +293,25 @@
     18 18 │     dateLabel: dateShort(e.data.pubDate),
   
 
-./src/pages/rss.xml.ts:52:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+./src/pages/rss.xml.ts:40:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Do not use template literals if interpolation and special-character handling are not needed.
   
-    50 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 │     items,
-  > 52 │     customData: `<language>ms-my</language>`,
+    38 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 │     items,
+  > 40 │     customData: `<language>ms-my</language>`,
        │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    53 │   });
-    54 │ }
+    41 │   });
+    42 │ }
   
   i Unsafe fix: Replace with string literal
   
-    50 50 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 51 │       items,
-    52    │ - ····customData:·`<language>ms-my</language>`,
-       52 │ + ····customData:·"<language>ms-my</language>",
-    53 53 │     });
-    54 54 │   }
+    38 38 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 39 │       items,
+    40    │ - ····customData:·`<language>ms-my</language>`,
+       40 │ + ····customData:·"<language>ms-my</language>",
+    41 41 │     });
+    42 42 │   }
   
 
 ./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -334,7 +334,7 @@
     18 18 │     dateLabel: dateShort(e.data.pubDate),
   
 
-Checked 51 files in 33ms. No fixes applied.
+Checked 48 files in 30ms. No fixes applied.
 Found 16 errors.
 check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 

@@ -1,3 +1,17 @@
+./astro.config.ts organizeImports ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Import statements could be sorted:
+  
+    14 14 │   
+    15 15 │   import remarkDirective from "remark-directive";
+    16    │ - import·{·remarkAdmonitions·}·from·"./src/plugins/remark-admonitions";
+    17    │ - import·{·rehypeBasePath·}·from·"./src/plugins/rehype-base-path";
+       16 │ + import·{·rehypeBasePath·}·from·"./src/plugins/rehype-base-path";
+       17 │ + import·{·remarkAdmonitions·}·from·"./src/plugins/remark-admonitions";
+    18 18 │   
+    19 19 │   import rehypeExternalLinks from "rehype-external-links";
+  
+
 ./scripts/build-redirects.mjs:82:12 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━
 
   × Do not use template literals if interpolation and special-character handling are not needed.
@@ -151,53 +165,25 @@
      96  96 │     "\n";
   
 
-./src/i18n/lang/en.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Formatter would have printed the following content:
-  
-    76 │ };
-       │  +
-
-./src/i18n/index.ts:156:29 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+./src/i18n/index.ts:161:29 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Template literals are preferred over string concatenation.
   
-    154 │   // Assemble final path
-    155 │   let result = targetSection;
-  > 156 │   if (targetSlug) result += "/" + targetSlug;
+    159 │   // Assemble final path
+    160 │   let result = targetSection;
+  > 161 │   if (targetSlug) result += "/" + targetSlug;
         │                             ^^^^^^^^^^^^^^^^
-    157 │ 
-    158 │   // If we ended up with no path, return the locale home
+    162 │ 
+    163 │   // The EN About route is uniquely nested under /en/ (menuLinksEn has
   
   i Unsafe fix: Use a template literal.
   
-    154 154 │     // Assemble final path
-    155 155 │     let result = targetSection;
-    156     │ - ··if·(targetSlug)·result·+=·"/"·+·targetSlug;
-        156 │ + ··if·(targetSlug)·result·+=·`/${targetSlug}`;
-    157 157 │   
-    158 158 │     // If we ended up with no path, return the locale home
-  
-
-./src/pages/en/rss.xml.ts:52:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Do not use template literals if interpolation and special-character handling are not needed.
-  
-    50 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 │     items,
-  > 52 │     customData: `<language>en-us</language>`,
-       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    53 │   });
-    54 │ }
-  
-  i Unsafe fix: Replace with string literal
-  
-    50 50 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 51 │       items,
-    52    │ - ····customData:·`<language>en-us</language>`,
-       52 │ + ····customData:·"<language>en-us</language>",
-    53 53 │     });
-    54 54 │   }
+    159 159 │     // Assemble final path
+    160 160 │     let result = targetSection;
+    161     │ - ··if·(targetSlug)·result·+=·"/"·+·targetSlug;
+        161 │ + ··if·(targetSlug)·result·+=·`/${targetSlug}`;
+    162 162 │   
+    163 163 │     // The EN About route is uniquely nested under /en/ (menuLinksEn has
   
 
 ./src/pages/esei/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -218,6 +204,27 @@
        16 │ + ··href:·`${localePath(locale,·"esei")}/${slugOf(e)}`,
     17 17 │     sectionLabel: strings.section.essays,
     18 18 │     dateLabel: dateShort(e.data.pubDate),
+  
+
+./src/pages/en/rss.xml.ts:40:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    38 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 │     items,
+  > 40 │     customData: `<language>en-us</language>`,
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    41 │   });
+    42 │ }
+  
+  i Unsafe fix: Replace with string literal
+  
+    38 38 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 39 │       items,
+    40    │ - ····customData:·`<language>en-us</language>`,
+       40 │ + ····customData:·"<language>en-us</language>",
+    41 41 │     });
+    42 42 │   }
   
 
 ./src/pages/essays/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -260,6 +267,26 @@
     22 22 │     dateLabel: dateShort(e.data.date ?? e.data.pubDate),
   
 
+./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Template literals are preferred over string concatenation.
+  
+    15 │ const rows = items.map((e) => ({
+  > 16 │   href: localePath(locale, "sajak") + "/" + slugOf(e),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 │   dateLabel: dateShort(e.data.pubDate),
+  
+  i Unsafe fix: Use a template literal.
+  
+    14 14 │   
+    15 15 │   const rows = items.map((e) => ({
+    16    │ - ··href:·localePath(locale,·"sajak")·+·"/"·+·slugOf(e),
+       16 │ + ··href:·`${localePath(locale,·"sajak")}/${slugOf(e)}`,
+    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 18 │     dateLabel: dateShort(e.data.pubDate),
+  
+
 ./src/pages/jurnal/index.astro:20:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Template literals are preferred over string concatenation.
@@ -278,6 +305,27 @@
        20 │ + ··href:·`${localePath(locale,·"jurnal")}/${slugOf(e)}`,
     21 21 │     sectionLabel: strings.section.journal,
     22 22 │     dateLabel: dateShort(e.data.date ?? e.data.pubDate),
+  
+
+./src/pages/rss.xml.ts:40:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Do not use template literals if interpolation and special-character handling are not needed.
+  
+    38 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 │     items,
+  > 40 │     customData: `<language>ms-my</language>`,
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    41 │   });
+    42 │ }
+  
+  i Unsafe fix: Replace with string literal
+  
+    38 38 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
+    39 39 │       items,
+    40    │ - ····customData:·`<language>ms-my</language>`,
+       40 │ + ····customData:·"<language>ms-my</language>",
+    41 41 │     });
+    42 42 │   }
   
 
 ./src/pages/poems/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -300,80 +348,11 @@
     18 18 │     dateLabel: dateShort(e.data.pubDate),
   
 
-./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Skipped 1 suggested fixes.
+If you wish to apply the suggested (unsafe) fixes, use the command biome check --fix --unsafe
 
-  × Template literals are preferred over string concatenation.
-  
-    15 │ const rows = items.map((e) => ({
-  > 16 │   href: localePath(locale, "sajak") + "/" + slugOf(e),
-       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 │   dateLabel: dateShort(e.data.pubDate),
-  
-  i Unsafe fix: Use a template literal.
-  
-    14 14 │   
-    15 15 │   const rows = items.map((e) => ({
-    16    │ - ··href:·localePath(locale,·"sajak")·+·"/"·+·slugOf(e),
-       16 │ + ··href:·`${localePath(locale,·"sajak")}/${slugOf(e)}`,
-    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 18 │     dateLabel: dateShort(e.data.pubDate),
-  
-
-./src/pages/rss.xml.ts:52:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Do not use template literals if interpolation and special-character handling are not needed.
-  
-    50 │     site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 │     items,
-  > 52 │     customData: `<language>ms-my</language>`,
-       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    53 │   });
-    54 │ }
-  
-  i Unsafe fix: Replace with string literal
-  
-    50 50 │       site: context.site ?? "https://cyber-pujangga.pages.dev",
-    51 51 │       items,
-    52    │ - ····customData:·`<language>ms-my</language>`,
-       52 │ + ····customData:·"<language>ms-my</language>",
-    53 53 │     });
-    54 54 │   }
-  
-
-./src/site.config.ts format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Formatter would have printed the following content:
-  
-    28 28 │     styleOverrides: {
-    29 29 │       borderRadius: "4px",
-    30    │ - ····codeBackground:·({·theme·}:·{·theme:·ExpressiveCodeTheme·})·=>·(theme.type·===·"light"·?·"#f0e9d6"·:·"#1a1715"),
-       30 │ + ····codeBackground:·({·theme·}:·{·theme:·ExpressiveCodeTheme·})·=>
-       31 │ + ······theme.type·===·"light"·?·"#f0e9d6"·:·"#1a1715",
-    31 32 │       codeFontFamily:
-    32 33 │         'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
-    ····· │ 
-    47 48 │       uiLineHeight: "inherit",
-    48 49 │     },
-    49    │ - ··themeCssSelector(theme:·ExpressiveCodeTheme,·{·styleVariants·}:·{·styleVariants:·StyleVariant[]·})·{
-       50 │ + ··themeCssSelector(
-       51 │ + ····theme:·ExpressiveCodeTheme,
-       52 │ + ····{·styleVariants·}:·{·styleVariants:·StyleVariant[]·},
-       53 │ + ··)·{
-    50 54 │       if (styleVariants.length >= 2) {
-    51 55 │         const baseTheme = styleVariants[0]?.theme;
-    ····· │ 
-    53 57 │           (v: StyleVariant) => v.theme.type !== baseTheme?.type,
-    54 58 │         )?.theme;
-    55    │ - ······if·(theme·===·baseTheme·||·theme·===·altTheme)
-    56    │ - ········return·`[data-theme='${theme.type}']`;
-       59 │ + ······if·(theme·===·baseTheme·||·theme·===·altTheme)·return·`[data-theme='${theme.type}']`;
-    57 60 │       }
-    58 61 │       return `[data-theme="${theme.name}"]`;
-  
-
-Checked 51 files in 36ms. No fixes applied.
-Found 18 errors.
+Checked 48 files in 41ms. No fixes applied.
+Found 17 errors.
 check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Some errors were emitted while running checks.

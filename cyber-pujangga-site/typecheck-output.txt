@@ -2,10 +2,10 @@
 > cyber-pujangga@0.1.0 check
 > astro check
 
-[2m03:50:07[22m [34m[content][39m Syncing content
-[2m03:50:07[22m [34m[content][39m Synced content
-[2m03:50:07[22m [34m[types][39m Generated [2m664ms[22m
-[2m03:50:07[22m [34m[check][39m Getting diagnostics for Astro files in /home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site...
+[2m07:04:54[22m [34m[content][39m Syncing content
+[2m07:04:54[22m [34m[content][39m Synced content
+[2m07:04:54[22m [34m[types][39m Generated [2m710ms[22m
+[2m07:04:54[22m [34m[check][39m Getting diagnostics for Astro files in /home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site...
 [96mscripts/build-redirects.mjs[0m:[93m16[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'readFile' is declared but its value is never read.
 
 [7m16[0m import { readFile, writeFile } from "node:fs/promises";
@@ -152,18 +152,13 @@
 [7m6[0m import { defineCollection, z } from "astro:content";
 [7m [0m [93m                           ~[0m
 
-[96msrc/layouts/PieceLayout.astro[0m:[93m39[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'strings' is declared but its value is never read.
+[96msrc/layouts/PieceLayout.astro[0m:[93m36[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'strings' is declared but its value is never read.
 
-[7m39[0m const strings = t(lang);
+[7m36[0m const strings = t(lang);
 [7m  [0m [93m      ~~~~~~~[0m
 
-[96msrc/lib/content.ts[0m:[93m86[0m:[93m8[0m - [93mwarning[0m[90m ts(6196): [0m'Key' is declared but never used.
-
-[7m86[0m   type Key = string; // `${collection}:${slug}`
-[7m  [0m [93m       ~~~[0m
-
-Result (48 files): 
+Result (45 files): 
 - 0 errors
 - 0 warnings
-- 38 hints
+- 37 hints
 
