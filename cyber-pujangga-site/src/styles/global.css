@@ -962,7 +962,7 @@ main article p {
   font-size: 1.05rem;
   line-height: 1.75;
   color: var(--ink);
-  margin: 0 0 22px;
+  margin: 0 0 28px;
   max-width: var(--reading-width);
   word-break: break-word;
   overflow-wrap: anywhere;
@@ -1050,7 +1050,7 @@ main .post-article ul,
 main .post-article ol,
 main article ul,
 main article ol {
-  margin: 0 0 22px;
+  margin: 0 0 28px;
   padding-left: 22px;
   max-width: var(--reading-width);
 }
@@ -1095,12 +1095,9 @@ main article hr {
 /* ============================================================
    Piece header (essays / journal / poems detail page)
    ----------------------------------------------------------
-   Mobile-first visual hierarchy:
-   1. Eyebrow (back link + section context)
-   2. Title (large serif, kinetic)
-   3. Description (italic dim)
-   4. Meta row (author chip + date + reading time as structured <dl>)
-   5. Tags (pill row)
+   Deliberately minimal — eyebrow (back link) + title only.
+   No byline, date, read-time, or tags: the piece's own voice
+   carries the page. See PieceLayout.astro.
    ============================================================ */
 
 .piece-header {
