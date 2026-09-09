@@ -13,8 +13,8 @@ import { defineConfig } from "astro/config";
 import { expressiveCodeOptions } from "./src/site.config";
 
 import remarkDirective from "remark-directive";
-import { remarkAdmonitions } from "./src/plugins/remark-admonitions";
 import { rehypeBasePath } from "./src/plugins/rehype-base-path";
+import { remarkAdmonitions } from "./src/plugins/remark-admonitions";
 
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeUnwrapImages from "rehype-unwrap-images";
