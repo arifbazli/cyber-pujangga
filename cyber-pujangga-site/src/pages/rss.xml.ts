@@ -2,7 +2,7 @@ import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { t } from "../i18n";
-import { filterByLocale } from "../lib/content";
+import { filterByLocale, slugOf } from "../lib/content";
 
 export async function GET(context: APIContext) {
   const strings = t("ms");
@@ -16,31 +16,19 @@ export async function GET(context: APIContext) {
       title: e.data.title,
       pubDate: e.data.pubDate,
       description: e.data.description ?? "",
-      link: `/esei/${e.id
-        .split("/")
-        .slice(1)
-        .join("/")
-        .replace(/\.(md|mdx)$/, "")}`,
+      link: `/esei/${slugOf(e)}`,
     })),
     ...filterByLocale(journal, "ms", "date").map((j) => ({
       title: j.data.title,
       pubDate: j.data.pubDate,
       description: j.data.description ?? "",
-      link: `/jurnal/${j.id
-        .split("/")
-        .slice(1)
-        .join("/")
-        .replace(/\.(md|mdx)$/, "")}`,
+      link: `/jurnal/${slugOf(j)}`,
     })),
     ...filterByLocale(poems, "ms").map((p) => ({
       title: p.data.title,
       pubDate: p.data.pubDate,
       description: p.data.description ?? `${p.data.form} sajak`,
-      link: `/sajak/${p.id
-        .split("/")
-        .slice(1)
-        .join("/")
-        .replace(/\.(md|mdx)$/, "")}`,
+      link: `/sajak/${slugOf(p)}`,
     })),
   ].sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 

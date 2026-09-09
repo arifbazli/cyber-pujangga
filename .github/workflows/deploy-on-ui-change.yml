@@ -7,6 +7,11 @@ on:
       - "cyber-pujangga-site/src/components/**"
       - "cyber-pujangga-site/src/layouts/**"
       - "cyber-pujangga-site/src/styles/**"
+      - "cyber-pujangga-site/src/pages/**"
+      - "cyber-pujangga-site/src/i18n/**"
+      - "cyber-pujangga-site/src/plugins/**"
+      - "cyber-pujangga-site/src/lib/content.ts"
+      - "cyber-pujangga-site/src/content.config.ts"
       - "cyber-pujangga-site/public/**"
       - "cyber-pujangga-site/astro.config.ts"
       - "cyber-pujangga-site/src/site.config.ts"
@@ -27,11 +32,6 @@ jobs:
           node-version: "22"
           cache: "npm"
           cache-dependency-path: cyber-pujangga-site/package-lock.json
-
-      # deploy.sh expects `wrangler` on PATH; it's not a project dependency
-      # (developers install it globally locally), so CI installs it here.
-      - name: Install wrangler
-        run: npm install -g wrangler@4.121.0
 
       - name: Build, deploy, and prune old deployments
         env:

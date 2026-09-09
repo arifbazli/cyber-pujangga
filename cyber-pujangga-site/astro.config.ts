@@ -14,14 +14,16 @@ import { expressiveCodeOptions } from "./src/site.config";
 
 import remarkDirective from "remark-directive";
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions";
-import { remarkReadingTime } from "./src/plugins/remark-reading-time";
+import { rehypeBasePath } from "./src/plugins/rehype-base-path";
 
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 
+const base = "/";
+
 export default defineConfig({
   site: "https://cyber-pujangga.pages.dev",
-  base: "/",
+  base,
   output: "static",
   compressHTML: true,
   trailingSlash: "never",
@@ -51,8 +53,9 @@ export default defineConfig({
             target: "_blank",
           },
         ],
+        [rehypeBasePath, { base }],
       ],
-      remarkPlugins: [remarkReadingTime, remarkDirective, remarkAdmonitions],
+      remarkPlugins: [remarkDirective, remarkAdmonitions],
       remarkRehype: {
         footnoteLabelProperties: {
           className: [""],

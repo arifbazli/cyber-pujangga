@@ -52,16 +52,24 @@ def main():
         sys.stderr.write(f'Missing env vars: {", ".join(missing)}\n')
         return 1
 
-    list_url = (
-        f'https://api.cloudflare.com/client/v4/accounts/{account}'
-        f'/pages/projects/{project}/deployments?page=1'
-    )
-    data, err = api('GET', list_url, token)
-    if err or not data.get('success'):
-        sys.stderr.write(f'LIST failed: {err or json.dumps(data)[:200]}\n')
-        return 1
+    deployments = []
+    page = 1
+    while True:
+        list_url = (
+            f'https://api.cloudflare.com/client/v4/accounts/{account}'
+            f'/pages/projects/{project}/deployments?page={page}&per_page=25'
+        )
+        data, err = api('GET', list_url, token)
+        if err or not data.get('success'):
+            sys.stderr.write(f'LIST failed: {err or json.dumps(data)[:200]}\n')
+            return 1
+        deployments.extend(data.get('result', []))
+        info = data.get('result_info') or {}
+        total_pages = info.get('total_pages', 1)
+        if page >= total_pages:
+            break
+        page += 1
 
-    deployments = data.get('result', [])
     sys.stderr.write(f'Found {len(deployments)} deployment(s)\n')
 
     to_delete = [

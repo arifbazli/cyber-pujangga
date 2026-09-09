@@ -126,6 +126,10 @@ author: "Cyber Pujangga"
 form: "free-verse"
 dedication: ""
 tags: []
+# Set true for structurally-sensitive forms (pantun, pantoum, syair, haiku)
+# where line breaks matter — shows a static image-card fallback on mobile
+# instead of re-flowed text.
+strictLayout: false
 ---
 
 First line of the poem.

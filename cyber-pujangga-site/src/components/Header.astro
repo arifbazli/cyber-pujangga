@@ -20,10 +20,21 @@ const otherLocaleLabel = lang === "ms" ? "EN" : "MS";
 const otherLocaleLabelLong = lang === "ms" ? "English" : "Bahasa Melayu";
 const otherLocalePath = alternateLocalePath(lang, currentPath);
 
-// Check if a link matches currentPath (or matches its locale-prefixed variant).
+// Check if a link matches currentPath. Both sides are normalized to a
+// leading-slash form before comparing — currentPath is passed without one
+// by every caller (e.g. "essays", "tentang", "about"), while nav hrefs
+// always have one ("/essays", "/tentang"). The EN About route is uniquely
+// nested under "/en/about" while its currentPath is just "about", so an
+// "/en" prefix is stripped from the href side before comparing.
+const norm = (p: string) => `/${p.replace(/^\/+/, "").replace(/\/+$/, "")}`;
 const isActive = (href: string): boolean => {
-  if (href === "/") return currentPath === "/" || currentPath === "/en" || currentPath === "/en/";
-  return currentPath === href || currentPath === `${href}/`;
+  const normHref = norm(href);
+  const normCurrent = norm(currentPath);
+  if (normHref === "/" || normHref === "/en") {
+    return normCurrent === "/" || normCurrent === "/en";
+  }
+  const hrefTail = normHref.replace(/^\/en(\/|$)/, "/");
+  return normCurrent === hrefTail || normCurrent === `${hrefTail}/`;
 };
 ---
 

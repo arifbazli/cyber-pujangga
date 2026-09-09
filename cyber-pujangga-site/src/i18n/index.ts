@@ -67,8 +67,11 @@ async function buildSlugTranslationMap() {
   const msToEn = new Map<string, { collection: string; slug: string }>();
   const enToMs = new Map<string, { collection: string; slug: string }>();
   const collections = ["essays", "journal", "poems"] as const;
-  for (const collection of collections) {
-    const all = await getCollection(collection, ({ data }) => !data.draft);
+  const allByCollection = await Promise.all(
+    collections.map((collection) => getCollection(collection, ({ data }) => !data.draft)),
+  );
+  collections.forEach((collection, i) => {
+    const all = allByCollection[i];
     const byKey = {
       ms: new Map<string, CollectionEntry<typeof collection>>(),
       en: new Map<string, CollectionEntry<typeof collection>>(),
@@ -83,10 +86,12 @@ async function buildSlugTranslationMap() {
         collection === "poems" && (e.data as { form?: string }).form
           ? `:${(e.data as { form?: string }).form}`
           : "";
-      // Pair by full timestamp (not just date) so multiple pieces posted on
-      // the same calendar day still resolve to their correct translation.
-      // The MS and EN halves of a translation must share the exact timestamp.
-      const key = `${d.toISOString()}${formKey}`;
+      // Pair by calendar date (not exact timestamp): EN/MS halves of a
+      // translation are usually created in separate scaffold invocations
+      // and rarely share the exact same second, so requiring an exact
+      // timestamp match caused most real pairs to silently fail to pair.
+      // A same-day collision within one locale is the accepted trade-off.
+      const key = `${d.toISOString().slice(0, 10)}${formKey}`;
       byKey[loc].set(key, e);
     }
     for (const [key, msEntry] of byKey.ms) {
@@ -97,7 +102,7 @@ async function buildSlugTranslationMap() {
       msToEn.set(`${collection}:${msSlug}`, { collection, slug: enSlug });
       enToMs.set(`${collection}:${enSlug}`, { collection, slug: msSlug });
     }
-  }
+  });
   return { msToEn, enToMs };
 }
 
@@ -154,6 +159,11 @@ export function alternateLocalePath(currentLocale: Locale, path: string): string
   // Assemble final path
   let result = targetSection;
   if (targetSlug) result += "/" + targetSlug;
+
+  // The EN About route is uniquely nested under /en/ (menuLinksEn has
+  // "/en/about", unlike "/essays" etc. which aren't under /en/) — every
+  // other EN section route lives at the bare path, so this is a one-off.
+  if (target === "en" && targetSection === "about") result = `en/${result}`;
 
   // If we ended up with no path, return the locale home
   if (!result) return target === "en" ? "/en" : "/";

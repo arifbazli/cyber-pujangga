@@ -1,6 +1,6 @@
 // Helper utilities shared across page templates.
 
-import { type CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { type Locale, isLocale } from "../i18n";
 
 /**
@@ -23,33 +23,17 @@ export function localeOf(entry: CollectionEntry<"essays" | "journal" | "poems" |
 /** Strip the language prefix to get the route slug. */
 export function slugOf(entry: CollectionEntry<"essays" | "journal" | "poems" | "pages">): string {
   const parts = entry.id.split("/");
-  const tail = parts.slice(1).join("/") || parts[0];
-  // For pages (flat folder), strip the trailing locale tag.
-  // The Astro glob loader concatenates the locale to the slug with no separator.
+  if (parts.length > 1) {
+    // essays/journal/poems: locale is its own path segment ("en/some-slug")
+    // — the rest is already the real slug, even if it happens to end in
+    // "en"/"ms" (e.g. "the-golden-pen"). No suffix-stripping needed or wanted.
+    return parts.slice(1).join("/");
+  }
+  // Pages (flat folder): the Astro glob loader concatenates the locale tag
+  // to the slug with no separator (e.g. "about" + "en" -> "abouten").
+  const tail = parts[0];
   const m = tail.match(/^(.+?)(ms|en)$/);
-  if (m) return m[1];
-  return tail;
-}
-
-/** Read-time estimate (rough: 200 words/min). */
-export function readingTime(body: string | undefined): number {
-  if (!body) return 1;
-  const words = body.trim().split(/\s+/).length;
-  return Math.max(1, Math.round(words / 200));
-}
-
-/** Format a date in the locale's convention. */
-export function formatDate(date: Date, locale: Locale): string {
-  return date.toLocaleDateString(locale === "ms" ? "ms-MY" : "en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
-
-/** ISO date for <time datetime="..."> attributes. */
-export function isoDate(date: Date): string {
-  return date.toISOString();
+  return m ? m[1] : tail;
 }
 
 /** Filter a collection to a single language, sorted newest first, non-drafts. */
@@ -65,69 +49,5 @@ export function filterByLocale<
     });
 }
 
-/**
- * Build a slug-translation map from all content collections.
- *
- * Entries that share a `pubDate` (essay/journal) — or `pubDate + form`
- * (poems) — are considered translations of each other.
- *
- * Returns a function that, given a (locale, collection, slug) triple,
- * returns the equivalent (locale, collection, slug) in the *target* locale
- * — or `null` if no translation exists.
- *
- * This is what powers the language-toggle link on piece detail pages,
- * so `/esei/mengenai-kesunyian-membaca` correctly links to
- * `/essays/on-the-quietness-of-reading` (and vice versa).
- */
-export async function buildSlugTranslationMap(): Promise<{
-  msToEn: Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>;
-  enToMs: Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>;
-}> {
-  type Key = string; // `${collection}:${slug}`
-  const msToEn = new Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>();
-  const enToMs = new Map<string, { collection: "essays" | "journal" | "poems"; slug: string }>();
-
-  const collections: Array<"essays" | "journal" | "poems"> = ["essays", "journal", "poems"];
-  for (const collection of collections) {
-    const all = await getCollection(collection, ({ data }) => !data.draft);
-    // Group by translation key: pubDate + form (for poems).
-    const msByKey = new Map<string, CollectionEntry<typeof collection>>();
-    const enByKey = new Map<string, CollectionEntry<typeof collection>>();
-    for (const e of all) {
-      const loc = localeOf(e);
-      if (loc !== "ms" && loc !== "en") continue;
-      const d = e.data.pubDate;
-      if (!d) continue;
-      const formKey =
-        collection === "poems" && (e.data as { form?: string }).form
-          ? `:${(e.data as { form?: string }).form}`
-          : "";
-      const key = `${d.toISOString().slice(0, 10)}${formKey}`;
-      if (loc === "ms") msByKey.set(key, e);
-      else enByKey.set(key, e);
-    }
-    for (const [key, msEntry] of msByKey) {
-      const enEntry = enByKey.get(key);
-      if (!enEntry) continue;
-      const msSlug = slugOf(msEntry);
-      const enSlug = slugOf(enEntry);
-      msToEn.set(`${collection}:${msSlug}`, { collection, slug: enSlug });
-      enToMs.set(`${collection}:${enSlug}`, { collection, slug: msSlug });
-    }
-  }
-  return { msToEn, enToMs };
-}
-
-/**
- * Look up the translation of a (collection, slug) pair in the target locale.
- * Returns `null` if no translation exists.
- */
-export function lookupTranslation(
-  map: Awaited<ReturnType<typeof buildSlugTranslationMap>>,
-  fromLocale: Locale,
-  collection: "essays" | "journal" | "poems",
-  slug: string,
-): { collection: "essays" | "journal" | "poems"; slug: string } | null {
-  const m = fromLocale === "ms" ? map.msToEn : map.enToMs;
-  return m.get(`${collection}:${slug}`) ?? null;
-}
+// Slug-translation pairing (for the language-toggle link) lives in
+// ../i18n/index.ts, which is the only place it's used.

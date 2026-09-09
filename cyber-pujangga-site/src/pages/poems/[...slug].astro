@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { type Locale, localePath, t } from "../../i18n";
 import PieceLayout from "../../layouts/PieceLayout.astro";
-import { localeOf, readingTime, slugOf } from "../../lib/content";
+import { localeOf, slugOf } from "../../lib/content";
 
 export async function getStaticPaths() {
   const entries = await getCollection("poems", ({ data }) => !data.draft);
@@ -25,13 +25,11 @@ const poemCardUrl = `/poem-card/${entry.id}.png`;
 	description={entry.data.description}
 	lang={locale}
 	pubDate={entry.data.pubDate}
-	author={entry.data.author ?? "Cyber Pujangga"}
-	readingMinutes={readingTime(entry.body)}
 	backHref={localePath(locale, "poems")}
 	backLabel={strings.section.poems}
-	sectionLabel={entry.data.form}
 	currentPath={`poems/${slugOf(entry)}`}
 	tags={entry.data.tags}
+	ogImage={`/og-image/poems/${entry.id}.png`}
 >
 	<div class="poem-wrapper" data-poem-strict={strict ? "true" : null}>
 		<div class="poem-body"><Content /></div>

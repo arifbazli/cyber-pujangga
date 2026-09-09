@@ -2,7 +2,7 @@
 import { getCollection, render } from "astro:content";
 import { type Locale, localePath, t } from "../../i18n";
 import PieceLayout from "../../layouts/PieceLayout.astro";
-import { localeOf, readingTime, slugOf } from "../../lib/content";
+import { localeOf, slugOf } from "../../lib/content";
 
 export async function getStaticPaths() {
   const entries = await getCollection("essays", ({ data }) => !data.draft);
@@ -23,13 +23,11 @@ const { Content } = await render(entry);
   lang={locale}
   pubDate={entry.data.pubDate}
   updatedDate={entry.data.updatedDate}
-  author={entry.data.author}
-  readingMinutes={readingTime(entry.body)}
   backHref={localePath(locale, "essays")}
   backLabel={strings.section.essays}
-  sectionLabel={entry.data.tags?.[0] ?? strings.section.essays}
   currentPath={`essays/${slugOf(entry)}`}
   tags={entry.data.tags}
+  ogImage={`/og-image/essays/${entry.id}.png`}
 >
   <Content />
 </PieceLayout>

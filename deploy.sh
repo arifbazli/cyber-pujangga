@@ -47,16 +47,27 @@ if [ ! -d node_modules ]; then
   npm install --no-audit --no-fund --loglevel=error
 fi
 
-if [ -z "${CLOUDFLARE_API_TOKEN:-}" ] && command -v wrangler >/dev/null 2>&1; then
-  AUTH_STATUS=$(wrangler whoami 2>&1 || true)
+# Resolve a Python 3 interpreter up front — used later for cleanup.
+# `python3` isn't guaranteed on PATH even when Python is installed
+# (e.g. Git Bash on Windows can shadow it with a non-functional stub).
+PYTHON=""
+for candidate in python3 python "py -3"; do
+  if command -v "${candidate%% *}" >/dev/null 2>&1; then
+    PYTHON="$candidate"
+    break
+  fi
+done
+
+if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+  AUTH_STATUS=$(npx wrangler whoami 2>&1 || true)
   if echo "$AUTH_STATUS" | grep -qi "invalid access token\|error"; then
     echo ""
     echo "✗ No CLOUDFLARE_API_TOKEN set, and 'wrangler whoami' failed."
     echo "  Set one with:  export CLOUDFLARE_API_TOKEN=cfut_xxxxx"
-    echo "  Or run:        wrangler login"
+    echo "  Or run:        npx wrangler login"
     exit 1
   fi
-elif [ -n "${CLOUDFLARE_API_TOKEN:-}" ]; then
+else
   export CLOUDFLARE_API_TOKEN
 fi
 
@@ -72,7 +83,7 @@ npm run build 2>&1 | tail -8
 echo ""
 echo "▶ Step 2/3 · Deploying ./dist to Cloudflare Pages"
 
-DEPLOY_OUTPUT=$(wrangler pages deploy ./dist \
+DEPLOY_OUTPUT=$(npx wrangler pages deploy ./dist \
   --project-name="$PROJECT_NAME" \
   --branch=main \
   --commit-dirty=true 2>&1)
@@ -107,12 +118,16 @@ fi
 echo ""
 echo "▶ Step 3/3 · Cleaning up old deployments (keeping only $NEW_SHORT_ID)"
 
-CF_ACCOUNT_ID="$ACCOUNT_ID" \
-CF_PAGES_PROJECT_NAME="$PROJECT_NAME" \
-KEEP_SHORT_ID="$NEW_SHORT_ID" \
-CLOUDFLARE_API_TOKEN="${CLOUDFLARE_API_TOKEN:-}" \
-python3 "$SCRIPTS_DIR/cf-pages-cleanup.py" \
-  || echo "  (cleanup script exited non-zero; site is still live)"
+if [ -z "$PYTHON" ]; then
+  echo "  (no python3/python/py interpreter found on PATH; skipping cleanup)"
+else
+  CF_ACCOUNT_ID="$ACCOUNT_ID" \
+  CF_PAGES_PROJECT_NAME="$PROJECT_NAME" \
+  KEEP_SHORT_ID="$NEW_SHORT_ID" \
+  CLOUDFLARE_API_TOKEN="${CLOUDFLARE_API_TOKEN:-}" \
+  $PYTHON "$SCRIPTS_DIR/cf-pages-cleanup.py" \
+    || echo "  (cleanup script exited non-zero; site is still live)"
+fi
 
 echo ""
 echo "✓ Done.  Live at:  https://$PROJECT_NAME.pages.dev"

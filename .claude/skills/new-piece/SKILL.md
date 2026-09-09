@@ -9,5 +9,5 @@ Run `./new-piece.sh <essay|journal|poem> <slug> [--lang en|ms] [--date ISO8601]`
 - Slug = filename, kebab-case; journal entries prefix with date, e.g. `2026-07-14-slow-day`.
 - Omit `--date` unless backdating — script stamps real UTC time by default.
 - Fill in `title`, `description`, and body after scaffolding — no placeholder text.
-- Never hand-write frontmatter — required fields differ per section (essay/poem need `author`; journal needs `mood`; poem needs `form`).
+- Never hand-write frontmatter — the scaffold includes house-style fields (`author`, journal's `mood`, poem's `form`/`strictLayout`) that are schema-optional/defaulted but expected filled in by convention.
 - Check `STYLE.md` before writing the body: journal is always quiet-personal; essays about a specific work/prize/translation/debate may use the literary-critical register instead.

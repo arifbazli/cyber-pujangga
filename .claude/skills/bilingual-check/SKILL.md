@@ -6,7 +6,7 @@ description: Audit essays/journal/poems for EN/MS structural inconsistencies —
 Content lives at `cyber-pujangga-site/src/content/{essays,journal,poems}/{en,ms}/*.md`. No enforced translation pairing — "inconsistency" means structural problems, not missing translations.
 
 Check per section, against `content.config.ts`'s schema:
-- Required frontmatter present (essay/poem: `title`, `description`, `pubDate`, `author`, `tags`; journal adds `date`, `mood`; poem adds `form`).
+- Actually-required fields are minimal (`title` + `pubDate`, journal also needs `date`) — everything else (`description`, `author`, `tags`, poem's `form`/`strictLayout`, journal's `mood`) is optional or schema-defaulted, so a build won't fail without them. Still flag missing/placeholder values as a *content-health* issue (house style expects them filled in), just don't describe them as schema violations.
 - `pubDate`/`date` parse as valid ISO 8601.
 - Slugs unique and kebab-case within their `{section}/{lang}` folder.
 - No leftover scaffold placeholder text (e.g. "Write your essay here.").
