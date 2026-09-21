@@ -1,17 +1,3 @@
-./astro.config.ts organizeImports ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Import statements could be sorted:
-  
-    14 14 │   
-    15 15 │   import remarkDirective from "remark-directive";
-    16    │ - import·{·remarkAdmonitions·}·from·"./src/plugins/remark-admonitions";
-    17    │ - import·{·rehypeBasePath·}·from·"./src/plugins/rehype-base-path";
-       16 │ + import·{·rehypeBasePath·}·from·"./src/plugins/rehype-base-path";
-       17 │ + import·{·remarkAdmonitions·}·from·"./src/plugins/remark-admonitions";
-    18 18 │   
-    19 19 │   import rehypeExternalLinks from "rehype-external-links";
-  
-
 ./scripts/build-redirects.mjs:82:12 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━
 
   × Do not use template literals if interpolation and special-character handling are not needed.
@@ -186,26 +172,6 @@
     163 163 │     // The EN About route is uniquely nested under /en/ (menuLinksEn has
   
 
-./src/pages/esei/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Template literals are preferred over string concatenation.
-  
-    15 │ const rows = items.map((e) => ({
-  > 16 │   href: localePath(locale, "esei") + "/" + slugOf(e),
-       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    17 │   sectionLabel: strings.section.essays,
-    18 │   dateLabel: dateShort(e.data.pubDate),
-  
-  i Unsafe fix: Use a template literal.
-  
-    14 14 │   
-    15 15 │   const rows = items.map((e) => ({
-    16    │ - ··href:·localePath(locale,·"esei")·+·"/"·+·slugOf(e),
-       16 │ + ··href:·`${localePath(locale,·"esei")}/${slugOf(e)}`,
-    17 17 │     sectionLabel: strings.section.essays,
-    18 18 │     dateLabel: dateShort(e.data.pubDate),
-  
-
 ./src/pages/en/rss.xml.ts:40:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━
 
   × Do not use template literals if interpolation and special-character handling are not needed.
@@ -225,6 +191,26 @@
        40 │ + ····customData:·"<language>en-us</language>",
     41 41 │     });
     42 42 │   }
+  
+
+./src/pages/esei/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Template literals are preferred over string concatenation.
+  
+    15 │ const rows = items.map((e) => ({
+  > 16 │   href: localePath(locale, "esei") + "/" + slugOf(e),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   sectionLabel: strings.section.essays,
+    18 │   dateLabel: dateShort(e.data.pubDate),
+  
+  i Unsafe fix: Use a template literal.
+  
+    14 14 │   
+    15 15 │   const rows = items.map((e) => ({
+    16    │ - ··href:·localePath(locale,·"esei")·+·"/"·+·slugOf(e),
+       16 │ + ··href:·`${localePath(locale,·"esei")}/${slugOf(e)}`,
+    17 17 │     sectionLabel: strings.section.essays,
+    18 18 │     dateLabel: dateShort(e.data.pubDate),
   
 
 ./src/pages/essays/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -267,26 +253,6 @@
     22 22 │     dateLabel: dateShort(e.data.date ?? e.data.pubDate),
   
 
-./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Template literals are preferred over string concatenation.
-  
-    15 │ const rows = items.map((e) => ({
-  > 16 │   href: localePath(locale, "sajak") + "/" + slugOf(e),
-       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 │   dateLabel: dateShort(e.data.pubDate),
-  
-  i Unsafe fix: Use a template literal.
-  
-    14 14 │   
-    15 15 │   const rows = items.map((e) => ({
-    16    │ - ··href:·localePath(locale,·"sajak")·+·"/"·+·slugOf(e),
-       16 │ + ··href:·`${localePath(locale,·"sajak")}/${slugOf(e)}`,
-    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 18 │     dateLabel: dateShort(e.data.pubDate),
-  
-
 ./src/pages/jurnal/index.astro:20:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Template literals are preferred over string concatenation.
@@ -305,6 +271,46 @@
        20 │ + ··href:·`${localePath(locale,·"jurnal")}/${slugOf(e)}`,
     21 21 │     sectionLabel: strings.section.journal,
     22 22 │     dateLabel: dateShort(e.data.date ?? e.data.pubDate),
+  
+
+./src/pages/poems/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Template literals are preferred over string concatenation.
+  
+    15 │ const rows = items.map((e) => ({
+  > 16 │   href: localePath(locale, "poems") + "/" + slugOf(e),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 │   dateLabel: dateShort(e.data.pubDate),
+  
+  i Unsafe fix: Use a template literal.
+  
+    14 14 │   
+    15 15 │   const rows = items.map((e) => ({
+    16    │ - ··href:·localePath(locale,·"poems")·+·"/"·+·slugOf(e),
+       16 │ + ··href:·`${localePath(locale,·"poems")}/${slugOf(e)}`,
+    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 18 │     dateLabel: dateShort(e.data.pubDate),
+  
+
+./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Template literals are preferred over string concatenation.
+  
+    15 │ const rows = items.map((e) => ({
+  > 16 │   href: localePath(locale, "sajak") + "/" + slugOf(e),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 │   dateLabel: dateShort(e.data.pubDate),
+  
+  i Unsafe fix: Use a template literal.
+  
+    14 14 │   
+    15 15 │   const rows = items.map((e) => ({
+    16    │ - ··href:·localePath(locale,·"sajak")·+·"/"·+·slugOf(e),
+       16 │ + ··href:·`${localePath(locale,·"sajak")}/${slugOf(e)}`,
+    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 18 │     dateLabel: dateShort(e.data.pubDate),
   
 
 ./src/pages/rss.xml.ts:40:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -328,31 +334,8 @@
     42 42 │   }
   
 
-./src/pages/poems/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Template literals are preferred over string concatenation.
-  
-    15 │ const rows = items.map((e) => ({
-  > 16 │   href: localePath(locale, "poems") + "/" + slugOf(e),
-       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 │   dateLabel: dateShort(e.data.pubDate),
-  
-  i Unsafe fix: Use a template literal.
-  
-    14 14 │   
-    15 15 │   const rows = items.map((e) => ({
-    16    │ - ··href:·localePath(locale,·"poems")·+·"/"·+·slugOf(e),
-       16 │ + ··href:·`${localePath(locale,·"poems")}/${slugOf(e)}`,
-    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 18 │     dateLabel: dateShort(e.data.pubDate),
-  
-
-Skipped 1 suggested fixes.
-If you wish to apply the suggested (unsafe) fixes, use the command biome check --fix --unsafe
-
-Checked 48 files in 41ms. No fixes applied.
-Found 17 errors.
+Checked 48 files in 32ms. No fixes applied.
+Found 16 errors.
 check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Some errors were emitted while running checks.

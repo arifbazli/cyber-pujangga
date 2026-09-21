@@ -2,10 +2,10 @@
 > cyber-pujangga@0.1.0 check
 > astro check
 
-[2m07:04:54[22m [34m[content][39m Syncing content
-[2m07:04:54[22m [34m[content][39m Synced content
-[2m07:04:54[22m [34m[types][39m Generated [2m710ms[22m
-[2m07:04:54[22m [34m[check][39m Getting diagnostics for Astro files in /home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site...
+[2m08:37:10[22m [34m[content][39m Syncing content
+[2m08:37:10[22m [34m[content][39m Synced content
+[2m08:37:10[22m [34m[types][39m Generated [2m739ms[22m
+[2m08:37:10[22m [34m[check][39m Getting diagnostics for Astro files in /home/runner/work/cyber-pujangga/cyber-pujangga/cyber-pujangga-site...
 [96mscripts/build-redirects.mjs[0m:[93m16[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'readFile' is declared but its value is never read.
 
 [7m16[0m import { readFile, writeFile } from "node:fs/promises";
