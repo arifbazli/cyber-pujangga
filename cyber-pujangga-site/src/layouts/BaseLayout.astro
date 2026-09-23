@@ -7,6 +7,7 @@ import Header from "@/components/Header.astro";
 import SkipLink from "@/components/SkipLink.astro";
 import ThemeProvider from "@/components/ThemeProvider.astro";
 import type { Locale } from "@/i18n";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -31,6 +32,7 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 			ogImage={ogImage}
 			articleDate={articleDate}
 		/>
+		<ClientRouter />
 	</head>
 	<body>
 		<SkipLink lang={lang} />
@@ -42,7 +44,9 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 			// ── Theme toggle ────────────────────────────────────────────
 			// Mockup v3: `data-theme` lives on <body> AND <html>.
 			// Default = dark (per mockup). Persists to localStorage["theme"].
-			(function initTheme() {
+			// Re-runs on every View Transitions navigation (astro:page-load)
+			// since the theme button is a fresh DOM node on each new page.
+			function initTheme() {
 				const html = document.documentElement;
 				const body = document.body;
 				const btn = document.getElementById("themeBtn");
@@ -83,12 +87,15 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 						"dark";
 					applyTheme(current === "dark" ? "light" : "dark");
 				});
-			})();
+			}
+			initTheme();
+			document.addEventListener("astro:page-load", initTheme);
 		</script>
 
 		<script>
 			// ── Mobile menu (full-screen overlay) ───────────────────────────
-			(function bindMobileMenu() {
+			// Re-runs on every navigation — menu/backdrop are fresh nodes per page.
+			function bindMobileMenu() {
 				const btn = document.getElementById("menuBtn") as HTMLElement;
 				const closeBtn = document.getElementById("menuClose");
 				const menu = document.getElementById("mobileMenu") as HTMLElement;
@@ -163,42 +170,61 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 				menu.querySelectorAll<HTMLElement>("a").forEach((a) => {
 					a.addEventListener("click", closeMenu);
 				});
-			})();
+			}
+			bindMobileMenu();
+			document.addEventListener("astro:page-load", bindMobileMenu);
 
 			// ── Sticky glass header on scroll ───────────────────────────
-			const header = document.getElementById("siteHeader");
-			if (header) {
-				const onScroll = () => {
-					header.classList.toggle("scrolled", window.scrollY > 20);
-				};
-				onScroll();
-				window.addEventListener("scroll", onScroll, { passive: true });
+			// The window scroll listener is bound only once (module-scope
+			// flag) and always re-looks-up #siteHeader, since that element
+			// is a fresh DOM node on every navigation.
+			let stickyHeaderBound = false;
+			function initStickyHeader() {
+				const header = document.getElementById("siteHeader");
+				if (!header) return;
+				header.classList.toggle("scrolled", window.scrollY > 20);
+				if (stickyHeaderBound) return;
+				stickyHeaderBound = true;
+				window.addEventListener(
+					"scroll",
+					() => {
+						const h = document.getElementById("siteHeader");
+						if (h) h.classList.toggle("scrolled", window.scrollY > 20);
+					},
+					{ passive: true },
+				);
 			}
+			initStickyHeader();
+			document.addEventListener("astro:page-load", initStickyHeader);
 
-			// ── Scroll-reveal via IntersectionObserver (one-shot) ───────
+			// ── Scroll-reveal via IntersectionObserver (one-shot per page) ──
 			// The mockup uses `[data-reveal]` → `.is-visible`. We also keep
 			// the project's `.reveal` → `.reveal-on` alias for backwards-compat.
-			const rows = document.querySelectorAll("[data-reveal], .reveal");
-			if ("IntersectionObserver" in window) {
-				const io = new IntersectionObserver(
-					(entries) => {
-						for (const entry of entries) {
-							if (entry.isIntersecting) {
-								entry.target.classList.add("is-visible");
-								entry.target.classList.add("reveal-on");
-								io.unobserve(entry.target);
+			function initScrollReveal() {
+				const rows = document.querySelectorAll("[data-reveal], .reveal");
+				if ("IntersectionObserver" in window) {
+					const io = new IntersectionObserver(
+						(entries) => {
+							for (const entry of entries) {
+								if (entry.isIntersecting) {
+									entry.target.classList.add("is-visible");
+									entry.target.classList.add("reveal-on");
+									io.unobserve(entry.target);
+								}
 							}
-						}
-					},
-					{ threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
-				);
-				rows.forEach((r) => io.observe(r));
-			} else {
-				rows.forEach((r) => {
-					r.classList.add("is-visible");
-					r.classList.add("reveal-on");
-				});
+						},
+						{ threshold: 0.15, rootMargin: "0px 0px -10% 0px" },
+					);
+					rows.forEach((r) => io.observe(r));
+				} else {
+					rows.forEach((r) => {
+						r.classList.add("is-visible");
+						r.classList.add("reveal-on");
+					});
+				}
 			}
+			initScrollReveal();
+			document.addEventListener("astro:page-load", initScrollReveal);
 
 			// ── Share buttons (Web Share API → clipboard fallback) ──────
 			// Listens for clicks on any `.share-btn` (or legacy `.tiktok-share`).
@@ -242,7 +268,7 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 				});
 			}
 			bindShareButtons();
-			// Re-bind after Astro page transitions (if used in future).
+			// Re-bind after Astro View Transitions navigations.
 			document.addEventListener("astro:page-load", bindShareButtons);
 		</script>
 	</body>

@@ -21,6 +21,10 @@
   --line-strong: rgba(43, 40, 34, 0.22);
   --tiktok-a: #ff2c55;
   --tiktok-b: #25f4ee;
+  /* Warm accent — same amber family already used in the OG-image cards,
+     promoted into the live UI. Deeper in light mode for contrast on
+     parchment; lighter (matching the OG cards) in dark mode. */
+  --accent: #9c6b2e;
   --radius: 4px;
   --glass-bg: rgba(251, 246, 236, 0.72);
   --glass-blur: 14px;
@@ -47,6 +51,7 @@
   --line: rgba(236, 231, 218, 0.1);
   --line-strong: rgba(236, 231, 218, 0.22);
   --glass-bg: rgba(27, 26, 23, 0.68);
+  --accent: #c89761;
 
   --paper: #1b1a17;
   --hairline: rgba(236, 231, 218, 0.1);
@@ -233,7 +238,7 @@ nav.primary a {
 nav.primary a.active,
 nav.primary a:hover {
   color: var(--ink);
-  border-color: var(--ink);
+  border-color: var(--accent);
 }
 
 .nav-right {
@@ -634,7 +639,7 @@ nav.primary a:hover {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--ink-dim);
+  background: var(--accent);
   flex-shrink: 0;
 }
 
@@ -659,6 +664,11 @@ main {
   border: 1px solid var(--line);
   background: var(--glass-bg);
   overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.featured:hover {
+  transform: translateY(-2px);
 }
 
 @supports (backdrop-filter: blur(1px)) {
@@ -691,7 +701,7 @@ main {
   content: "";
   width: 14px;
   height: 1px;
-  background: var(--ink-faint);
+  background: var(--accent);
 }
 
 .featured h2 {
@@ -770,6 +780,11 @@ main {
 .entry-row.is-visible {
   opacity: 1;
   transform: none;
+}
+
+.entry-row.is-visible:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -957,6 +972,19 @@ main article {
   margin-top: 24px;
 }
 
+/* Decorative drop-cap on the opening paragraph of an essay/journal entry. */
+main .post-article > p:first-of-type::first-letter,
+main article > p:first-of-type::first-letter {
+  font-family: "Newsreader Variable", serif;
+  font-weight: 600;
+  font-size: 3.4em;
+  line-height: 0.82;
+  float: left;
+  padding-right: 0.09em;
+  padding-top: 0.02em;
+  color: var(--accent);
+}
+
 main .post-article p,
 main article p {
   font-size: 1.05rem;
@@ -1010,8 +1038,8 @@ main article a {
 
 main .post-article a:hover,
 main article a:hover {
-  color: var(--ink);
-  text-decoration-color: var(--ink);
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 main .post-article :not(pre) > code,
@@ -1067,7 +1095,7 @@ main .post-article blockquote,
 main article blockquote {
   margin: 26px 0;
   padding: 4px 0 4px 20px;
-  border-left: 2px solid var(--ink-dim);
+  border-left: 2px solid var(--accent);
   font-style: italic;
   color: var(--ink-dim);
   font-size: 1.05rem;
@@ -1193,18 +1221,30 @@ main article hr {
 }
 
 /* Poem body */
+/* Ornamental mark announcing the poem — sets poems visually apart
+   from the left-aligned prose register used by essays/journal. */
+.poem-body::before {
+  content: "❦";
+  display: block;
+  text-align: center;
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
 .poem-body {
   white-space: pre-line;
-  text-align: left;
-  font-size: 1.1rem;
-  line-height: 1.95;
-  letter-spacing: 0.01em;
-  max-width: 50ch;
+  text-align: center;
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.3vw, 1.35rem);
+  line-height: 2.05;
+  letter-spacing: 0.015em;
+  max-width: 46ch;
   margin: 0 auto;
 }
 
 .poem-body p {
-  margin: 0 0 1.2rem;
+  margin: 0 0 1.4rem;
 }
 
 /* Admonitions */
