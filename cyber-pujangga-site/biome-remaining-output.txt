@@ -293,6 +293,26 @@
     18 18 │     dateLabel: dateShort(e.data.pubDate),
   
 
+./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Template literals are preferred over string concatenation.
+  
+    15 │ const rows = items.map((e) => ({
+  > 16 │   href: localePath(locale, "sajak") + "/" + slugOf(e),
+       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 │   dateLabel: dateShort(e.data.pubDate),
+  
+  i Unsafe fix: Use a template literal.
+  
+    14 14 │   
+    15 15 │   const rows = items.map((e) => ({
+    16    │ - ··href:·localePath(locale,·"sajak")·+·"/"·+·slugOf(e),
+       16 │ + ··href:·`${localePath(locale,·"sajak")}/${slugOf(e)}`,
+    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
+    18 18 │     dateLabel: dateShort(e.data.pubDate),
+  
+
 ./src/pages/rss.xml.ts:40:17 lint/style/noUnusedTemplateLiteral  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   × Do not use template literals if interpolation and special-character handling are not needed.
@@ -314,27 +334,7 @@
     42 42 │   }
   
 
-./src/pages/sajak/index.astro:16:9 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  × Template literals are preferred over string concatenation.
-  
-    15 │ const rows = items.map((e) => ({
-  > 16 │   href: localePath(locale, "sajak") + "/" + slugOf(e),
-       │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    17 │   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 │   dateLabel: dateShort(e.data.pubDate),
-  
-  i Unsafe fix: Use a template literal.
-  
-    14 14 │   
-    15 15 │   const rows = items.map((e) => ({
-    16    │ - ··href:·localePath(locale,·"sajak")·+·"/"·+·slugOf(e),
-       16 │ + ··href:·`${localePath(locale,·"sajak")}/${slugOf(e)}`,
-    17 17 │     sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
-    18 18 │     dateLabel: dateShort(e.data.pubDate),
-  
-
-Checked 48 files in 30ms. No fixes applied.
+Checked 48 files in 32ms. No fixes applied.
 Found 16 errors.
 check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
