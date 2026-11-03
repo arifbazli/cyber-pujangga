@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readdirSync, readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -15,13 +15,17 @@ function list(dir) {
         const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
         const fm = match?.[1] ?? "";
         const raw =
-          fm.match(/^pubDate:\s*(.+)$/m)?.[1]?.trim() ??
-          fm.match(/^date:\s*(.+)$/m)?.[1]?.trim();
-        const form = fm.match(/^form:\s*(.+)$/m)?.[1]?.trim()?.replace(/^['"]|['"]$/g, "");
+          fm.match(/^pubDate:\s*(.+)$/m)?.[1]?.trim() ?? fm.match(/^date:\s*(.+)$/m)?.[1]?.trim();
+        const form = fm
+          .match(/^form:\s*(.+)$/m)?.[1]
+          ?.trim()
+          ?.replace(/^['"]|['"]$/g, "");
         const normalizedDate = raw ? new Date(raw).toISOString().slice(0, 10) : null;
         return {
           slug: f.replace(/\.md$/, ""),
-          key: normalizedDate ? `${normalizedDate}${form ? `:${form}` : ""}` : f.replace(/\.md$/, ""),
+          key: normalizedDate
+            ? `${normalizedDate}${form ? `:${form}` : ""}`
+            : f.replace(/\.md$/, ""),
         };
       });
   } catch {
