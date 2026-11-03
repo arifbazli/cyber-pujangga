@@ -28,7 +28,7 @@ export default defineConfig({
   compressHTML: true,
   trailingSlash: "never",
   build: {
-    inlineStylesheets: "always",
+    inlineStylesheets: "never",
   },
   integrations: [
     expressiveCode(expressiveCodeOptions),
