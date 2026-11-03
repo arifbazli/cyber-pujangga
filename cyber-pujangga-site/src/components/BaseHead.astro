@@ -2,7 +2,7 @@
 // BaseHead — all <head> content: meta, OG, canonical, RSS, font preload.
 // Adapted from astro-sienna. Stripped of analytics, webmentions, giscus.
 import "@/styles/global.css";
-import type { Locale } from "@/i18n";
+import { type Locale, alternateLocalePath, hasAlternatePath } from "@/i18n";
 import { siteConfig } from "@/site.config";
 // Preload the variable newsreader subset; rest loads via @font-face in global.css.
 import newsreaderLatin from "@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url";
@@ -13,9 +13,10 @@ interface Props {
   lang: Locale;
   ogImage?: string;
   articleDate?: string;
+  currentPath?: string;
 }
 
-const { title, description, lang, ogImage, articleDate } = Astro.props;
+const { title, description, lang, ogImage, articleDate, currentPath } = Astro.props;
 
 const titleSeparator = "·";
 // Avoid duplicating the site name when the title IS the site name (landing pages).
@@ -28,6 +29,10 @@ const socialImageURL = ogImage
 
 const ogLocale = lang === "ms" ? "ms_MY" : "en_US";
 const desc = description ?? siteConfig.description;
+const alternatePath =
+  hasAlternatePath(lang, currentPath ?? "") ? alternateLocalePath(lang, currentPath ?? "") : null;
+const otherLocale = lang === "ms" ? "en" : "ms";
+const xDefaultPath = lang === "ms" ? "/" : "/en";
 ---
 
 <meta charset="utf-8" />
@@ -48,6 +53,17 @@ const desc = description ?? siteConfig.description;
 <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
 
 <link href={canonicalURL} rel="canonical" />
+{alternatePath && (
+  <>
+    <link href={canonicalURL} rel="alternate" hreflang={lang === "ms" ? "ms" : "en"} />
+    <link
+      href={new URL(alternatePath, Astro.site)}
+      rel="alternate"
+      hreflang={otherLocale === "ms" ? "ms" : "en"}
+    />
+    <link href={new URL(xDefaultPath, Astro.site)} rel="alternate" hreflang="x-default" />
+  </>
+)}
 
 <meta content={siteTitle} name="title" />
 <meta content={desc} name="description" />
@@ -65,6 +81,7 @@ const desc = description ?? siteConfig.description;
 <meta content={String(canonicalURL)} property="og:url" />
 <meta content={siteConfig.title} property="og:site_name" />
 <meta content={ogLocale} property="og:locale" />
+{alternatePath && <meta content={otherLocale === "ms" ? "ms_MY" : "en_US"} property="og:locale:alternate" />}
 <meta content={socialImageURL} property="og:image" />
 <meta content="1200" property="og:image:width" />
 <meta content="630" property="og:image:height" />
