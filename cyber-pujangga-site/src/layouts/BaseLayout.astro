@@ -80,14 +80,16 @@ const { title, description, lang, currentPath = "", ogImage, articleDate } = Ast
 				applyTheme(initial as "dark" | "light");
 
 				if (!btn) return;
-
-				btn.addEventListener("click", () => {
-					const current =
-						body.getAttribute("data-theme") ||
-						html.getAttribute("data-theme") ||
-						"dark";
-					applyTheme(current === "dark" ? "light" : "dark");
-				});
+				if (btn.dataset.themeBound !== "1") {
+					btn.dataset.themeBound = "1";
+					btn.addEventListener("click", () => {
+						const current =
+							body.getAttribute("data-theme") ||
+							html.getAttribute("data-theme") ||
+							"dark";
+						applyTheme(current === "dark" ? "light" : "dark");
+					});
+				}
 			}
 			initTheme();
 			document.addEventListener("astro:page-load", initTheme);
