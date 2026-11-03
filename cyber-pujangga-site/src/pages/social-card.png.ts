@@ -7,11 +7,11 @@ import NewsreaderSemiBold from "@/assets/fonts/newsreader-600.ttf";
 import { siteConfig } from "@/site.config";
 import { Resvg } from "@resvg/resvg-js";
 import type { APIContext } from "astro";
-import satori from "satori";
+import satori, { type SatoriOptions } from "satori";
 import { html } from "satori-html";
 
 export async function GET(context: APIContext) {
-  const ogOptions = {
+  const ogOptions: SatoriOptions = {
     fonts: [
       { data: Buffer.from(NewsreaderRegular), name: "Newsreader", style: "normal", weight: 400 },
       { data: Buffer.from(NewsreaderSemiBold), name: "Newsreader", style: "normal", weight: 600 },
