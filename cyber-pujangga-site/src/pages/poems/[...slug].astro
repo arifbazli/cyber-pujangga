@@ -35,7 +35,7 @@ const poemCardUrl = `/poem-card/${entry.id}.png`;
 		<div class="poem-body"><Content /></div>
 		{strict && (
 			<figure class="poem-mobile-fallback">
-				<img src={poemCardUrl} alt={`${entry.data.title} — static card for small screens`} loading="lazy" />
+				<img src={poemCardUrl} alt={`${entry.data.title}: poem displayed as a static card on small screens`} loading="lazy" decoding="async" />
 				<figcaption class="poem-card-caption mono">Static card for small screens</figcaption>
 			</figure>
 		)}
