@@ -39,7 +39,7 @@ const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "Article",
 	headline: title,
-	description: description ?? siteConfig.description,
+	description: description ?? (lang === "ms" ? siteConfig.descriptionMs : siteConfig.description),
 	datePublished: pubDate.toISOString(),
 	dateModified: (updatedDate ?? pubDate).toISOString(),
 	image: new URL(ogImage ?? "/social-card.png", Astro.site).href,
