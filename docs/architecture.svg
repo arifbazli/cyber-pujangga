@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">Cyber Pujangga system architecture</title>
+  <desc id="desc">Authoring, build, and delivery layers for a bilingual static Astro site on Cloudflare Pages.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="author" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#bfdbfe"/>
+    </linearGradient>
+    <linearGradient id="build" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#dcfce7"/>
+      <stop offset="100%" stop-color="#bbf7d0"/>
+    </linearGradient>
+    <linearGradient id="delivery" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+    <filter id="soft"><feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.10"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="430" rx="24" fill="url(#bg)"/>
+  <text x="70" y="58" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#0f172a">Cyber Pujangga: system architecture</text>
+  <text x="70" y="86" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15" fill="#475569">Bilingual Markdown content becomes paired, SEO-ready static output on Cloudflare Pages.</text>
+
+  <text x="70" y="130" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#1d4ed8" letter-spacing="1.2">AUTHORING LAYER</text>
+  <g filter="url(#soft)">
+    <rect x="60" y="155" width="330" height="84" rx="18" fill="url(#author)" stroke="#60a5fa" stroke-width="2"/>
+    <text x="85" y="190" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1e3a8a">Agent crew</text>
+    <text x="85" y="215" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Research, draft, verify, and open PR</text>
+  </g>
+  <g filter="url(#soft)">
+    <rect x="435" y="155" width="330" height="84" rx="18" fill="url(#author)" stroke="#60a5fa" stroke-width="2"/>
+    <text x="460" y="190" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1e3a8a">Markdown content</text>
+    <text x="460" y="215" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Essays, journal, and poems in en and ms</text>
+  </g>
+  <g filter="url(#soft)">
+    <rect x="810" y="155" width="330" height="84" rx="18" fill="url(#author)" stroke="#60a5fa" stroke-width="2"/>
+    <text x="835" y="190" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#1e3a8a">Content collections</text>
+    <text x="835" y="215" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Frontmatter validation and locale pairing</text>
+  </g>
+
+  <line x1="225" y1="239" x2="225" y2="278" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="599" y1="239" x2="599" y2="278" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="975" y1="239" x2="975" y2="278" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <text x="70" y="274" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#166534" letter-spacing="1.2">BUILD LAYER</text>
+  <g filter="url(#soft)">
+    <rect x="60" y="290" width="330" height="84" rx="18" fill="url(#build)" stroke="#4ade80" stroke-width="2"/>
+    <text x="85" y="325" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#166534">Astro build</text>
+    <text x="85" y="350" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Static routes, localized metadata, redirects</text>
+  </g>
+  <g filter="url(#soft)">
+    <rect x="435" y="290" width="330" height="84" rx="18" fill="url(#build)" stroke="#4ade80" stroke-width="2"/>
+    <text x="460" y="325" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#166534">Satori rendering</text>
+    <text x="460" y="350" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">OG, social, and poem card images</text>
+  </g>
+  <g filter="url(#soft)">
+    <rect x="810" y="290" width="330" height="84" rx="18" fill="url(#build)" stroke="#4ade80" stroke-width="2"/>
+    <text x="835" y="325" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18" font-weight="700" fill="#166534">Discovery output</text>
+    <text x="835" y="350" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12" fill="#475569">Sitemap, RSS, JSON-LD, hreflang</text>
+  </g>
+</svg>

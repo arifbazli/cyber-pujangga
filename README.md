@@ -11,41 +11,7 @@ Markdown while letting agent workflows handle scaffolding, translation pairing, 
 
 ## System architecture
 
-```mermaid
-flowchart TB
-    classDef layer fill:#f8fafc,stroke:#cbd5e1,stroke-width:1px,color:#0f172a,rx:14px;
-    classDef core fill:#eff6ff,stroke:#60a5fa,stroke-width:2px,color:#1e3a8a,rx:14px;
-    classDef edge fill:#f0fdf4,stroke:#4ade80,stroke-width:2px,color:#14532d,rx:14px;
-
-    subgraph Authoring ["Authoring layer"]
-        Agent[Agent crew: research, draft, verify, PR]
-        Sources[Markdown content: essays / journal / poems]
-    end
-
-    subgraph Build ["Build layer"]
-        Collections[Content collections: frontmatter validation]
-        Astro[Astro + TypeScript static rendering]
-        Assets[Satori images: OG, social, poem cards]
-        Metadata[Redirects, sitemap, RSS, JSON-LD, hreflang]
-    end
-
-    subgraph Delivery ["Delivery layer"]
-        Pages[Cloudflare Pages static edge delivery]
-        Headers[_headers: cache policy and security headers]
-        Reader[Web reader: EN and MS]
-        Smoke[Playwright accessibility and routing smoke tests]
-    end
-
-    Agent --> Sources
-    Sources --> Collections
-    Collections --> Astro
-    Astro --> Assets
-    Astro --> Metadata
-    Astro --> Pages
-    Pages --> Headers
-    Headers --> Reader
-    Smoke --> Reader
-```
+![Cyber Pujangga system architecture: authoring, build, and delivery layers](docs/architecture.svg)
 
 This design keeps the content layer plain Markdown while moving predictable outputs — redirects,
 feed/canonical metadata, social images, and bilingual pairing validation — into the build layer.
