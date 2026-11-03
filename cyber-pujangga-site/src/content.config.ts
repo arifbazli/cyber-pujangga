@@ -3,8 +3,9 @@
 // Each piece is written in ONE language per file; the language is determined
 // by the folder it lives in (en/ or ms/) — see the `loader` pattern below.
 
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 // ----- Essays -----
 // Longer reflective / argumentative pieces.
