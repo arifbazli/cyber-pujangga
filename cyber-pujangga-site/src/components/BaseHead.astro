@@ -84,7 +84,7 @@ const desc = description ?? siteConfig.description;
 <meta content={socialImageURL} property="twitter:image" />
 
 <link
-	href="/rss.xml"
+	href={lang === "ms" ? "/rss.xml" : "/en/rss.xml"}
 	rel="alternate"
 	title={siteConfig.title}
 	type="application/rss+xml"
