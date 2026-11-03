@@ -196,7 +196,6 @@ export const menuLinksEn: Array<{ href: string; label: string }> = [
   { href: "/en/about", label: "About" },
 ];
 
-
 export function hasAlternatePath(currentLocale: Locale, path: string): boolean {
   let cleanPath = path.replace(/^\//, "").replace(/\/$/, "");
   if (cleanPath === "en" || cleanPath.startsWith("en/")) {

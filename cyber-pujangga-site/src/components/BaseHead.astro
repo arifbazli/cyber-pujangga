@@ -30,8 +30,9 @@ const socialImageURL = ogImage
 const ogLocale = lang === "ms" ? "ms_MY" : "en_US";
 const siteDescription = lang === "ms" ? siteConfig.descriptionMs : siteConfig.description;
 const desc = description ?? siteDescription;
-const alternatePath =
-  hasAlternatePath(lang, currentPath ?? "") ? alternateLocalePath(lang, currentPath ?? "") : null;
+const alternatePath = hasAlternatePath(lang, currentPath ?? "")
+  ? alternateLocalePath(lang, currentPath ?? "")
+  : null;
 const otherLocale = lang === "ms" ? "en" : "ms";
 const xDefaultPath = lang === "ms" ? "/" : "/en";
 ---
