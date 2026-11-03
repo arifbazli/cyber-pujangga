@@ -13,27 +13,27 @@ Markdown while letting agent workflows handle scaffolding, translation pairing, 
 
 ```mermaid
 flowchart TB
-    classDef layer fill:#f8fafc,stroke:#cbd5e1,stroke-width:1px,color:#0f172a,rx:12px;
-    classDef core fill:#eff6ff,stroke:#60a5fa,color:#1e3a8a,rx:12px;
-    classDef edge fill:#f0fdf4,stroke:#4ade80,color:#14532d,rx:12px;
+    classDef layer fill:#f8fafc,stroke:#cbd5e1,stroke-width:1px,color:#0f172a,rx:14px;
+    classDef core fill:#eff6ff,stroke:#60a5fa,stroke-width:2px,color:#1e3a8a,rx:14px;
+    classDef edge fill:#f0fdf4,stroke:#4ade80,stroke-width:2px,color:#14532d,rx:14px;
 
-    subgraph Authoring ["Authoring layers"]
-        Agent[🤖 Agent crew<br/>research → draft → verify → PR]
-        Sources[📝 Markdown content<br/>essays / journal / poems]
+    subgraph Authoring ["Authoring layer"]
+        Agent[Agent crew: research, draft, verify, PR]
+        Sources[Markdown content: essays / journal / poems]
     end
 
     subgraph Build ["Build layer"]
-        Collections[📚 Content collections<br/>Frontmatter validation]
-        Astro[⚙️ Astro + TypeScript<br/>Static rendering]
-        Assets[🖼️ Satori images<br/>OG, social, poem cards]
-        Metadata[🔗 Redirects, sitemap<br/>RSS, JSON-LD, hreflang]
+        Collections[Content collections: frontmatter validation]
+        Astro[Astro + TypeScript static rendering]
+        Assets[Satori images: OG, social, poem cards]
+        Metadata[Redirects, sitemap, RSS, JSON-LD, hreflang]
     end
 
     subgraph Delivery ["Delivery layer"]
-        Pages[☁️ Cloudflare Pages<br/>Static assets and routes]
-        Headers[🛡️ _headers<br/>Cache, security response]
-        Reader[🌐 Web reader<br/>EN and MS]
-        Smoke[🧪 Playwright<br/>Accessibility and routing smoke]
+        Pages[Cloudflare Pages static edge delivery]
+        Headers[_headers: cache policy and security headers]
+        Reader[Web reader: EN and MS]
+        Smoke[Playwright accessibility and routing smoke tests]
     end
 
     Agent --> Sources
@@ -45,10 +45,6 @@ flowchart TB
     Pages --> Headers
     Headers --> Reader
     Smoke --> Reader
-
-    class Authoring,Build,Delivery layer;
-    class Astro,Collections,Assets,Metadata core;
-    class Pages,Headers,Reader,Smoke edge;
 ```
 
 This design keeps the content layer plain Markdown while moving predictable outputs — redirects,
