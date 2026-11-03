@@ -7,6 +7,7 @@ export interface SiteConfig {
   /** Displayed in <title> and OG tags. */
   title: string;
   description: string;
+  descriptionMs: string;
   author: string;
   siteUrl: string;
 }
@@ -14,6 +15,7 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   title: "Cyber Pujangga",
   description: "Personal writing across two languages: essays, daily notes, and poems.",
+  descriptionMs: "Penulisan peribadi dalam dua bahasa: esei, catatan harian, dan sajak.",
   author: "Cyber Pujangga",
   siteUrl: "https://cyber-pujangga.pages.dev",
 };

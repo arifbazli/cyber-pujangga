@@ -158,7 +158,7 @@ export function alternateLocalePath(currentLocale: Locale, path: string): string
 
   // Assemble final path
   let result = targetSection;
-  if (targetSlug) result += "/" + targetSlug;
+  if (targetSlug) result += `/${targetSlug}`;
 
   // The EN About route is uniquely nested under /en/ (menuLinksEn has
   // "/en/about", unlike "/essays" etc. which aren't under /en/) — every
@@ -195,3 +195,25 @@ export const menuLinksEn: Array<{ href: string; label: string }> = [
   { href: "/poems", label: "Poems" },
   { href: "/en/about", label: "About" },
 ];
+
+export function hasAlternatePath(currentLocale: Locale, path: string): boolean {
+  let cleanPath = path.replace(/^\//, "").replace(/\/$/, "");
+  if (cleanPath === "en" || cleanPath.startsWith("en/")) {
+    cleanPath = cleanPath === "en" ? "" : cleanPath.slice(3);
+  }
+
+  if (cleanPath === "") return true;
+
+  const parts = cleanPath.split("/").filter(Boolean);
+  const section = parts[0] ?? "";
+  if (!(section in sectionMap[currentLocale])) return false;
+
+  const slug = parts[1] ?? "";
+  if (!slug) return true;
+
+  const collectionKey = inferCollection(section);
+  if (!collectionKey) return false;
+
+  const map = currentLocale === "ms" ? slugTranslationMap.msToEn : slugTranslationMap.enToMs;
+  return map.has(`${collectionKey}:${slug}`);
+}

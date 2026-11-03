@@ -1,11 +1,12 @@
 ---
 import ShareButton from "@/components/ShareButton.astro";
-import { type Locale, t } from "@/i18n";
+import type { Locale } from "@/i18n";
 // PieceLayout — wrapper for essay, journal, and poem detail pages.
 // Header is intentionally minimal: eyebrow back-link and title only.
 // Excerpts, byline, dates, read-time and tags have been removed so the
 // piece's own voice carries the page.
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { siteConfig } from "@/site.config";
 
 interface Props {
   title: string;
@@ -33,8 +34,19 @@ const {
   ogImage,
 } = Astro.props;
 
-const strings = t(lang);
 const articleDate = (updatedDate ?? pubDate).toISOString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description: description ?? (lang === "ms" ? siteConfig.descriptionMs : siteConfig.description),
+  datePublished: pubDate.toISOString(),
+  dateModified: (updatedDate ?? pubDate).toISOString(),
+  image: new URL(ogImage ?? "/social-card.png", Astro.site).href,
+  inLanguage: lang === "ms" ? "ms-MY" : "en-US",
+  author: { "@type": "Person", name: siteConfig.author },
+  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).href,
+};
 ---
 
 <BaseLayout
@@ -45,6 +57,7 @@ const articleDate = (updatedDate ?? pubDate).toISOString();
 	articleDate={articleDate}
 	currentPath={currentPath}
 >
+	<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 	<main id="main">
 		<article class="piece">
 			<header class="piece-header">

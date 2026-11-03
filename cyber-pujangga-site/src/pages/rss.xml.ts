@@ -37,6 +37,6 @@ export async function GET(context: APIContext) {
     description: strings.site.description,
     site: context.site ?? "https://cyber-pujangga.pages.dev",
     items,
-    customData: `<language>ms-my</language>`,
+    customData: "<language>ms-my</language>",
   });
 }

@@ -21,6 +21,39 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 
 const base = "/";
 
+const sectionCollection = {
+  essays: ["essays", "en"],
+  esei: ["essays", "ms"],
+  journal: ["journal", "en"],
+  jurnal: ["journal", "ms"],
+  poems: ["poems", "en"],
+  sajak: ["poems", "ms"],
+} as Record<string, [string, string]>;
+
+function pieceLastmod(pathname: string): Date | undefined {
+  const parts = pathname.replace(/^\//, "").split("/").filter(Boolean);
+  if (parts.length < 2) return undefined;
+  const [section, slug] = [parts[0], parts[1]];
+  const mapping = sectionCollection[section];
+  if (!mapping) return undefined;
+  const [collection, locale] = mapping;
+  const filePath = `./src/content/${collection}/${locale}/${slug}.md`;
+  try {
+    const text = fs.readFileSync(filePath, "utf8");
+    const fm = text.match(/^---\n([\s\S]*?)\n---/);
+    if (!fm) return undefined;
+    const updated =
+      fm[1].match(/^updatedDate:\s*(.+)$/m)?.[1]?.trim() ??
+      fm[1].match(/^pubDate:\s*(.+)$/m)?.[1]?.trim() ??
+      fm[1].match(/^date:\s*(.+)$/m)?.[1]?.trim();
+    if (!updated) return undefined;
+    const d = new Date(updated);
+    return Number.isNaN(d.getTime()) ? undefined : d;
+  } catch {
+    return undefined;
+  }
+}
+
 export default defineConfig({
   site: "https://cyber-pujangga.pages.dev",
   base,
@@ -28,7 +61,7 @@ export default defineConfig({
   compressHTML: true,
   trailingSlash: "never",
   build: {
-    inlineStylesheets: "always",
+    inlineStylesheets: "never",
   },
   integrations: [
     expressiveCode(expressiveCodeOptions),
@@ -36,7 +69,11 @@ export default defineConfig({
     sitemap({
       changefreq: "weekly",
       priority: 0.7,
-      lastmod: new Date(),
+      serialize(item) {
+        const pathname = new URL(item.url).pathname.replace(/\/$/, "") || "/";
+        const lm = pieceLastmod(pathname);
+        return lm ? { ...item, lastmod: lm.toISOString() } : item;
+      },
     }),
     mdx(),
     robotsTxt(),
@@ -65,6 +102,7 @@ export default defineConfig({
   },
   prefetch: true,
   vite: {
+    build: { assetsInlineLimit: 0 },
     plugins: [rawFonts()],
   },
 });
@@ -73,7 +111,10 @@ function rawFonts() {
   return {
     name: "vite-plugin-raw-fonts",
     transform(_code: string, id: string) {
-      if (id.endsWith(".ttf") || id.endsWith(".woff") || id.endsWith(".woff2")) {
+      if (
+        id.includes("/src/assets/fonts/") &&
+        (id.endsWith(".ttf") || id.endsWith(".woff") || id.endsWith(".woff2"))
+      ) {
         const buffer = fs.readFileSync(id);
         return {
           code: `export default ${JSON.stringify(buffer)}`,
