@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { readdirSync } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
 /**
  * Build script: generates `public/_redirects` with cross-locale slugs.
  *
@@ -13,78 +14,79 @@ import { readdirSync } from "node:fs";
  *
  * Also adds `/en/about` ↔ `/tentang` aliases and category-only cross-mixes.
  */
-import { readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const siteRoot = resolve(here, "..");
 
-function listMd(dir) {
+async function listMd(dir) {
   try {
-    return readdirSync(resolve(siteRoot, "src/content", dir))
-      .filter((f) => f.endsWith(".md"))
-      .map((f) => f.replace(/\.md$/, ""));
+    const names = readdirSync(resolve(siteRoot, "src/content", dir)).filter((f) =>
+      f.endsWith(".md"),
+    );
+    const items = await Promise.all(
+      names.map(async (f) => {
+        const slug = f.replace(/\.md$/, "");
+        const text = await readFile(resolve(siteRoot, "src/content", dir, f), "utf8");
+        const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        const fm = match?.[1] ?? "";
+        const pubDate =
+          fm.match(/^pubDate:\s*(.+)$/m)?.[1]?.trim() ?? fm.match(/^date:\s*(.+)$/m)?.[1]?.trim();
+        const form = fm
+          .match(/^form:\s*(.+)$/m)?.[1]
+          ?.trim()
+          ?.replace(/^['"]|['"]$/g, "");
+        return { slug, key: pubDate ? `${pubDate}${form ? `:${form}` : ""}` : slug };
+      }),
+    );
+    return items;
   } catch {
     return [];
   }
 }
 
-const essayMs = listMd("essays/ms");
-const essayEn = listMd("essays/en");
-const journalMs = listMd("journal/ms");
-const journalEn = listMd("journal/en");
-const poemMs = listMd("poems/ms");
-const poemEn = listMd("poems/en");
+const crossLines = (msSlug, enSlug, msPrefix, enPrefix) => [
+  `/${msPrefix}/${enSlug}    /${enPrefix}/${enSlug}    301`,
+  `/${enPrefix}/${msSlug}    /${msPrefix}/${msSlug}    301`,
+  `/${msPrefix}/${enSlug}/   /${enPrefix}/${enSlug}/   301`,
+  `/${enPrefix}/${msSlug}/   /${msPrefix}/${msSlug}/   301`,
+];
 
-// Pair slugs by matching content: for essays/journal we assume same
-// alphabetical order after sorting, and for poems the same — but the
-// safe fallback is positional pairing by sorted pubDate.
-// In this content set, MS and EN each have exactly one of each kind
-// (essay, journal, poem), so positional pairing is unambiguous.
+const msEssays = await listMd("essays/ms");
+const enEssays = await listMd("essays/en");
+const msJournals = await listMd("journal/ms");
+const enJournals = await listMd("journal/en");
+const msPoems = await listMd("poems/ms");
+const enPoems = await listMd("poems/en");
 
-// Cross-mix: MS-slug + EN-prefix and EN-slug + MS-prefix
-const lines = [];
+function pair(msList, enList) {
+  const byKey = { ms: new Map(), en: new Map() };
+  for (const item of msList) byKey.ms.set(item.key, item);
+  for (const item of enList) byKey.en.set(item.key, item);
 
-function crossMix(msSlug, enSlug, msPrefix, enPrefix) {
-  // Mixed: /esei/on-the-quietness-of-reading → /essays/on-the-quietness-of-reading
-  lines.push(`/${msPrefix}/${enSlug}    /${enPrefix}/${enSlug}    301`);
-  // Mixed: /essays/mengenai-kesunyian-membaca → /esei/mengenai-kesunyian-membaca
-  lines.push(`/${enPrefix}/${msSlug}    /${msPrefix}/${msSlug}    301`);
-  // Trailing-slash variants
-  lines.push(`/${msPrefix}/${enSlug}/   /${enPrefix}/${enSlug}/   301`);
-  lines.push(`/${enPrefix}/${msSlug}/   /${msPrefix}/${msSlug}/   301`);
+  const pairs = [];
+  for (const [key, ms] of byKey.ms) {
+    const en = byKey.en.get(key);
+    if (en) pairs.push({ msSlug: ms.slug, enSlug: en.slug });
+    else console.warn(`build-redirects: missing EN counterpart for ${ms.slug} (${key})`);
+  }
+  for (const [key, en] of byKey.en) {
+    if (!byKey.ms.has(key))
+      console.warn(`build-redirects: missing MS counterpart for ${en.slug} (${key})`);
+  }
+  return pairs;
 }
 
-// NOTE: We deliberately do NOT add section-landing redirects like
-// /essays → /esei. The two are content in different languages; if a
-// user types /essays they want the EN section, not an auto-redirect
-// to the MS section. The lang-toggle link in the header handles
-// in-app language switching.
+const lines = [];
+for (const { msSlug, enSlug } of pair(msEssays, enEssays))
+  lines.push(...crossLines(msSlug, enSlug, "esei", "essays"));
+for (const { msSlug, enSlug } of pair(msJournals, enJournals))
+  lines.push(...crossLines(msSlug, enSlug, "jurnal", "journal"));
+for (const { msSlug, enSlug } of pair(msPoems, enPoems))
+  lines.push(...crossLines(msSlug, enSlug, "sajak", "poems"));
 
-// Pair essay slugs by index (assumes parallel content)
-const essayPairs = essayMs
-  .map((msSlug, i) => ({ msSlug, enSlug: essayEn[i] ?? msSlug }))
-  .filter((p) => p.enSlug);
-for (const { msSlug, enSlug } of essayPairs) crossMix(msSlug, enSlug, "esei", "essays");
-
-const journalPairs = journalMs
-  .map((msSlug, i) => ({ msSlug, enSlug: journalEn[i] ?? msSlug }))
-  .filter((p) => p.enSlug);
-for (const { msSlug, enSlug } of journalPairs) crossMix(msSlug, enSlug, "jurnal", "journal");
-
-const poemPairs = poemMs
-  .map((msSlug, i) => ({ msSlug, enSlug: poemEn[i] ?? msSlug }))
-  .filter((p) => p.enSlug);
-for (const { msSlug, enSlug } of poemPairs) crossMix(msSlug, enSlug, "sajak", "poems");
-
-// Trailing-slash alias for EN home
 lines.push("/en    /en/    301");
-
-// Legacy /about URL aliases — `/about` was the pre-bilingual URL.
-// It now lives at `/en/about` (and `/tentang` for Malay). Send both
-// variants of the bare EN URL to the canonical `/en/about/` so anyone
-// sharing the old link lands on the right page.
 lines.push("/about    /en/about    301");
 lines.push("/about/   /en/about/   301");
 
