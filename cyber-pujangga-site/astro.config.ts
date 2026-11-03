@@ -65,6 +65,7 @@ export default defineConfig({
   },
   prefetch: true,
   vite: {
+    build: { assetsInlineLimit: 0 },
     plugins: [rawFonts()],
   },
 });
@@ -73,7 +74,10 @@ function rawFonts() {
   return {
     name: "vite-plugin-raw-fonts",
     transform(_code: string, id: string) {
-      if (id.endsWith(".ttf") || id.endsWith(".woff") || id.endsWith(".woff2")) {
+      if (
+        id.includes("/src/assets/fonts/") &&
+        (id.endsWith(".ttf") || id.endsWith(".woff") || id.endsWith(".woff2"))
+      ) {
         const buffer = fs.readFileSync(id);
         return {
           code: `export default ${JSON.stringify(buffer)}`,
