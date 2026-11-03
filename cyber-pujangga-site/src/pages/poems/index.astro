@@ -13,7 +13,7 @@ function dateShort(d: Date): string {
 }
 
 const rows = items.map((e) => ({
-  href: localePath(locale, "poems") + "/" + slugOf(e),
+  href: `${localePath(locale, "poems")}/${slugOf(e)}`,
   sectionLabel: strings.section.poems + (e.data.form ? ` · ${e.data.form}` : ""),
   dateLabel: dateShort(e.data.pubDate),
   title: e.data.title,

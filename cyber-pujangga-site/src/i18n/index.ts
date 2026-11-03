@@ -158,7 +158,7 @@ export function alternateLocalePath(currentLocale: Locale, path: string): string
 
   // Assemble final path
   let result = targetSection;
-  if (targetSlug) result += "/" + targetSlug;
+  if (targetSlug) result += `/${targetSlug}`;
 
   // The EN About route is uniquely nested under /en/ (menuLinksEn has
   // "/en/about", unlike "/essays" etc. which aren't under /en/) — every

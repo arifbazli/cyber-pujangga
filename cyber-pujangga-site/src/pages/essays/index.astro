@@ -13,7 +13,7 @@ function dateShort(d: Date): string {
 }
 
 const rows = items.map((e) => ({
-  href: localePath(locale, "essays") + "/" + slugOf(e),
+  href: `${localePath(locale, "essays")}/${slugOf(e)}`,
   sectionLabel: strings.section.essays,
   dateLabel: dateShort(e.data.pubDate),
   title: e.data.title,
