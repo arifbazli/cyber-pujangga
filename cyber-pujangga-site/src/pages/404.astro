@@ -1,26 +1,18 @@
 ---
-import { defaultLocale, localePath, t } from "../i18n";
+import { localePath, t } from "../i18n";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const strings = t(defaultLocale);
+const ms = t("ms");
+const enStrings = t("en");
 ---
 
-<BaseLayout title="404" description={strings.misc.notFound} lang={defaultLocale} currentPath="404">
-
-	<section class="hero">
-		<div class="hero-avatar-row">
-			<div class="avatar-mark" aria-hidden="true">?</div>
-			<div class="who">
-				<strong>404</strong><br />the page you’re looking for isn’t here
-			</div>
-		</div>
-		<h1 class="kinetic-title">404 — notfound</h1>
-		<p class="lede">{strings.misc.notFound}</p>
-	</section>
-
+<BaseLayout title="404" description={ms.misc.notFound} lang="ms" currentPath="404">
 	<main id="main">
-		<div class="notfound">
-			<p><a href={localePath(defaultLocale)} class="btn primary">{strings.misc.home}</a></p>
-		</div>
+		<section class="notfound">
+			<h1>404</h1>
+			<p>{ms.misc.notFound}</p>
+			<p class="mono" lang="en">{enStrings.misc.notFound}</p>
+			<p><a href={localePath("ms")} class="btn primary">{ms.misc.home}</a></p>
+		</section>
 	</main>
 </BaseLayout>
